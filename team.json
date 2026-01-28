@@ -1,0 +1,125 @@
+{
+  "team": [
+    {
+      "name": "Ewa Deelman, Ph.D.",
+      "role": "USC / PI",
+      "email": "deelman@isi.edu",
+      "image": "https://swarm-workflows.org/people/deelman.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Prasanna Balaprakash",
+      "role": "ORNL / PI",
+      "email": "pbalapra@ornl.gov",
+      "image": "https://swarm-workflows.org/people/balaprakash.png",
+      "status": "Active"
+    },
+    {
+      "name": "Anirban Mandal, Ph.D.",
+      "role": "RENCI / PI",
+      "email": "anirban@renci.org",
+      "image": "https://swarm-workflows.org/people/mandal.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Krishnan Raghavan",
+      "role": "ANL / PI",
+      "email": "kraghavan@anl.gov",
+      "image": "https://swarm-workflows.org/people/raghavan.jpg",
+      "status": "Active"
+    },    
+    {
+      "name": "Hamza Safri,Ph.D.",
+      "role": "USC/ ISI",
+      "email": "safri@isi.edu",
+      "image": "https://scitech.group/images/people/safri-postdoc.png",
+      "status": "Active"
+    },
+    {
+      "name": "Sheng Di, Ph.D.",
+      "role": "ANL",
+      "email": "sdi1@anl.gov",
+      "image": "https://swarm-workflows.org/people/sdi.jpeg",
+      "status": "Active"
+    },
+    {
+      "name": "Franck Cappello",
+      "role": "ANL",
+      "email": "cappello@mcs.anl.gov",
+      "image": "https://swarm-workflows.org/people/cappello.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Zizhong Chen, Ph.D.",
+      "role": "UCR",
+      "email": "chen@cs.ucr.edu",
+      "image": "https://swarm-workflows.org/people/zchen.jpeg",
+      "status": "Active"
+    },
+    {
+      "name": "Komal Thareja",
+      "role": "RENCI",
+      "email": "kthare10@renci.org",
+      "image": "https://swarm-workflows.org/people/thareja.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Jean Luca Bez",
+      "role": "LBL",
+      "email": "jlbez@lbl.gov",
+      "image": "https://swarm-workflows.org/people/jlbez.jpg",
+      "status": "Active"
+    }
+  ],
+  "alumni": [
+    {
+      "name": "Mariam Kiran, Ph.D.",
+      "role": "ORNL",
+      "email": "kiranm@ornl.gov",
+      "image": "https://swarm-workflows.org/people/kiran.jpg",
+      "status": "Alumni"
+    },
+    {
+      "name": "Kesheng (John) Wu",
+      "role": "LBL",
+      "email": "kwu@lbl.gov",
+      "image": "https://swarm-workflows.org/people/kwu.jpeg",
+      "status": "Alumni"
+    },
+    {
+      "name": "Imtiaz Mahmud, Ph.D.",
+      "role": "LBL",
+      "email": "imahmud@lbl.gov",
+      "image": "https://swarm-workflows.org/people/imahmud.jpeg",
+      "status": "Alumni"
+    },
+    {
+      "name": "Pawel Zuk, Ph.D.",
+      "role": "USC",
+      "email": "pawelzuk@isi.edu",
+      "image": "https://swarm-workflows.org/people/zuk.png",
+      "status": "Alumni"
+    },
+    {
+      "name": "Hongwei Jin, Ph.D.",
+      "role": "ANL",
+      "email": "jinh@anl.gov",
+      "image": "https://swarm-workflows.org/people/jinh.jpeg",
+      "status": "Alumni"
+    },
+    {
+      "name": "G. Papadimitriou",
+      "role": "USC",
+      "email": "georgpap@isi.edu",
+      "image": "https://swarm-workflows.org/people/papadimitriou.jpg",
+      "status": "Alumni"
+    },
+    {
+      "name": "Aiden Hamade",
+      "role": "ORNL",
+      "email": "hamadeat@ornl.gov",
+      "image": "https://swarm-workflows.org/people/ahamade.jpg",
+      "status": "Alumni"
+    }
+  ]
+}
