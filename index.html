@@ -9,323 +9,389 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
-  <style>
-    /* --- 1. CORE VARIABLES --- */
-:root {
-    /* Dark Mode (Default) */
-    --bg-main: #020617;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --header-bg: rgba(2, 6, 23, 0.8);
-    --accent: #38bdf8;
-    
-    /* Lifecycle Colors */
-    --c-create: #38bdf8;
-    --c-plan: #818cf8;
-    --c-provision: #a78bfa;
-    --c-execute: #34d399;
-    --c-publish: #fb7185;
-    --active-color: var(--c-create);
-}
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            /* Dark Mode (Default) */
+            --bg-main: #020617;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --header-bg: rgba(2, 6, 23, 0.8);
+            --accent: #38bdf8;
 
-/* THE WHITE UPDATE: Pure Light Mode */
-body.light-mode {
-    --bg-main: #ffffff;           /* Pure White Background */
-    --bg-card: rgba(15, 23, 42, 0.03); /* Subtle translucent overlay for cards */
-    --border-color: #e6eef8;      /* Clean gray borders */
-    --text-main: #0f172a;         /* Deep Navy text */
-    --text-muted: #475569;        /* Slate text */
-    --header-bg: rgba(255, 255, 255, 0.95);
-    --accent: #0ea5e9;
-}
+            /* Lifecycle Colors */
+            --c-create: #38bdf8;
+            --c-plan: #818cf8;
+            --c-provision: #a78bfa;
+            --c-execute: #34d399;
+            --c-publish: #fb7185;
+            --active-color: var(--c-create);
+        }
 
-/* Light-mode visual overrides for better contrast and polish */
-body.light-mode header {
-    background: var(--header-bg);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.04);
-}
+        /* THE WHITE UPDATE: Pure Light Mode */
+        body.light-mode {
+            --bg-main: #ffffff;
+            /* Pure White Background */
+            --bg-card: rgba(15, 23, 42, 0.03);
+            /* Subtle translucent overlay for cards */
+            --border-color: #e6eef8;
+            /* Clean gray borders */
+            --text-main: #0f172a;
+            /* Deep Navy text */
+            --text-muted: #475569;
+            /* Slate text */
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --accent: #0ea5e9;
+        }
 
-body.light-mode .glass-card {
-    /* Use an opaque-ish background to avoid backdrop blurring in light mode */
-    background: rgba(255,255,255,0.98);
-    border: 1px solid rgba(2,6,23,0.04);
-    color: var(--text-main);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-}
+        /* Light-mode visual overrides for better contrast and polish */
+        body.light-mode header {
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 8px 24px rgba(2, 6, 23, 0.04);
+        }
 
-body.light-mode .glass-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 36px rgba(14,165,233,0.06);
-}
+        body.light-mode .glass-card {
+            /* Use an opaque-ish background to avoid backdrop blurring in light mode */
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(2, 6, 23, 0.04);
+            color: var(--text-main);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
 
-body.light-mode .logo-header-static {
-    filter: drop-shadow(0 10px 20px rgba(14,165,233,0.06));
-}
+        body.light-mode .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(14, 165, 233, 0.06);
+        }
 
-body.light-mode .logo-hero-xl {
-    filter: drop-shadow(0 18px 40px rgba(14,165,233,0.06));
-}
+        body.light-mode .logo-header-static {
+            filter: drop-shadow(0 10px 20px rgba(14, 165, 233, 0.06));
+        }
 
-body.light-mode .theme-toggle {
-    background: var(--bg-card);
-    color: var(--accent);
-    box-shadow: 0 8px 24px rgba(2,6,23,0.04);
-    border: 1px solid var(--border-color);
-}
+        body.light-mode .logo-hero-xl {
+            filter: drop-shadow(0 18px 40px rgba(14, 165, 233, 0.06));
+        }
 
-body.light-mode .image-wrapper .hover-logo {
-    filter: none;
-    opacity: 0.95;
-}
+        body.light-mode .theme-toggle {
+            background: var(--bg-card);
+            color: var(--accent);
+            box-shadow: 0 8px 24px rgba(2, 6, 23, 0.04);
+            border: 1px solid var(--border-color);
+        }
 
-/* Light-mode overrides for common Tailwind utility classes used across the site */
-body.light-mode .bg-slate-950,
-body.light-mode .bg-slate-950\/50 {
-    background-color: var(--bg-main) !important;
-    color: var(--text-main) !important;
-}
-body.light-mode .bg-white\/5 {
-    background-color: rgba(2,6,23,0.04) !important;
-}
-body.light-mode .text-white { color: var(--text-main) !important; }
-body.light-mode .text-slate-300,
-body.light-mode .text-slate-400,
-body.light-mode .text-slate-500,
-body.light-mode .text-slate-600 { color: var(--text-muted) !important; }
-body.light-mode .border-white\/5,
-body.light-mode .border-white\/10 { border-color: rgba(2,6,23,0.06) !important; }
 
-/* Remove Tailwind image inversion used for dark mode */
-body.light-mode .brightness-0,
-body.light-mode .invert { filter: none !important; }
+        body.light-mode .image-wrapper .hover-logo {
+            filter: none;
+            opacity: 0.95;
+        }
 
-/* Make translucent overlays subtler in light mode */
-body.light-mode .bg-gradient-to-t.from-slate-950\/60 { background: linear-gradient(to top, rgba(15,23,42,0.04), transparent) !important; }
+        /* Light-mode overrides for common Tailwind utility classes used across the site */
+        body.light-mode .bg-slate-950,
+        body.light-mode .bg-slate-950\/50 {
+            background-color: var(--bg-main) !important;
+            color: var(--text-main) !important;
+        }
 
-/* Nav and header link adjustments for light mode */
-/* Nav adjustments for light mode to match dark mode energy */
-body.light-mode nav a {
-    color: var(--text-muted);
-    font-weight: 700;
-    transform: none;
-}
+        body.light-mode .bg-white\/5 {
+            background-color: rgba(2, 6, 23, 0.04) !important;
+        }
 
-body.light-mode nav a:hover,
-body.light-mode nav a.active {
-    color: var(--accent);
-    transform: none;
-}
+        body.light-mode .text-white {
+            color: var(--text-main) !important;
+        }
 
-/* Badge / inline tags (e.g., NSF Funded Infrastructure) */
-body.light-mode .inline-flex.bg-sky-500\/10 {
-    background-color: rgba(14,165,233,0.06) !important;
-    border-color: rgba(14,165,233,0.12) !important;
-    color: var(--accent) !important;
-}
+        body.light-mode .text-slate-300,
+        body.light-mode .text-slate-400,
+        body.light-mode .text-slate-500,
+        body.light-mode .text-slate-600 {
+            color: var(--text-muted) !important;
+        }
 
-/* Accent color adjustments for labeled spans */
-body.light-mode .text-sky-500 { color: var(--accent) !important; }
+        body.light-mode .border-white\/5,
+        body.light-mode .border-white\/10 {
+            border-color: rgba(2, 6, 23, 0.06) !important;
+        }
 
-/* Buttons and CTA adjustments often using bg-sky-500 */
-body.light-mode .bg-sky-500 { background-color: var(--accent) !important; }
-body.light-mode .text-slate-950 { color: #071233 !important; }
+        /* Remove Tailwind image inversion used for dark mode */
+        body.light-mode .brightness-0,
+        body.light-mode .invert {
+            filter: none !important;
+        }
 
-/* Ensure small mono tracking items remain readable */
-body.light-mode .mono, body.light-mode .mono * { color: var(--text-muted) !important; }
+        /* Make translucent overlays subtler in light mode */
+        body.light-mode .bg-gradient-to-t.from-slate-950\/60 {
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.04), transparent) !important;
+        }
 
-/* --- 2. GLOBAL RESET & BASE --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Nav and header link adjustments for light mode */
+        /* Nav adjustments for light mode to match dark mode energy */
+        body.light-mode nav a {
+            color: var(--text-muted);
+            font-weight: 700;
+            transform: none;
+        }
 
-body.light-mode header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100px;              /* MATCH dark mode */
-    display: flex;
-    align-items: center;
-    padding: 0 5%;
-    background: var(--header-bg);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 1000;
-}
+        body.light-mode nav a:hover,
+        body.light-mode nav a.active {
+            color: var(--accent);
+            transform: none;
+        }
 
-body {
-    font-family: 'Outfit', sans-serif;
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    transition: background-color 0.5s ease, color 0.5s ease;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-}
+        /* Badge / inline tags (e.g., NSF Funded Infrastructure) */
+        body.light-mode .inline-flex.bg-sky-500\/10 {
+            background-color: rgba(14, 165, 233, 0.06) !important;
+            border-color: rgba(14, 165, 233, 0.12) !important;
+            color: var(--accent) !important;
+        }
 
-.mono { font-family: 'JetBrains Mono', monospace; }
+        /* Accent color adjustments for labeled spans */
+        body.light-mode .text-sky-500 {
+            color: var(--accent) !important;
+        }
 
-section {
-    min-height: 100vh;
-    padding: 140px 5% 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+        /* Buttons and CTA adjustments often using bg-sky-500 */
+        body.light-mode .bg-sky-500 {
+            background-color: var(--accent) !important;
+        }
 
-/* --- 3. HEADER & NAVIGATION --- */
-body:not(.light-mode) header {
-    position: fixed;
-    top: 0; width: 100%; height: 100px;
-    background: var(--header-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    padding: 0 5%;
-    transition: all 0.3s ease;
-}
+        body.light-mode .text-slate-950 {
+            color: #071233 !important;
+        }
 
-.logo-header-static {
-    height: 60px;
-    width: auto;
-    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.2));
-}
+        /* Ensure small mono tracking items remain readable */
+        body.light-mode .mono,
+        body.light-mode .mono * {
+            color: var(--text-muted) !important;
+        }
 
-nav a {
-    color: var(--text-muted);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    transition: color 0.3s ease;
-}
+        /* --- 2. GLOBAL RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-nav a:hover, nav a.active {
-    color: var(--accent);
-}
+        body.light-mode header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100px;
+            /* MATCH dark mode */
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
 
-/* --- 4. ABOUT SECTION & MASSIVE LOGO --- */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 5rem;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-}
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
-.logo-hero-xl {
-    width: 0%;
-    max-width: 100px;
-    height: auto;
-    z-index: 10;
-    transform: translateX(5%);
-    filter: drop-shadow(0 0 60px rgba(56, 189, 248, 0.25));
-    animation: heroFloatLarge 8s ease-in-out infinite;
-}
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
 
-/* Blue ambient glow behind the logo */
-.hero-glow {
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
-    border-radius: 50%;
-    z-index: 0;
-}
+        section {
+            min-height: 100vh;
+            padding: 140px 5% 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-/* --- 5. COMPONENT STYLES --- */
-.glass-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 24px;
-    padding: 1.5rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        /* --- 3. HEADER & NAVIGATION --- */
+        body:not(.light-mode) header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--header-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            transition: all 0.3s ease;
+        }
 
-.glass-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-5px);
-}
+        .logo-header-static {
+            height: 60px;
+            width: auto;
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.2));
+        }
 
-/* Lifecycle SVG Styles */
-.stage-viewport {
-    perspective: 1500px;
-    width: 100%;
-    max-width: 550px;
-    aspect-ratio: 1;
-}
+        nav a {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            transition: color 0.3s ease;
+        }
 
-#lifecycle-svg {
-    transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-    transform-style: preserve-3d;
-}
+        nav a:hover,
+        nav a.active {
+            color: var(--accent);
+        }
 
-.stage-path {
-    cursor: pointer;
-    transition: all 0.4s ease;
-    opacity: 0.15;
-}
+        /* --- 4. ABOUT SECTION & MASSIVE LOGO --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-.stage-path.active {
-    opacity: 1;
-    filter: drop-shadow(0 0 15px var(--active-color));
-}
+        .logo-hero-xl {
+            width: 0%;
+            max-width: 100px;
+            height: auto;
+            z-index: 10;
+            transform: translateX(5%);
+            filter: drop-shadow(0 0 60px rgba(56, 189, 248, 0.25));
+            animation: heroFloatLarge 8s ease-in-out infinite;
+        }
 
-/* --- 6. ANIMATIONS --- */
-@keyframes heroFloatLarge {
-    0%, 100% { transform: translate(5%, 0px); }
-    50% { transform: translate(5%, -35px); }
-}
+        /* Blue ambient glow behind the logo */
+        .hero-glow {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
 
-/* --- 7. MOBILE RESPONSIVENESS --- */
-@media (max-width: 1024px) {
-    header { height: 80px; }
-    
-    .about-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2rem;
-    }
+        /* --- 5. COMPONENT STYLES --- */
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    .logo-hero-xl {
-        width: 100%;
-        max-width: 420px;
-        transform: none;
-        margin: 2rem auto 0;
-    }
+        .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
 
-    @keyframes heroFloatLarge {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
+        /* Lifecycle SVG Styles */
+        .stage-viewport {
+            perspective: 1500px;
+            width: 100%;
+            max-width: 550px;
+            aspect-ratio: 1;
+        }
 
-    nav { display: none; } /* Hide for mobile; desktop-only nav */
-    
-    h2 { font-size: 3.5rem !important; }
-}
+        #lifecycle-svg {
+            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-style: preserve-3d;
+        }
 
-/* --- 8. UI ELEMENTS --- */
-.theme-toggle {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 9999;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    color: var(--accent);
-}
-  </style>
+        .stage-path {
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0.15;
+        }
+
+        .stage-path.active {
+            opacity: 1;
+            filter: drop-shadow(0 0 15px var(--active-color));
+        }
+
+        /* --- 6. ANIMATIONS --- */
+        @keyframes heroFloatLarge {
+
+            0%,
+            100% {
+                transform: translate(5%, 0px);
+            }
+
+            50% {
+                transform: translate(5%, -35px);
+            }
+        }
+
+        /* --- 7. MOBILE RESPONSIVENESS --- */
+        @media (max-width: 1024px) {
+            header {
+                height: 80px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .logo-hero-xl {
+                width: 100%;
+                max-width: 420px;
+                transform: none;
+                margin: 2rem auto 0;
+            }
+
+            @keyframes heroFloatLarge {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-20px);
+                }
+            }
+
+            nav {
+                display: none;
+            }
+
+            /* Hide for mobile; desktop-only nav */
+
+            h2 {
+                font-size: 3.5rem !important;
+            }
+        }
+
+        /* --- 8. UI ELEMENTS --- */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--accent);
+        }
+
+        .theme-toggle svg {
+            --lucide-size: 32px;
+        }
+    </style>
 </head>
 
 <body>
@@ -462,46 +528,58 @@ nav a:hover, nav a.active {
             }
         }
 
-       /* 1. Header Logo - Static & Clean */
-.logo-header-static {
-    height: 70px;
-    width: auto;
-    filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.2));
-}
+        /* 1. Header Logo - Static & Clean */
+        .logo-header-static {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.2));
+        }
 
-/* 2. About Section Logo - Extra Large & Centered */
-.logo-hero-xl {
-    width: 70%; /* Makes it larger than the column width */
-    max-width: 900px;
-    height: auto;
-    z-index: 10;
-    /* Subtle breathing animation */
-    animation: heroFloatLarge 8s ease-in-out infinite;
-    filter: drop-shadow(0 0 50px rgba(56, 189, 248, 0.3));
-}
+        /* 2. About Section Logo - Extra Large & Centered */
+        .logo-hero-xl {
+            width: 70%;
+            /* Makes it larger than the column width */
+            max-width: 900px;
+            height: auto;
+            z-index: 10;
+            /* Subtle breathing animation */
+            animation: heroFloatLarge 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 50px rgba(56, 189, 248, 0.3));
+        }
 
-@keyframes heroFloatLarge {
-    0%, 100% { transform: translate(5%, 0px); }
-    50% { transform: translate(5%, -25px); }
-}
+        @keyframes heroFloatLarge {
 
-/* Adjust layout for the text vs logo */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 50/50 split */
-    gap: 2rem;
-    align-items: center;
-}
+            0%,
+            100% {
+                transform: translate(5%, 0px);
+            }
 
-@media (max-width: 1024px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .logo-hero-xl { 
-        width: 100%; 
-        max-width: 400px; 
-        transform: none; 
-        margin-top: 3rem;
-    }
-}   
+            50% {
+                transform: translate(5%, -25px);
+            }
+        }
+
+        /* Adjust layout for the text vs logo */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            /* 50/50 split */
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-hero-xl {
+                width: 100%;
+                max-width: 400px;
+                transform: none;
+                margin-top: 3rem;
+            }
+        }
 
         @keyframes heroFloatLarge {
 
@@ -546,56 +624,56 @@ nav a:hover, nav a.active {
         }
 
         .glow-pulse {
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    /* Subtle blue tint that works on both dark and light */
-    background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: glowScale 4s ease-in-out infinite;
-}
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            /* Subtle blue tint that works on both dark and light */
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glowScale 4s ease-in-out infinite;
+        }
 
-/* Make sure the logo shadow isn't too heavy in light mode */
-body.light-mode .logo-hero-xl {
-    filter: drop-shadow(0 20px 40px rgba(14, 165, 233, 0.15));
-}
+        /* Make sure the logo shadow isn't too heavy in light mode */
+        body.light-mode .logo-hero-xl {
+            filter: drop-shadow(0 20px 40px rgba(14, 165, 233, 0.15));
+        }
 
-/* Soften hero glow in light mode (or hide it) */
-body.light-mode .hero-glow {
-    background: radial-gradient(circle, rgba(14,165,233,0.06) 0%, transparent 70%);
-    filter: none !important;
-    opacity: 0.6;
-}
+        /* Soften hero glow in light mode (or hide it) */
+        body.light-mode .hero-glow {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.06) 0%, transparent 70%);
+            filter: none !important;
+            opacity: 0.6;
+        }
 
-/* Make the #about section visually match the dark version but in light colors */
-body.light-mode #about {
-    background-color: var(--bg-main) !important;
-    color: var(--text-main) !important;
-}
+        /* Make the #about section visually match the dark version but in light colors */
+        body.light-mode #about {
+            background-color: var(--bg-main) !important;
+            color: var(--text-main) !important;
+        }
 
-body.light-mode #about h2 {
-    color: var(--text-main) !important;
-}
+        body.light-mode #about h2 {
+            color: var(--text-main) !important;
+        }
 
-body.light-mode #about p,
-body.light-mode #about .text-xl,
-body.light-mode #about .text-sm {
-    color: var(--text-muted) !important;
-}
+        body.light-mode #about p,
+        body.light-mode #about .text-xl,
+        body.light-mode #about .text-sm {
+            color: var(--text-muted) !important;
+        }
 
-/* Ensure glass cards stand out on white background */
-body.light-mode #about .glass-card {
-    background: #f8fafc;
-    border: 1px solid rgba(2,6,23,0.06);
-    box-shadow: 0 6px 18px rgba(2,6,23,0.03);
-    color: var(--text-main);
-}
+        /* Ensure glass cards stand out on white background */
+        body.light-mode #about .glass-card {
+            background: #f8fafc;
+            border: 1px solid rgba(2, 6, 23, 0.06);
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.03);
+            color: var(--text-main);
+        }
 
-/* Subtler hero glow for the about hero in light mode */
-body.light-mode #about .hero-glow {
-    background: radial-gradient(circle, rgba(14,165,233,0.04) 0%, transparent 70%);
-    opacity: 0.25;
-}
+        /* Subtler hero glow for the about hero in light mode */
+        body.light-mode #about .hero-glow {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.04) 0%, transparent 70%);
+            opacity: 0.25;
+        }
     </style>
 
     <header>
@@ -619,55 +697,63 @@ body.light-mode #about .hero-glow {
         </nav>
     </header>
 
-   <section id="about" class="bg-slate-950 overflow-hidden py-24">
-    <div class="max-w-[1400px] mx-auto px-6">
-        <div class="about-grid">
-            
-            <div class="space-y-12">
-                <div class="space-y-6">
-                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase">
-                        <i data-lucide="sparkles" class="w-3 h-3"></i> NSF Funded Infrastructure
+    <section id="about" class="bg-slate-950 overflow-hidden py-24">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="about-grid">
+
+                <div class="space-y-12">
+                    <div class="space-y-6">
+                        <div
+                            class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase">
+                            <i data-lucide="sparkles" class="w-3 h-3"></i> NSF Funded Infrastructure
+                        </div>
+                        <h2 class="text-7xl font-black tracking-tighter leading-none">
+                            What is <span class="text-sky-500 italic">Pegasus AI?</span>
+                        </h2>
+                        <p class="text-xl text-slate-300 leading-relaxed font-light">
+                            PegasusAI is the next-generation AI-driven scientific workflow management system developed
+                            by a
+                            multi-institutional team funded by the <strong>U.S. National Science Foundation</strong>.
+                        </p>
                     </div>
-                    <h2 class="text-7xl font-black tracking-tighter leading-none">
-                        What is <span class="text-sky-500 italic">Pegasus AI?</span>
-                    </h2>
-                    <p class="text-xl text-slate-300 leading-relaxed font-light">
-                        PegasusAI is the next-generation AI-driven scientific workflow management system developed by a
-                        multi-institutional team funded by the <strong>U.S. National Science Foundation</strong>.
-                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-6 glass-card rounded-2xl">
+                            <h4 class=" font-bold flex items-center gap-2 mb-2"><i data-lucide="brain"
+                                    class="w-4 h-4 text-sky-500"></i> Intelligent Planning</h4>
+                            <p class="text-sm text-slate-400">ML models to predict resource needs and optimize
+                                execution.</p>
+                        </div>
+                        <div class="p-6 glass-card rounded-2xl">
+                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="zap"
+                                    class="w-4 h-4 text-sky-500"></i> Adaptive Mgmt</h4>
+                            <p class="text-sm text-slate-400">Real-time anomaly detection and automatic plan adjustment.
+                            </p>
+                        </div>
+                        <div class="p-6 glass-card rounded-2xl">
+                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="users"
+                                    class="w-4 h-4 text-sky-500"></i> Human-in-Loop</h4>
+                            <p class="text-sm text-slate-400">AI-augmented tools for creation, monitoring, and
+                                debugging.</p>
+                        </div>
+                        <div class="p-6 glass-card rounded-2xl">
+                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="database"
+                                    class="w-4 h-4 text-sky-500"></i> AI-Ready Data</h4>
+                            <p class="text-sm text-slate-400">Curated datasets to advance cyberinfrastructure research.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-6 glass-card rounded-2xl">
-                        <h4 class=" font-bold flex items-center gap-2 mb-2"><i data-lucide="brain" class="w-4 h-4 text-sky-500"></i> Intelligent Planning</h4>
-                        <p class="text-sm text-slate-400">ML models to predict resource needs and optimize execution.</p>
-                    </div>
-                    <div class="p-6 glass-card rounded-2xl">
-                        <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="zap" class="w-4 h-4 text-sky-500"></i> Adaptive Mgmt</h4>
-                        <p class="text-sm text-slate-400">Real-time anomaly detection and automatic plan adjustment.</p>
-                    </div>
-                    <div class="p-6 glass-card rounded-2xl">
-                        <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="users" class="w-4 h-4 text-sky-500"></i> Human-in-Loop</h4>
-                        <p class="text-sm text-slate-400">AI-augmented tools for creation, monitoring, and debugging.</p>
-                    </div>
-                    <div class="p-6 glass-card rounded-2xl">
-                        <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="database" class="w-4 h-4 text-sky-500"></i> AI-Ready Data</h4>
-                        <p class="text-sm text-slate-400">Curated datasets to advance cyberinfrastructure research.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative flex justify-center items-center">
+                <div class="relative flex justify-center items-center">
                     <div class="absolute inset-0 bg-sky-500/10 hero-glow rounded-full scale-150"></div>
-                
-                <img src="image.png" 
-                     alt="Pegasus AI Hero" 
-                     class="logo-hero-xl relative z-10">
-            </div>
 
+                    <img src="image.png" alt="Pegasus AI Hero" class="logo-hero-xl relative z-10">
+                </div>
+
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section id="ecosystem" class="py-24 bg-slate-950 border-t border-white/5 overflow-hidden">
         <div class="max-w-[1400px] mx-auto px-6">
@@ -1126,30 +1212,45 @@ body.light-mode #about .hero-glow {
             </div>
         </div>
     </section>
-    <section id="partners" class="bg-slate-950">
-        <div class="max-w-7xl mx-auto w-full">
-            <h2 class="text-6xl font-black uppercase mb-16 text-center italic">Project <span
-                    class="text-sky-500">Partners</span></h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="glass-card p-12 rounded-[3rem] text-center space-y-6 hover:border-sky-500/40 transition">
-                    <h3 class="text-4xl font-bold tracking-tighter uppercase">ACCESS</h3>
-                    <p class="text-slate-400">NSF-funded program providing unified access to over 20 compute and storage
-                        systems.</p>
-                    <a href="https://access-ci.org" target="_blank"
-                        class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-xs">Visit
-                        access-ci.org <i data-lucide="external-link" class="w-4 h-4"></i></a>
+    <section id="partners" class="py-24 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-6 w-full">
+        <h2 class="text-6xl font-black uppercase mb-16 text-center italic">Project <span class="text-sky-500">Partners</span></h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
+                <div class="h-24 flex items-center justify-center">
+                    <img src="access.png" 
+                         alt="ACCESS Logo" 
+                         class="max-h-full w-auto object-contain filter grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500">
                 </div>
-                <div class="glass-card p-12 rounded-[3rem] text-center space-y-6 hover:border-sky-500/40 transition">
-                    <h3 class="text-4xl font-bold tracking-tighter uppercase">PATh & OSG</h3>
-                    <p class="text-slate-400">Partnership to Advance Throughput Computing for large-scale distributed US
-                        open science.</p>
-                    <a href="https://path-cc.io" target="_blank"
-                        class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-xs">Visit
-                        path-cc.io <i data-lucide="external-link" class="w-4 h-4"></i></a>
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">ACCESS</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">NSF-funded program providing unified access to over 20 compute and storage systems.</p>
                 </div>
+                <a href="https://access-ci.org" target="_blank"
+                    class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
+                    Visit access-ci.org <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+
+            <div class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
+                <div class="h-24 flex items-center justify-center">
+                    <img src="https://path-cc.io/images/logo/Logo_Primary_Acronym.png" 
+                         alt="PATh Logo" 
+                         class="max-h-full w-auto object-contain filter grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500">
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">PATh & OSG</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Partnership to Advance Throughput Computing for large-scale distributed US open science.</p>
+                </div>
+                <a href="https://path-cc.io" target="_blank"
+                    class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
+                    Visit path-cc.io <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <section id="team" class="py-24 bg-slate-950/50 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-16">
@@ -1161,13 +1262,7 @@ body.light-mode #about .hero-glow {
             <div id="active-team-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
             </div>
 
-            <div class="mt-32 mb-12 flex items-center gap-8">
-                <h3 class="text-2xl font-bold uppercase tracking-widest text-slate-600">Alumni</h3>
-                <div class="h-px flex-1 bg-white/5"></div>
-            </div>
-
-            <div id="alumni-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            </div>
+           
         </div>
     </section>
 
@@ -1339,6 +1434,7 @@ body.light-mode #about .hero-glow {
         function applyTheme(mode) {
             const body = document.body;
             const icon = document.getElementById('theme-icon');
+
             if (mode === 'light') {
                 body.classList.add('light-mode');
                 icon.setAttribute('data-lucide', 'moon');
@@ -1346,9 +1442,17 @@ body.light-mode #about .hero-glow {
                 body.classList.remove('light-mode');
                 icon.setAttribute('data-lucide', 'sun');
             }
-            lucide.createIcons();
+
+            lucide.createIcons({
+                attrs: {
+                    width: 56,
+                    height: 56
+                }
+            });
+
             localStorage.setItem('theme', mode);
         }
+
 
         function toggleTheme() {
             const current = document.body.classList.contains('light-mode') ? 'light' : 'dark';
