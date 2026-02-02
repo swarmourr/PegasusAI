@@ -1,125 +1,138 @@
 {
   "team": [
     {
-      "name": "Ewa Deelman, Ph.D.",
-      "role": "USC / PI",
+      "name": "Ewa Deelman",
+      "role": "ISI / USC",
       "email": "deelman@isi.edu",
       "image": "https://swarm-workflows.org/people/deelman.jpg",
       "status": "Active"
     },
     {
-      "name": "Prasanna Balaprakash",
-      "role": "ORNL / PI",
-      "email": "pbalapra@ornl.gov",
-      "image": "https://swarm-workflows.org/people/balaprakash.png",
+      "name": "Karan Vahi",
+      "role": "ISI / USC",
+      "email": "vahi@isi.edu",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCnnpVa7rPmTUyHw3LNwsTlZQOFZN2vdp6A&s",
       "status": "Active"
     },
     {
-      "name": "Anirban Mandal, Ph.D.",
-      "role": "RENCI / PI",
+      "name": "Mats Rynge",
+      "role": "ISI / USC",
+      "email": "rynge@isi.edu",
+      "image": "https://www.isi.edu/wp-content/uploads/headshots/rynge-1.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Rajiv Mayani",
+      "role": "ISI / USC",
+      "email": "mayani@isi.edu",
+      "image": "https://www.isi.edu/wp-content/uploads/2024/02/mayani-1.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Nicole Virdone",
+      "role": "ISI / USC",
+      "email": "virdone@isi.edu",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCya3GecQdMZ0uhTIwWMN7dHKxYZDwTl95Lw&s",
+      "status": "Active"
+    },
+    {
+      "name": "Hamza Safri",
+      "role": "ISI / USC",
+      "email": "safri@isi.edu",
+      "image": "https://media.licdn.com/dms/image/v2/D4D03AQFqX8jXzPkH4A/profile-displayphoto-scale_200_200/B4DZqtMCveGsAY-/0/1763842207886?e=2147483647&v=beta&t=57-VQTo7nffEOpBKv-Ec_xsgpEAt8w3ZtXfj4cFQwtM",
+      "status": "Active"
+    },
+    {
+      "name": "Michela Taufer",
+      "role": "UTK",
+      "email": "mtaufer@utk.edu",
+      "image": "https://eecs.utk.edu/wp-content/uploads/2020/01/michela-taufer-1.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Sai Swaminathan",
+      "role": "UTK",
+      "email": "sswamin6@utk.edu",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLjQs1dxXwcDz9DoBHv9PN9pATKvY6SAZuQg&s",
+      "status": "Active"
+    },
+    {
+      "name": "Kin Wai NG",
+      "role": "UTK",
+      "email": "kng2@utk.edu",
+      "image": "https://media.licdn.com/dms/image/v2/D4E03AQGHVBa367lwMQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1701443643163?e=2147483647&v=beta&t=TBPhEeF6IM0FY9Enxq1RLHJBMVlOmVybfcLExYSdBDQ",
+      "status": "Active"
+    },
+    {
+      "name": "Kin Hong NG",
+      "role": "UTK",
+      "email": "kng3@utk.edu",
+      "image": "https://media.licdn.com/dms/image/v2/C4E03AQFmLv2TyeS5tQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1650766254584?e=2147483647&v=beta&t=NhjMOp5qXPZ4WUL40Lqhxdp-zLpYP_Pnb1JH9Wu2HLE",
+      "status": "Active"
+    },
+    {
+      "name": "Rajasi Gore",
+      "role": "UTK",
+      "email": "gore.rajas@gmail.com",
+      "image": "https://mosis.eecs.utk.edu/img/rajasi.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Shawn-Patrick Barhorst",
+      "role": "UTK",
+      "email": "shaebarh@vols.utk.edu",
+      "image": "https://pegasus-ai.org/assets/img/faces/shawn-patrick-barhorst.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Angelina Ju",
+      "role": "UTK",
+      "email": "aju@vols.utk.edu",
+      "image": "https://media.licdn.com/dms/image/v2/D4E03AQHHshBkEyEtUw/profile-displayphoto-shrink_200_200/B4EZbgUzBrHIAY-/0/1747520270764?e=2147483647&v=beta&t=WF010lJfOUw1ZO-7RApy9vKtMY-Kfpl6FbJvHkGzEAo",
+      "status": "Active"
+    },
+    {
+      "name": "Jack Marquez",
+      "role": "UTK",
+      "email": "jmarque4@utk.edu",
+      "image": "https://eecs.utk.edu/wp-content/uploads/2023/06/jack-marquez.jpg",
+      "status": "Active"
+    },
+    {
+      "name": "Anirban Mandal",
+      "role": "RENCI / UNC",
       "email": "anirban@renci.org",
       "image": "https://swarm-workflows.org/people/mandal.jpg",
       "status": "Active"
     },
     {
-      "name": "Krishnan Raghavan",
-      "role": "ANL / PI",
-      "email": "kraghavan@anl.gov",
-      "image": "https://swarm-workflows.org/people/raghavan.jpg",
-      "status": "Active"
-    },    
-    {
-      "name": "Hamza Safri,Ph.D.",
-      "role": "USC/ ISI",
-      "email": "safri@isi.edu",
-      "image": "https://scitech.group/images/people/safri-postdoc.png",
-      "status": "Active"
-    },
-    {
-      "name": "Sheng Di, Ph.D.",
-      "role": "ANL",
-      "email": "sdi1@anl.gov",
-      "image": "https://swarm-workflows.org/people/sdi.jpeg",
-      "status": "Active"
-    },
-    {
-      "name": "Franck Cappello",
-      "role": "ANL",
-      "email": "cappello@mcs.anl.gov",
-      "image": "https://swarm-workflows.org/people/cappello.jpg",
-      "status": "Active"
-    },
-    {
-      "name": "Zizhong Chen, Ph.D.",
-      "role": "UCR",
-      "email": "chen@cs.ucr.edu",
-      "image": "https://swarm-workflows.org/people/zchen.jpeg",
-      "status": "Active"
-    },
-    {
       "name": "Komal Thareja",
-      "role": "RENCI",
+      "role": "RENCI / UNC",
       "email": "kthare10@renci.org",
       "image": "https://swarm-workflows.org/people/thareja.jpg",
       "status": "Active"
     },
     {
-      "name": "Jean Luca Bez",
-      "role": "LBL",
-      "email": "jlbez@lbl.gov",
-      "image": "https://swarm-workflows.org/people/jlbez.jpg",
+      "name": "Michael Stealey",
+      "role": "RENCI / UNC",
+      "email": "stealey@renci.org",
+      "image": null,
+      "status": "Active"
+    },
+    {
+      "name": "Michael Zink",
+      "role": "UMass",
+      "email": "mzink@umass.edu",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5uN_UkvtK6KTsI-SpLoMaRrovg-nMXrr5Pg&s",
+      "status": "Active"
+    },
+    {
+      "name": "Berent Aldikacti",
+      "role": "UMass",
+      "email": "baldikacti@umass.edu",
+      "image": "https://cbi.chem.umass.edu/wp-content/uploads/2021/07/Berent-Aldikacti-200x200-2.jpg",
       "status": "Active"
     }
   ],
-  "alumni": [
-    {
-      "name": "Mariam Kiran, Ph.D.",
-      "role": "ORNL",
-      "email": "kiranm@ornl.gov",
-      "image": "https://swarm-workflows.org/people/kiran.jpg",
-      "status": "Alumni"
-    },
-    {
-      "name": "Kesheng (John) Wu",
-      "role": "LBL",
-      "email": "kwu@lbl.gov",
-      "image": "https://swarm-workflows.org/people/kwu.jpeg",
-      "status": "Alumni"
-    },
-    {
-      "name": "Imtiaz Mahmud, Ph.D.",
-      "role": "LBL",
-      "email": "imahmud@lbl.gov",
-      "image": "https://swarm-workflows.org/people/imahmud.jpeg",
-      "status": "Alumni"
-    },
-    {
-      "name": "Pawel Zuk, Ph.D.",
-      "role": "USC",
-      "email": "pawelzuk@isi.edu",
-      "image": "https://swarm-workflows.org/people/zuk.png",
-      "status": "Alumni"
-    },
-    {
-      "name": "Hongwei Jin, Ph.D.",
-      "role": "ANL",
-      "email": "jinh@anl.gov",
-      "image": "https://swarm-workflows.org/people/jinh.jpeg",
-      "status": "Alumni"
-    },
-    {
-      "name": "G. Papadimitriou",
-      "role": "USC",
-      "email": "georgpap@isi.edu",
-      "image": "https://swarm-workflows.org/people/papadimitriou.jpg",
-      "status": "Alumni"
-    },
-    {
-      "name": "Aiden Hamade",
-      "role": "ORNL",
-      "email": "hamadeat@ornl.gov",
-      "image": "https://swarm-workflows.org/people/ahamade.jpg",
-      "status": "Alumni"
-    }
-  ]
+  "alumni": []
 }
