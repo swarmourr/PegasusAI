@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="logo.svg">
+    <link rel="icon" type="image/png" href="logo.png">
     <title>Pegasus AI | Complete Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,14 +12,17 @@
         rel="stylesheet">
     <style>
         /* --- 1. CORE VARIABLES --- */
+        /* --- 1. CORE VARIABLES --- */
         :root {
-            /* Dark Mode (Default) */
-            --bg-main: #020617;
-            --bg-card: rgba(255, 255, 255, 0.03);
+            /* Dark Mode (Default) - Updated to be lighter */
+            --bg-main: #0b162b;
+            /* Lighter charcoal instead of #020617 */
+            --bg-card: rgba(231, 0, 0, 0.03);
             --border-color: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --header-bg: rgba(2, 6, 23, 0.8);
+            --text-muted: #38bdf8;
+            --header-bg: #0b162b;
+            /* Matches new lighter background */
             --accent: #38bdf8;
 
             /* Lifecycle Colors */
@@ -45,6 +48,17 @@
             /* Slate text */
             --header-bg: rgba(255, 255, 255, 0.95);
             --accent: #0ea5e9;
+        }
+
+        /* Ensure all sections follow the new lighter background */
+        header,
+        #about,
+        #ecosystem,
+        #tech,
+        #partners,
+        #team,
+        footer {
+            background-color: var(--bg-main) !important;
         }
 
         /* Light-mode visual overrides for better contrast and polish */
@@ -229,9 +243,11 @@
         }
 
         .logo-header-static {
-            height: 60px;
+            height: 70px;
             width: auto;
-            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.2));
+            /* Boost brightness and add a tight cyan glow to separate from background */
+            filter: brightness(1.2) drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
+            transition: filter 0.3s ease;
         }
 
         nav a {
@@ -258,13 +274,13 @@
         }
 
         .logo-hero-xl {
-            width: 0%;
-            max-width: 100px;
+            width: 70%;
+            max-width: 900px;
             height: auto;
             z-index: 10;
-            transform: translateX(5%);
-            filter: drop-shadow(0 0 60px rgba(56, 189, 248, 0.25));
             animation: heroFloatLarge 8s ease-in-out infinite;
+            /* Stronger "Backlight" effect to pop against #0b162b */
+            filter: brightness(1.1) drop-shadow(0 0 40px rgba(56, 189, 248, 0.4)) drop-shadow(0 0 80px rgba(56, 189, 248, 0.2));
         }
 
         /* Blue ambient glow behind the logo */
@@ -341,7 +357,7 @@
             }
 
             .logo-hero-xl {
-                width: 100%;
+                width: 10%;
                 max-width: 420px;
                 transform: none;
                 margin: 2rem auto 0;
@@ -392,14 +408,41 @@
         .theme-toggle svg {
             --lucide-size: 32px;
         }
+
+        /* --- SVG Logo Theme Logic --- */
+
+        /* Default State (Dark Mode) */
+        .svg-logo-light {
+            display: none !important;
+        }
+
+        .svg-logo-dark {
+            display: block !important;
+        }
+
+        /* Light Mode State (Triggered by body.light-mode) */
+        body.light-mode .svg-logo-dark {
+            display: none !important;
+        }
+
+        body.light-mode .svg-logo-light {
+            display: block !important;
+        }
+
+        /* Optional: Make the central circle stand out more in light mode */
+        body.light-mode circle[fill="var(--bg-main)"] {
+            fill: #ffffff;
+            /* Pure white inside the circle for light mode */
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
+        }
     </style>
 </head>
 
 <body>
+    
 
     <style>
-        /* ... your existing root and basic styles ... */
-
+        /* --- FIXED HEADER STYLES --- */
         body:not(.light-mode) header {
             position: fixed;
             top: 0;
@@ -538,9 +581,9 @@
 
         /* 2. About Section Logo - Extra Large & Centered */
         .logo-hero-xl {
-            width: 70%;
+            width: 100%;
             /* Makes it larger than the column width */
-            max-width: 900px;
+            max-width: 500px;
             height: auto;
             z-index: 10;
             /* Subtle breathing animation */
@@ -586,7 +629,7 @@
 
             0%,
             100% {
-                transform: translate(10%, 0px) scale(1);
+                transform: translate(10%, 80px) scale(1);
             }
 
             50% {
@@ -634,9 +677,10 @@
             animation: glowScale 4s ease-in-out infinite;
         }
 
-        /* Make sure the logo shadow isn't too heavy in light mode */
+        /* Light Mode Reset: Keep it clean on white */
+        body.light-mode .logo-header-static,
         body.light-mode .logo-hero-xl {
-            filter: drop-shadow(0 20px 40px rgba(14, 165, 233, 0.15));
+            filter: drop-shadow(0 10px 20px rgba(14, 165, 233, 0.1));
         }
 
         /* Soften hero glow in light mode (or hide it) */
@@ -675,11 +719,69 @@
             background: radial-gradient(circle, rgba(14, 165, 233, 0.04) 0%, transparent 70%);
             opacity: 0.25;
         }
+
+        /* --- Logo Switching Logic --- */
+
+        /* By default (Dark Mode), hide the light-mode images */
+        .light-logo-img {
+            display: none !important;
+        }
+
+        /* When Light Mode is active... */
+        body.light-mode .dark-logo-img {
+            display: none !important;
+            /* Hide the dark-mode images */
+        }
+
+        body.light-mode .light-logo-img {
+            display: block !important;
+            /* Show the light-mode images */
+        }
+
+        /* Maintain sizing for the header logos */
+        .logo-header-static.light-logo-img,
+        .logo-header-static.dark-logo-img {
+            height: 70px;
+            width: auto;
+        }
+
+        /* --- Logo Theme Logic --- */
+
+        /* 1. Default State (Dark Mode) */
+        .light-logo-img {
+            display: none !important;
+        }
+
+        .dark-logo-img {
+            display: block !important;
+            /* Added filter to help logo stand out on the dark bg */
+            filter: brightness(1.1) drop-shadow(0 0 12px rgba(56, 189, 248, 0.3));
+        }
+
+        /* 2. Light Mode State */
+        body.light-mode .dark-logo-img {
+            display: none !important;
+        }
+
+        body.light-mode .light-logo-img {
+            display: block !important;
+            /* Clean look for light background */
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.05));
+        }
+
+        /* Ensure consistent sizing */
+        .logo-header-static {
+            height: 70px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
     </style>
 
     <header>
         <div class="flex items-center gap-8">
-            <img src="image.png" alt="Logo" class="logo-header-static">
+            <img src="image1.png" alt="Logo" class="logo-header-static dark-logo-img">
+
+            <img src="image.png" alt="Logo" class="logo-header-static light-logo-img">
 
             <div class="flex flex-col">
                 <h1 class="text-4xl font-black uppercase italic tracking-tighter leading-none">
@@ -702,6 +804,12 @@
         <div class="max-w-[1400px] mx-auto px-6">
             <div class="about-grid">
 
+                <div class="relative flex justify-center items-center">
+                    <div class="hero-glow"></div>
+                    <img src="image1.png" alt="Pegasus Hero Dark" class="logo-hero-xl relative z-10 dark-logo-img">
+                    <img src="image.png" alt="Pegasus Hero Light" class="logo-hero-xl relative z-10 light-logo-img">
+                </div>
+
                 <div class="space-y-12">
                     <div class="space-y-6">
                         <div
@@ -713,14 +821,14 @@
                         </h2>
                         <p class="text-xl text-slate-300 leading-relaxed font-light">
                             PegasusAI is the next-generation AI-driven scientific workflow management system developed
-                            by a
-                            multi-institutional team funded by the <strong>U.S. National Science Foundation</strong>.
+                            by a multi-institutional team funded by the <strong>U.S. National Science
+                                Foundation</strong>.
                         </p>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="p-6 glass-card rounded-2xl">
-                            <h4 class=" font-bold flex items-center gap-2 mb-2"><i data-lucide="brain"
+                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="brain"
                                     class="w-4 h-4 text-sky-500"></i> Intelligent Planning</h4>
                             <p class="text-sm text-slate-400">ML models to predict resource needs and optimize
                                 execution.</p>
@@ -744,12 +852,6 @@
                             </p>
                         </div>
                     </div>
-                </div>
-
-                <div class="relative flex justify-center items-center">
-                    <div class="absolute inset-0 bg-sky-500/10 hero-glow rounded-full scale-150"></div>
-
-                    <img src="image.png" alt="Pegasus AI Hero" class="logo-hero-xl relative z-10">
                 </div>
 
             </div>
@@ -941,6 +1043,25 @@
                                         opacity: 0;
                                     }
                                 }
+
+                                /* Default: Hide the light image in dark mode */
+                                .svg-logo-light {
+                                    display: none;
+                                }
+
+                                /* Default: Show the dark image in dark mode */
+                                .svg-logo-dark {
+                                    display: block;
+                                }
+
+                                /* When Light Mode is active: Swap them */
+                                body.light-mode .svg-logo-dark {
+                                    display: none;
+                                }
+
+                                body.light-mode .svg-logo-light {
+                                    display: block;
+                                }
                             </style>
                             <filter id="theme-glow">
                                 <feGaussianBlur stdDeviation="3" result="blur" />
@@ -1064,7 +1185,10 @@
                                 class="mono-label">Interfaces</text>
                         </g>
                         <g transform="translate(600, 600)">
-                            <image href="image.png" x="-60" y="-180" width="150" height="400"
+                            <image class="svg-logo-dark" href="image1.png" x="-60" y="-180" width="150" height="400"
+                                preserveAspectRatio="xMidYMid meet" opacity="0.9" />
+
+                            <image class="svg-logo-light" href="image.png" x="-60" y="-180" width="150" height="400"
                                 preserveAspectRatio="xMidYMid meet" opacity="0.9" />
                         </g>
                         <g transform="translate(600, 800)">
@@ -1183,9 +1307,12 @@
                             </text>
                         </g>
                         <g>
-                            <circle cx="300" cy="300" r="105" fill="#020617" stroke="var(--active-color)"
+                            <circle cx="300" cy="300" r="105" fill="var(--bg-main)" stroke="var(--active-color)"
                                 stroke-width="4" />
-                            <image href="image.png" x="205" y="205" width="190" height="190" />
+
+                            <image class="svg-logo-dark" href="image1.png" x="205" y="205" width="190" height="170" />
+
+                            <image class="svg-logo-light" href="image.png" x="205" y="205" width="190" height="170" />
                         </g>
                     </svg>
                 </div>
@@ -1214,44 +1341,47 @@
         </div>
     </section>
     <section id="partners" class="py-24 bg-slate-950">
-    <div class="max-w-7xl mx-auto px-6 w-full">
-        <h2 class="text-6xl font-black uppercase mb-16 text-center italic">Project <span class="text-sky-500">Partners</span></h2>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
-                <div class="h-24 flex items-center justify-center">
-                    <img src="access.png" 
-                         alt="ACCESS Logo" 
-                         class="max-h-full w-auto object-contain filter grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500">
-                </div>
-                <div class="space-y-4">
-                    <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">ACCESS</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">NSF-funded program providing unified access to over 20 compute and storage systems.</p>
-                </div>
-                <a href="https://access-ci.org" target="_blank"
-                    class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
-                    Visit access-ci.org <i data-lucide="external-link" class="w-3 h-3"></i>
-                </a>
-            </div>
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <h2 class="text-6xl font-black uppercase mb-16 text-center italic">Project <span
+                    class="text-sky-500">Partners</span></h2>
 
-            <div class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
-                <div class="h-24 flex items-center justify-center">
-                    <img src="https://path-cc.io/images/logo/Logo_Primary_Acronym.png" 
-                         alt="PATh Logo" 
-                         class="max-h-full w-auto object-contain filter grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div
+                    class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
+                    <div class="h-24 flex items-center justify-center">
+                        <img src="access.png" alt="ACCESS Logo"
+                            class="max-h-full w-auto object-contain filter grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500">
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">ACCESS</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">NSF-funded program providing unified access to
+                            over 20 compute and storage systems.</p>
+                    </div>
+                    <a href="https://access-ci.org" target="_blank"
+                        class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
+                        Visit access-ci.org <i data-lucide="external-link" class="w-3 h-3"></i>
+                    </a>
                 </div>
-                <div class="space-y-4">
-                    <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">PATh & OSG</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Partnership to Advance Throughput Computing for large-scale distributed US open science.</p>
+
+                <div
+                    class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
+                    <div class="h-24 flex items-center justify-center">
+                        <img src="https://path-cc.io/images/logo/Logo_Primary_Acronym.png" alt="PATh Logo"
+                            class="max-h-full w-auto object-contain filter grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500">
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">PATh & OSG</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Partnership to Advance Throughput Computing
+                            for large-scale distributed US open science.</p>
+                    </div>
+                    <a href="https://path-cc.io" target="_blank"
+                        class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
+                        Visit path-cc.io <i data-lucide="external-link" class="w-3 h-3"></i>
+                    </a>
                 </div>
-                <a href="https://path-cc.io" target="_blank"
-                    class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
-                    Visit path-cc.io <i data-lucide="external-link" class="w-3 h-3"></i>
-                </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <section id="team" class="py-24 bg-slate-950/50 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-16">
@@ -1263,7 +1393,7 @@
             <div id="active-team-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
             </div>
 
-           
+
         </div>
     </section>
 
