@@ -8,6 +8,7 @@
     <title>Pegasus AI | Complete Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
     <style>
@@ -837,8 +838,9 @@ body.light-mode .moon-icon {
 </head>
 
 <body>
-    
-    <header>
+
+<div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;"></div> 
+<header>
         <div class="flex items-center gap-8">
             <img src="image1.png" alt="Logo" class="logo-header-static dark-logo-img">
 
@@ -875,7 +877,7 @@ body.light-mode .moon-icon {
                     <div class="space-y-6">
                         <div
                             class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase">
-                            <i data-lucide="sparkles" class="w-3 h-3"></i> NSF Funded Infrastructure
+                            <i data-lucide="sparkles" class="w-3 h-3"></i> Funded by NSF  : #2513101
                         </div>
                         <h2 class="text-7xl font-black tracking-tighter leading-none">
                             What is <span class="text-sky-500 italic">Pegasus AI?</span>
@@ -1557,6 +1559,7 @@ body.light-mode .moon-icon {
     </div>
 </button>
     <script>
+        
         const lifecycleData = [
             { title: "Create Workflow", color: "var(--c-create)", loop: "modify", bullets: ["Suggest related workflows and relevant data", "Error-check workflow composition", "Improve overall user experience (UX)"] },
             { title: "Workflow Plan", color: "var(--c-plan)", loop: "adapt", bullets: ["Decide necessary resource requirements", "Map workflows onto available resources", "Replan dynamically as conditions change"] },
@@ -1655,6 +1658,7 @@ function toggleTheme() {
                 applyTheme('dark');
             }
         });
+    
     </script>
 </body>
 
