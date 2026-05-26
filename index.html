@@ -1765,10 +1765,10 @@
 `;
 
                 // Inject Active Team
-                activeGrid.innerHTML = data.team.map(p => createCard(p)).join('');
+                if (activeGrid) activeGrid.innerHTML = data.team.map(p => createCard(p)).join('');
 
                 // Inject Alumni
-                alumniGrid.innerHTML = data.alumni.map(p => createCard(p)).join('');
+                if (alumniGrid) alumniGrid.innerHTML = data.alumni.map(p => createCard(p)).join('');
 
                 // Re-initialize icons
                 lucide.createIcons();
