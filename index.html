@@ -5,20 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo.png">
-    <title>Pegasus AI | Complete Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <title>Pegasus AI | Next-Gen Scientific Workflow Management</title>
+    <meta name="description" content="PegasusAI is an AI-driven scientific workflow management system developed by USC ISI, UTK, RENCI, and UMass, funded by the U.S. National Science Foundation.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://swarmourr.github.io/PegasusAI/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://swarmourr.github.io/PegasusAI/">
+    <meta property="og:title" content="Pegasus AI | Next-Gen Scientific Workflow Management">
+    <meta property="og:description" content="AI-driven scientific workflow management system funded by the U.S. National Science Foundation.">
+    <meta property="og:image" content="https://swarmourr.github.io/PegasusAI/image1.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pegasus AI | Next-Gen Scientific Workflow Management">
+    <meta name="twitter:description" content="AI-driven scientific workflow management system funded by the U.S. National Science Foundation.">
+    <meta name="twitter:image" content="https://swarmourr.github.io/PegasusAI/image1.png">
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@0.525.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        /* --- 1. CORE VARIABLES --- */
         /* --- 1. CORE VARIABLES --- */
         :root {
             /* Dark Mode (Default) - Updated to be lighter */
             --bg-main: #0b162b;
             /* Lighter charcoal instead of #020617 */
-            --bg-card: rgba(231, 0, 0, 0.03);
+            --bg-card: rgba(0, 0, 0, 0.03);
             --border-color: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-muted: #38bdf8;
@@ -844,11 +862,12 @@
 
 <body>
 
+    <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-sky-500 focus:text-white focus:rounded-lg focus:font-bold">Skip to content</a>
+
     <header>
         <div class="flex items-center gap-8">
-            <img src="image1.png" alt="Logo" class="logo-header-static dark-logo-img">
-
-            <img src="image.png" alt="Logo" class="logo-header-static light-logo-img">
+            <img src="image1.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static dark-logo-img">
+            <img src="image.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static light-logo-img">
 
             <div class="flex flex-col">
                 <h1 class="text-4xl font-black uppercase italic tracking-tighter leading-none">
@@ -865,7 +884,7 @@
             <a href="#engine" class="hover:text-white hover:scale-110 transition-all">04 ENGINE</a>
             <a href="#workflows" class="hover:text-white hover:scale-110 transition-all">05 WORKFLOWS</a>
             <a href="#team" class="hover:text-white hover:scale-110 transition-all">06 TEAM</a>
-            <a href="#blog" class="hover:text-white hover:scale-110 transition-all text-sky-400">07 BLOG</a>
+            <a href="blog.html" class="hover:text-white hover:scale-110 transition-all text-sky-400">07 BLOG</a>
         </nav>
 
         <!-- Hamburger button (mobile only) -->
@@ -890,7 +909,7 @@
             <a href="#engine" onclick="toggleMobileMenu()" class="hover:text-white transition-all">04 ENGINE</a>
             <a href="#workflows" onclick="toggleMobileMenu()" class="hover:text-white transition-all">05 WORKFLOWS</a>
             <a href="#team" onclick="toggleMobileMenu()" class="hover:text-white transition-all">06 TEAM</a>
-            <a href="#blog" onclick="toggleMobileMenu()" class="text-sky-400 hover:text-white transition-all">07 BLOG</a>
+            <a href="blog.html" onclick="toggleMobileMenu()" class="text-sky-400 hover:text-white transition-all">07 BLOG</a>
         </nav>
     </div>
 
@@ -900,8 +919,8 @@
 
                 <div class="relative flex justify-center items-center">
                     <div class="hero-glow"></div>
-                    <img src="image1.png" alt="Pegasus Hero Dark" class="logo-hero-xl relative z-10 dark-logo-img">
-                    <img src="image.png" alt="Pegasus Hero Light" class="logo-hero-xl relative z-10 light-logo-img">
+                    <img src="image1.png" alt="Pegasus AI — dark mode hero logo" class="logo-hero-xl relative z-10 dark-logo-img">
+                    <img src="image.png" alt="Pegasus AI — light mode hero logo" class="logo-hero-xl relative z-10 light-logo-img">
                 </div>
 
                 <div class="space-y-12">
@@ -1561,7 +1580,7 @@
                 <div
                     class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
                     <div class="h-24 flex items-center justify-center">
-                        <img src="access.png" alt="ACCESS Logo"
+                        <img src="access.png" alt="ACCESS Logo" loading="lazy"
                             class="max-h-full w-auto object-contain filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-500">
                     </div>
                     <div class="space-y-4">
@@ -1775,7 +1794,7 @@
         <div class="image-wrapper mb-4 border border-white/5">
             <img src="image.png" class="hover-logo" alt="Pegasus Logo">
             
-            <img src="${person.image}" alt="${person.name}" 
+            <img src="${person.image}" alt="Photo of ${person.name}" loading="lazy" width="200" height="200"
                  class="w-full h-full aspect-square object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100">
             
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -1869,6 +1888,27 @@
             menu.classList.toggle('hidden');
             menu.classList.toggle('flex');
         }
+
+        // Scroll spy — highlight active nav section
+        (function () {
+            const sections = ['about', 'ecosystem', 'tech', 'engine', 'workflows', 'team'];
+            const navLinks = document.querySelectorAll('#main-nav a');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(a => a.classList.remove('text-white'));
+                        const active = document.querySelector(`#main-nav a[href="#${entry.target.id}"]`);
+                        if (active) active.classList.add('text-white');
+                    }
+                });
+            }, { rootMargin: '-40% 0px -55% 0px' });
+
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
+        })();
 
         function applyTheme(mode) {
             const body = document.body;

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo.png">
+    <title>404 — Page Not Found | Pegasus AI</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0b162b;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow"></div>
+
+    <div class="relative z-10 space-y-8 max-w-xl">
+        <img src="image1.png" alt="Pegasus AI logo" width="100" height="100" class="mx-auto opacity-60">
+
+        <div>
+            <p class="mono text-[11px] tracking-[0.4em] text-sky-400/60 uppercase mb-4">Error 404</p>
+            <h1 class="text-8xl font-black tracking-tighter leading-none mb-4">
+                Lost in <span class="text-sky-500 italic">Space</span>
+            </h1>
+            <p class="text-slate-400 text-lg leading-relaxed">
+                This page doesn't exist or has been moved.
+            </p>
+        </div>
+
+        <a href="index.html"
+            class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 mono text-[11px] tracking-[0.3em] uppercase font-bold hover:bg-sky-500/20 transition-all">
+            &larr; Back to Home
+        </a>
+    </div>
+</body>
+
+</html>

@@ -6,11 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo.png">
     <title>Pegasus AI | Blog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <meta name="description" content="Research updates, insights, and announcements from the Pegasus AI team at USC ISI, UTK, RENCI, and UMass.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://swarmourr.github.io/PegasusAI/blog.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://swarmourr.github.io/PegasusAI/blog.html">
+    <meta property="og:title" content="Pegasus AI | Blog">
+    <meta property="og:description" content="Research updates, insights, and announcements from the Pegasus AI team.">
+    <meta property="og:image" content="https://swarmourr.github.io/PegasusAI/image1.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pegasus AI | Blog">
+    <meta name="twitter:description" content="Research updates, insights, and announcements from the Pegasus AI team.">
+    <meta name="twitter:image" content="https://swarmourr.github.io/PegasusAI/image1.png">
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@0.525.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <style>
         :root {
             --bg-main: #0b162b;
@@ -299,10 +318,13 @@
 </head>
 
 <body>
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-sky-500 focus:text-white focus:rounded-lg focus:font-bold">Skip to content</a>
+
     <header>
         <a href="index.html" class="flex items-center gap-8">
-            <img src="image1.png" alt="Logo" class="logo-header-static dark-logo-img">
-            <img src="image.png" alt="Logo" class="logo-header-static light-logo-img">
+            <img src="image1.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static dark-logo-img">
+            <img src="image.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static light-logo-img">
             <div class="flex flex-col">
                 <h1 class="text-4xl font-black uppercase italic tracking-tighter leading-none">
                     Pegasus <span class="text-sky-500">AI</span>
@@ -345,7 +367,7 @@
         </nav>
     </div>
 
-    <main>
+    <main id="main-content">
         <!-- Blog listing view -->
         <div id="listing-view">
             <div class="mb-16">
