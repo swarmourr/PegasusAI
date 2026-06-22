@@ -253,7 +253,7 @@
 
         nav a {
             color: var(--text-muted);
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 700;
             letter-spacing: 0.2em;
             transition: color 0.3s ease;
@@ -348,6 +348,8 @@
             header {
                 height: 80px;
             }
+            nav a { font-size: 11px; letter-spacing: 0.1em; }
+            #main-nav { gap: 1.5rem; }
 
             .about-grid {
                 grid-template-columns: 1fr;
@@ -531,9 +533,11 @@
                 /* Smaller logo for mobile */
             }
 
-            nav {
+            #main-nav {
                 display: none;
-                /* Hide main nav; consider a hamburger menu later */
+            }
+            #hamburger {
+                display: flex !important;
             }
 
             section {
@@ -854,7 +858,7 @@
             </div>
         </div>
 
-        <nav class="ml-auto flex gap-10 mono text-[12px] font-bold tracking-widest text-slate-400">
+        <nav id="main-nav" class="ml-auto flex gap-10 mono font-bold tracking-widest text-slate-400">
             <a href="#about" class="hover:text-white hover:scale-110 transition-all">01 ABOUT</a>
             <a href="#ecosystem" class="hover:text-white hover:scale-110 transition-all">02 ECOSYSTEM</a>
             <a href="#tech" class="hover:text-white hover:scale-110 transition-all">03 TECH</a>
@@ -863,7 +867,32 @@
             <a href="#team" class="hover:text-white hover:scale-110 transition-all">06 TEAM</a>
             <a href="#blog" class="hover:text-white hover:scale-110 transition-all text-sky-400">07 BLOG</a>
         </nav>
+
+        <!-- Hamburger button (mobile only) -->
+        <button id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"
+            class="ml-auto hidden flex-col gap-[5px] p-2 cursor-pointer">
+            <span class="ham-line block w-6 h-[2px] bg-current transition-all"></span>
+            <span class="ham-line block w-6 h-[2px] bg-current transition-all"></span>
+            <span class="ham-line block w-6 h-[2px] bg-current transition-all"></span>
+        </button>
     </header>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[999] hidden flex-col items-center justify-center gap-8"
+        style="background: var(--bg-main);">
+        <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-slate-400 hover:text-white">
+            <i data-lucide="x" class="w-7 h-7"></i>
+        </button>
+        <nav class="flex flex-col items-center gap-8 mono font-bold tracking-widest text-slate-400 text-2xl">
+            <a href="#about" onclick="toggleMobileMenu()" class="hover:text-white transition-all">01 ABOUT</a>
+            <a href="#ecosystem" onclick="toggleMobileMenu()" class="hover:text-white transition-all">02 ECOSYSTEM</a>
+            <a href="#tech" onclick="toggleMobileMenu()" class="hover:text-white transition-all">03 TECH</a>
+            <a href="#engine" onclick="toggleMobileMenu()" class="hover:text-white transition-all">04 ENGINE</a>
+            <a href="#workflows" onclick="toggleMobileMenu()" class="hover:text-white transition-all">05 WORKFLOWS</a>
+            <a href="#team" onclick="toggleMobileMenu()" class="hover:text-white transition-all">06 TEAM</a>
+            <a href="#blog" onclick="toggleMobileMenu()" class="text-sky-400 hover:text-white transition-all">07 BLOG</a>
+        </nav>
+    </div>
 
     <section id="about" class="bg-slate-950 overflow-hidden py-24">
         <div class="max-w-[1400px] mx-auto px-6">
@@ -1835,6 +1864,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', loadBlogPreviews);
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
         function applyTheme(mode) {
             const body = document.body;
             if (mode === 'light') {
