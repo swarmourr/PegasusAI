@@ -62,12 +62,21 @@
 
         nav a {
             color: var(--text-muted);
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 700;
             letter-spacing: 0.2em;
             transition: color 0.3s ease;
         }
         nav a:hover, nav a.active { color: var(--accent); }
+
+        @media (max-width: 1024px) {
+            nav a { font-size: 11px; letter-spacing: 0.1em; }
+            #main-nav { gap: 1.5rem; }
+        }
+        @media (max-width: 768px) {
+            #main-nav { display: none; }
+            #hamburger { display: flex !important; }
+        }
 
         .logo-header-static {
             height: 70px;
@@ -302,7 +311,7 @@
             </div>
         </a>
 
-        <nav class="ml-auto flex gap-6 mono text-[100px] font-bold tracking-widest text-slate-400">
+        <nav id="main-nav" class="ml-auto flex gap-10 mono font-bold tracking-widest text-slate-400">
             <a href="index.html#about" class="hover:text-white hover:scale-110 transition-all">01 ABOUT</a>
             <a href="index.html#ecosystem" class="hover:text-white hover:scale-110 transition-all">02 ECOSYSTEM</a>
             <a href="index.html#tech" class="hover:text-white hover:scale-110 transition-all">03 TECH</a>
@@ -311,7 +320,30 @@
             <a href="index.html#team" class="hover:text-white hover:scale-110 transition-all">06 TEAM</a>
             <a href="blog.html" class="text-sky-400 hover:text-white hover:scale-110 transition-all active">07 BLOG</a>
         </nav>
+
+        <button id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"
+            class="ml-auto hidden flex-col gap-[5px] p-2 cursor-pointer">
+            <span class="block w-6 h-[2px] bg-current transition-all"></span>
+            <span class="block w-6 h-[2px] bg-current transition-all"></span>
+            <span class="block w-6 h-[2px] bg-current transition-all"></span>
+        </button>
     </header>
+
+    <div id="mobile-menu" class="fixed inset-0 z-[999] hidden flex-col items-center justify-center gap-8"
+        style="background: var(--bg-main);">
+        <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-slate-400 hover:text-white">
+            <i data-lucide="x" class="w-7 h-7"></i>
+        </button>
+        <nav class="flex flex-col items-center gap-8 mono font-bold tracking-widest text-slate-400 text-2xl">
+            <a href="index.html#about" onclick="toggleMobileMenu()" class="hover:text-white transition-all">01 ABOUT</a>
+            <a href="index.html#ecosystem" onclick="toggleMobileMenu()" class="hover:text-white transition-all">02 ECOSYSTEM</a>
+            <a href="index.html#tech" onclick="toggleMobileMenu()" class="hover:text-white transition-all">03 TECH</a>
+            <a href="index.html#engine" onclick="toggleMobileMenu()" class="hover:text-white transition-all">04 ENGINE</a>
+            <a href="index.html#workflows" onclick="toggleMobileMenu()" class="hover:text-white transition-all">05 WORKFLOWS</a>
+            <a href="index.html#team" onclick="toggleMobileMenu()" class="hover:text-white transition-all">06 TEAM</a>
+            <a href="blog.html" onclick="toggleMobileMenu()" class="text-sky-400 hover:text-white transition-all">07 BLOG</a>
+        </nav>
+    </div>
 
     <main>
         <!-- Blog listing view -->
@@ -377,6 +409,12 @@
 
     <script>
         // --- Theme ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
         function applyTheme(mode) {
             if (mode === 'light') document.body.classList.add('light-mode');
             else document.body.classList.remove('light-mode');
