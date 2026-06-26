@@ -1,0 +1,13 @@
+# Backup files
+*.bk
+*.bk1
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp
+*.swo
