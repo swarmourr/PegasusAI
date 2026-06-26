@@ -2,7 +2,7 @@
 
 Marketing and documentation website for **Pegasus AI** — a next-generation AI-driven scientific workflow management system developed by USC ISI, UTK, RENCI, and UMass, funded by the U.S. National Science Foundation (NSF Award #2513101).
 
-Live site: [https://pegasus-isi.github.io/pegasus-ai/](https://pegasus-isi.github.io/pegasus-ai/)
+Live site: [https://swarmourr.github.io/PegasusAI/](https://swarmourr.github.io/PegasusAI/)
 
 ---
 
@@ -73,7 +73,7 @@ This site is deployed via **GitHub Pages** from the `main` branch root.
 
 GitHub will publish the site at:
 ```
-https://pegasus-isi.github.io/pegasus-ai/
+https://<your-username>.github.io/<repo-name>/
 ```
 
 **Deploy an update:**
@@ -96,7 +96,7 @@ Cloudflare Pages offers faster global CDN, free custom domains, and automatic HT
 
 1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages**
 2. Click **Create application → Pages → Connect to Git**
-3. Select your GitHub repo (`pegasus-ai`)
+3. Select your GitHub repo (`PegasusAI`)
 4. Configure the build settings:
 
 | Setting | Value |
