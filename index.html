@@ -11,20 +11,20 @@
     <title>Pegasus AI | Next-Gen Scientific Workflow Management</title>
     <meta name="description" content="PegasusAI is an AI-driven scientific workflow management system developed by USC ISI, UTK, RENCI, and UMass, funded by the U.S. National Science Foundation.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://swarmourr.github.io/PegasusAI/">
+    <link rel="canonical" href="https://pegasus-isi.github.io/pegasus-ai/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://swarmourr.github.io/PegasusAI/">
+    <meta property="og:url" content="https://pegasus-isi.github.io/pegasus-ai/">
     <meta property="og:title" content="Pegasus AI | Next-Gen Scientific Workflow Management">
     <meta property="og:description" content="AI-driven scientific workflow management system funded by the U.S. National Science Foundation.">
-    <meta property="og:image" content="https://swarmourr.github.io/PegasusAI/assets/img/image1.png">
+    <meta property="og:image" content="https://pegasus-isi.github.io/pegasus-ai/assets/img/image1.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Pegasus AI | Next-Gen Scientific Workflow Management">
     <meta name="twitter:description" content="AI-driven scientific workflow management system funded by the U.S. National Science Foundation.">
-    <meta name="twitter:image" content="https://swarmourr.github.io/PegasusAI/assets/img/image1.png">
+    <meta name="twitter:image" content="https://pegasus-isi.github.io/pegasus-ai/assets/img/image1.png">
     <!-- Preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,25 +79,159 @@
         #tech,
         #partners,
         #team,
+        #blog,
         footer {
             background-color: var(--bg-main) !important;
+        }
+
+        /* Scroll progress bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(to right, #38bdf8, #818cf8, #38bdf8);
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+            z-index: 10000;
+            transition: width 0.1s linear;
+        }
+        @keyframes shimmer { to { background-position: -200% 0; } }
+
+        /* Hero section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-main);
+        }
+        .hero-orb-1 {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(56,189,248,0.11) 0%, transparent 65%);
+            border-radius: 50%;
+            animation: orb-drift 10s ease-in-out infinite;
+        }
+        .hero-orb-2 {
+            display: block;
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 65%);
+            border-radius: 50%;
+            animation: orb-drift 13s ease-in-out infinite reverse;
+        }
+
+        /* Stat callout gradient text */
+        .stat-val {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            background: linear-gradient(135deg, #ffffff 20%, rgba(56,189,248,0.9) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.light-mode .stat-val {
+            background: linear-gradient(135deg, #0f172a 20%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* Blog card category accent borders */
+        .blog-cat-ai-workflows  { border-top: 2px solid rgba(16,185,129,0.5) !important; }
+        .blog-cat-task-performance { border-top: 2px solid rgba(56,189,248,0.5) !important; }
+        .blog-cat-monitoring    { border-top: 2px solid rgba(139,92,246,0.5) !important; }
+        .blog-cat-education     { border-top: 2px solid rgba(245,158,11,0.5) !important; }
+        .blog-cat-ci-design     { border-top: 2px solid rgba(244,63,94,0.5) !important; }
+
+        /* Card hover glow depth */
+        a.group:hover, div.group:hover {
+            box-shadow: 0 8px 32px -8px rgba(56, 189, 248, 0.10);
+        }
+
+        /* Fade from hero into about */
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: linear-gradient(to bottom, transparent, var(--bg-main));
+            pointer-events: none;
+            z-index: 2;
+        }
+        @keyframes orb-drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(var(--border-color) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+            opacity: 0.4;
+        }
+
+        /* Back to top */
+        #back-to-top {
+            position: fixed;
+            bottom: 8.5rem;
+            right: 2.5rem;
+            z-index: 9998;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        #back-to-top:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 0 20px rgba(56,189,248,0.25);
+            color: #38bdf8;
         }
 
         /* Light-mode visual overrides for better contrast and polish */
 
         body.light-mode .glass-card {
-            /* Use an opaque-ish background to avoid backdrop blurring in light mode */
             background: rgba(255, 255, 255, 0.98);
-            border: 1px solid var(--accent);
+            border: 1px solid var(--border-color);
             color: var(--text-main);
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
         }
 
         body.light-mode .glass-card:hover {
-            border-color: var(--accent);
+            border-color: rgba(14,165,233,0.4);
             transform: translateY(-4px);
-            box-shadow: 0 12px 36px rgba(14, 165, 233, 0.06);
+            box-shadow: 0 12px 36px rgba(14, 165, 233, 0.08);
         }
 
         body.light-mode .logo-header-static {
@@ -127,6 +261,9 @@
             background-color: var(--bg-main) !important;
             color: var(--text-main) !important;
         }
+        body.light-mode .bg-slate-900 {
+            background-color: rgba(15, 23, 42, 0.03) !important;
+        }
 
         body.light-mode .bg-white\/5 {
             background-color: rgba(2, 6, 23, 0.04) !important;
@@ -144,8 +281,13 @@
         }
 
         body.light-mode .border-white\/5,
-        body.light-mode .border-white\/10 {
-            border-color: rgba(2, 6, 23, 0.06) !important;
+        body.light-mode .border-white\/8,
+        body.light-mode .border-white\/10,
+        body.light-mode .border-white\/15 {
+            border-color: rgba(2, 6, 23, 0.07) !important;
+        }
+        body.light-mode .hover\:bg-white\/\[0\.02\]:hover {
+            background-color: rgba(2, 6, 23, 0.02) !important;
         }
 
         /* Remove Tailwind image inversion used for dark mode */
@@ -208,17 +350,15 @@
         }
 
         body.light-mode header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            background: var(--header-bg);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 8px 24px rgba(2, 6, 23, 0.04);
-            z-index: 1000;
+            box-shadow: 0 1px 12px rgba(2, 6, 23, 0.05);
+        }
+        body.light-mode header.header-scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(2, 6, 23, 0.08);
         }
 
         body {
@@ -235,61 +375,95 @@
         }
 
         section {
-            min-height: 100vh;
-            padding: 140px 5% 80px;
+            padding: 96px 0 80px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
+        #hero {
+            min-height: 100vh;
+            padding: 0;
+        }
+
         /* --- 3. HEADER & NAVIGATION --- */
-        body:not(.light-mode) header {
+        header {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 100px;
-            background: var(--header-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
+            height: 80px;
             z-index: 1000;
             display: flex;
             align-items: center;
-            padding: 0 5%;
-            transition: all 0.3s ease;
+            padding: 0 clamp(1.5rem, 4%, 3rem);
+            transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        body:not(.light-mode) header {
+            background: rgba(11, 22, 43, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.07);
+        }
+        header.header-scrolled {
+            height: 68px;
+        }
+        body:not(.light-mode) header.header-scrolled {
+            background: rgba(11, 22, 43, 0.96);
+            border-bottom-color: rgba(56, 189, 248, 0.13);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
         }
 
         .logo-header-static {
-            height: 70px;
+            height: 50px;
             width: auto;
-            /* Boost brightness and add a tight cyan glow to separate from background */
-            filter: brightness(1.2) drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
+            filter: brightness(1.1) drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
             transition: filter 0.3s ease;
         }
 
         nav a {
             color: var(--text-muted);
             font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            transition: color 0.3s ease;
+            font-weight: 600;
+            transition: color 0.2s ease, background 0.2s ease;
         }
 
-        nav a:hover,
-        nav a.active {
-            color: var(--accent);
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link.active {
+            color: #fff !important;
+        }
+
+        body.light-mode .nav-link.active {
+            color: var(--accent) !important;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        /* Nav link base color — neutral in dark mode, active/hover pops */
+        body:not(.light-mode) #main-nav .nav-link {
+            color: #94a3b8;
+        }
+        body:not(.light-mode) #main-nav .nav-link:hover {
+            color: #f8fafc;
         }
 
         /* --- 4. ABOUT SECTION & MASSIVE LOGO --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 5rem;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
         .logo-hero-xl {
             width: 70%;
             max-width: 900px;
@@ -311,15 +485,16 @@
         /* --- 5. COMPONENT STYLES --- */
         .glass-card {
             background: var(--bg-card);
-            border: 1px solid var(--accent);
+            border: 1px solid var(--border-color);
             border-radius: 24px;
             padding: 1.5rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
+            border-color: rgba(56,189,248,0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(56,189,248,0.07);
         }
 
         /* Lifecycle SVG Styles */
@@ -335,15 +510,99 @@
             transform-style: preserve-3d;
         }
 
+        #logo-group {
+            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: 300px 300px;
+        }
+
+        /* Timeline nav */
+        .tl-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+            background: var(--bg-main);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .tl-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.3;
+            transition: all 0.4s ease;
+            white-space: nowrap;
+        }
+        .tl-btn { background: none; border: none; cursor: pointer; padding: 0; }
+
+        .seg-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            fill: white;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
         .stage-path {
             cursor: pointer;
             transition: all 0.4s ease;
-            opacity: 0.15;
+            opacity: 0.2;
         }
+        body.light-mode .stage-path { opacity: 0.35; }
 
         .stage-path.active {
             opacity: 1;
-            filter: drop-shadow(0 0 15px var(--active-color));
+            filter: drop-shadow(0 0 18px var(--active-color));
+        }
+
+        /* Engine section */
+        #engine {
+            padding: 3.5rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Stage step buttons */
+        .stage-btn {
+            padding: 0.4rem 0.9rem;
+            border-radius: 0.6rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .stage-btn:hover { opacity: 0.8; }
+        .stage-btn.active {
+            border-color: var(--active-color) !important;
+            color: var(--active-color) !important;
+            background: color-mix(in srgb, var(--active-color) 12%, transparent) !important;
+        }
+
+        /* Loop tags */
+        .loop-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            opacity: 0.25;
+            transition: all 0.4s ease;
+        }
+        .loop-tag.active {
+            opacity: 1;
+            color: var(--active-color);
         }
 
         /* --- 6. ANIMATIONS --- */
@@ -362,23 +621,10 @@
         /* --- 7. MOBILE RESPONSIVENESS --- */
         @media (max-width: 1024px) {
             header {
-                height: 80px;
+                height: 60px;
             }
-            nav a { font-size: 11px; letter-spacing: 0.1em; }
-            #main-nav { gap: 1.5rem; }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .logo-hero-xl {
-                width: 10%;
-                max-width: 420px;
-                transform: none;
-                margin: 2rem auto 0;
-            }
+            nav a { font-size: 11px; }
+            #main-nav { gap: 0.5rem; }
 
             @keyframes heroFloatLarge {
 
@@ -453,21 +699,7 @@
             filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
         }
 
-        /* --- FIXED HEADER STYLES --- */
-        body:not(.light-mode) header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 120px;
-            /* Increased height for larger logo */
-            background: rgba(2, 6, 23, 0.9);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-        }
+        /* Header styles consolidated in section 3 above */
 
         /* --- ENHANCED LOGO ANIMATIONS --- */
         .logo-hero-size {
@@ -531,6 +763,12 @@
             position: relative;
             overflow: hidden;
             border-radius: 1.5rem;
+            height: 200px;
+        }
+        .image-wrapper img.w-full {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Mobile Responsive Adjustments */
@@ -614,25 +852,12 @@
             }
         }
 
-        /* Adjust layout for the text vs logo */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            /* 50/50 split */
-            gap: 2rem;
-            align-items: center;
-        }
-
         @media (max-width: 1024px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
             .logo-hero-xl {
-                width: 100%;
-                max-width: 400px;
+                width: 60%;
+                max-width: 360px;
                 transform: none;
-                margin-top: 3rem;
+                margin-top: 2rem;
             }
         }
 
@@ -752,8 +977,9 @@
         /* Maintain sizing for the header logos */
         .logo-header-static.light-logo-img,
         .logo-header-static.dark-logo-img {
-            height: 70px;
+            height: 50px;
             width: auto;
+            object-fit: contain;
         }
 
         /* --- Logo Theme Logic --- */
@@ -855,117 +1081,254 @@
             transform: translateY(0) scale(1);
             opacity: 1;
         }
+
+        /* --- 9. SCROLL FADE-IN --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-d1 { transition-delay: 0.12s; }
+        .fade-in-d2 { transition-delay: 0.24s; }
+        .fade-in-d3 { transition-delay: 0.36s; }
+
+        /* Fixed header scroll offset */
+        section[id] { scroll-margin-top: 80px; }
+
+        /* Footer links */
+        .footer-link {
+            font-size: 13px;
+            color: #64748b;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: block;
+            padding: 1px 0;
+        }
+        .footer-link:hover {
+            color: #f8fafc;
+            padding-left: 4px;
+        }
+        body.light-mode .footer-link { color: #94a3b8; }
+        body.light-mode .footer-link:hover { color: #0f172a; }
+
+        /* Featured workflow card */
+        .workflow-featured {
+            background: linear-gradient(135deg, rgba(56,189,248,0.05) 0%, rgba(129,140,248,0.03) 100%) !important;
+            border-color: rgba(56,189,248,0.25) !important;
+        }
+
+        /* Hero floating card */
+        .hero-stats-card {
+            font-family: 'JetBrains Mono', monospace;
+            min-width: 200px;
+        }
     </style>
 </head>
 
 <body>
 
+    <div id="scroll-progress"></div>
+
     <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-sky-500 focus:text-white focus:rounded-lg focus:font-bold">Skip to content</a>
 
-    <header>
-        <div class="flex items-center gap-8">
-            <img src="assets/img/image1.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static dark-logo-img">
-            <img src="assets/img/image.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static light-logo-img">
-
-            <div class="flex flex-col">
-                <h1 class="text-4xl font-black uppercase italic tracking-tighter leading-none">
-                    Pegasus <span class="text-sky-500">AI</span>
-                </h1>
-                <span class="mono text-[9px] tracking-[0.4em] text-sky-400/60 mt-1">NEXT-GEN WORKFLOWS</span>
+    <header id="main-header">
+        <!-- Brand -->
+        <a href="#" class="flex items-center gap-3 shrink-0 no-underline" style="text-decoration:none">
+            <!-- Logo clipped to icon only (image has "PegasusAI" text in bottom ~25%) -->
+            <!-- Display image at 62px tall in a 46px container → clips bottom 25% (the text) -->
+            <div class="dark-logo-img shrink-0 overflow-hidden" style="width:46px;height:46px">
+                <img src="assets/img/image1.png" alt="Pegasus AI" style="width:46px;height:62px;object-fit:cover;object-position:top center;display:block;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.35))">
             </div>
-        </div>
+            <div class="light-logo-img shrink-0 overflow-hidden" style="width:46px;height:46px">
+                <img src="assets/img/image.png" alt="Pegasus AI" style="width:46px;height:62px;object-fit:cover;object-position:top center;display:block">
+            </div>
+            <div class="flex flex-col leading-none">
+                <span class="text-[22px] font-extrabold tracking-tight" style="color:var(--text-main)">Pegasus <span class="text-sky-400">AI</span></span>
+                <span class="mono text-[8px] tracking-[0.35em] text-sky-400/50 mt-0.5 uppercase">Next-Gen Workflows</span>
+            </div>
+        </a>
 
-        <nav id="main-nav" class="ml-auto flex gap-10 mono font-bold tracking-widest text-slate-400">
-            <a href="#about" class="hover:text-white hover:scale-110 transition-all">01 ABOUT</a>
-            <a href="#ecosystem" class="hover:text-white hover:scale-110 transition-all">02 ECOSYSTEM</a>
-            <a href="#tech" class="hover:text-white hover:scale-110 transition-all">03 TECH</a>
-            <a href="#engine" class="hover:text-white hover:scale-110 transition-all">04 ENGINE</a>
-            <a href="#workflows" class="hover:text-white hover:scale-110 transition-all">05 WORKFLOWS</a>
-            <a href="#team" class="hover:text-white hover:scale-110 transition-all">06 TEAM</a>
-            <a href="blog.html" class="hover:text-white hover:scale-110 transition-all text-sky-400">07 BLOG</a>
+        <!-- Desktop nav -->
+        <nav id="main-nav" class="ml-auto flex items-center gap-1">
+            <a href="#about"     class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">About</a>
+            <a href="#ecosystem" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Ecosystem</a>
+            <a href="#tech"      class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Tech</a>
+            <a href="#engine"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Engine</a>
+            <a href="#workflows" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Workflows</a>
+            <a href="#studio"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Studio</a>
+            <a href="#team"      class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Team</a>
+            <div class="w-px h-4 bg-white/10 mx-2"></div>
+            <a href="blog.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-[14px] font-bold hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-all">
+                Blog <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </a>
         </nav>
 
-        <!-- Hamburger button (mobile only) -->
+        <!-- Hamburger (mobile only) -->
         <button id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"
-            class="ml-auto hidden flex-col gap-[5px] p-2 cursor-pointer">
-            <span class="ham-line block w-6 h-[2px] bg-current transition-all"></span>
-            <span class="ham-line block w-6 h-[2px] bg-current transition-all"></span>
-            <span class="ham-line block w-6 h-[2px] bg-current transition-all"></span>
+            class="ml-auto hidden flex-col gap-[5px] p-2 cursor-pointer text-slate-400 hover:text-white transition-colors">
+            <span class="block w-5 h-[1.5px] bg-current transition-all rounded-full"></span>
+            <span class="block w-5 h-[1.5px] bg-current transition-all rounded-full"></span>
+            <span class="block w-3.5 h-[1.5px] bg-current transition-all rounded-full"></span>
         </button>
     </header>
 
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-[999] hidden flex-col items-center justify-center gap-8"
-        style="background: var(--bg-main);">
-        <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-slate-400 hover:text-white">
-            <i data-lucide="x" class="w-7 h-7"></i>
+    <div id="mobile-menu" class="fixed inset-0 z-[999] hidden flex-col items-center justify-center gap-6"
+        style="background: rgba(2, 6, 23, 0.97); backdrop-filter: blur(20px);">
+        <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <nav class="flex flex-col items-center gap-8 mono font-bold tracking-widest text-slate-400 text-2xl">
-            <a href="#about" onclick="toggleMobileMenu()" class="hover:text-white transition-all">01 ABOUT</a>
-            <a href="#ecosystem" onclick="toggleMobileMenu()" class="hover:text-white transition-all">02 ECOSYSTEM</a>
-            <a href="#tech" onclick="toggleMobileMenu()" class="hover:text-white transition-all">03 TECH</a>
-            <a href="#engine" onclick="toggleMobileMenu()" class="hover:text-white transition-all">04 ENGINE</a>
-            <a href="#workflows" onclick="toggleMobileMenu()" class="hover:text-white transition-all">05 WORKFLOWS</a>
-            <a href="#team" onclick="toggleMobileMenu()" class="hover:text-white transition-all">06 TEAM</a>
-            <a href="blog.html" onclick="toggleMobileMenu()" class="text-sky-400 hover:text-white transition-all">07 BLOG</a>
+        <!-- Brand in mobile menu -->
+        <div class="flex items-center gap-2 mb-4">
+            <div class="dark-logo-img shrink-0 overflow-hidden" style="width:36px;height:36px">
+                <img src="assets/img/image1.png" alt="" style="width:36px;height:48px;object-fit:cover;object-position:top center;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.3))">
+            </div>
+            <div class="light-logo-img shrink-0 overflow-hidden" style="width:36px;height:36px">
+                <img src="assets/img/image.png" alt="" style="width:36px;height:48px;object-fit:cover;object-position:top center">
+            </div>
+            <span class="text-base font-extrabold tracking-tight text-white">Pegasus <span class="text-sky-400">AI</span></span>
+        </div>
+        <nav class="flex flex-col items-center gap-1 w-full max-w-xs px-4">
+            <a href="#about"     onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">About</a>
+            <a href="#ecosystem" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Ecosystem</a>
+            <a href="#tech"      onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Tech</a>
+            <a href="#engine"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Engine</a>
+            <a href="#workflows" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Workflows</a>
+            <a href="#team"      onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Team</a>
+            <div class="w-full h-px bg-white/5 my-2"></div>
+            <a href="blog.html" onclick="toggleMobileMenu()"
+                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-sm font-bold hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-all">
+                Blog <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
         </nav>
     </div>
 
-    <section id="about" class="bg-slate-950 overflow-hidden py-24">
-        <div class="max-w-[1400px] mx-auto px-6">
-            <div class="about-grid">
+    <!-- Hero -->
+    <section id="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-orb-1"></div>
+        <div class="hero-orb-2"></div>
+        <div class="max-w-5xl mx-auto px-6 py-40 flex flex-col items-center text-center gap-10 relative z-10">
+            <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-sky-500/20 transition-colors">
+                <img src="assets/img/nsf.png" alt="NSF" width="14" height="14"> Funded by the National Science Foundation · Award #2513101
+            </a>
+            <h1 class="text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-none uppercase">
+                AI&#8209;Powered<br><span class="text-sky-500 italic">Scientific</span><br>Workflows
+            </h1>
+            <p class="text-base md:text-lg text-slate-500 font-light max-w-xl leading-relaxed">
+                Next-generation workflow management — intelligent automation, real-time monitoring, and LLM-powered tools for large-scale scientific computing.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <a href="#about"
+                    class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-sky-500 text-white font-bold tracking-wide text-sm hover:bg-sky-400 transition-all hover:shadow-[0_0_24px_rgba(56,189,248,0.4)] group">
+                    Explore <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+                <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border border-white/15 text-slate-400 font-semibold text-sm hover:border-white/30 hover:text-white transition-all group">
+                    <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                </a>
+                <a href="blog.html"
+                    class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border border-white/15 text-slate-400 font-semibold text-sm hover:border-white/30 hover:text-white transition-all group">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Blog
+                </a>
+            </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 pointer-events-none">
+                <span class="mono text-[9px] tracking-[0.4em] uppercase">Scroll</span>
+                <div class="w-px h-10 bg-gradient-to-b from-sky-400 to-transparent animate-pulse"></div>
+            </div>
+        </div>
 
+    </section>
+
+    <section id="about" class="bg-slate-950 overflow-hidden py-24">
+        <div class="max-w-[1400px] mx-auto px-6 space-y-14">
+
+            <!-- Top row: text left, image right -->
+            <div class="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+
+                <!-- Text -->
+                <div class="space-y-8">
+                    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-sky-500/20 transition-colors">
+                        <img src="assets/img/nsf.png" alt="NSF" width="16" height="16"> Funded by the National Science Foundation · Award #2513101
+                    </a>
+                    <h2 class="text-5xl xl:text-6xl font-black tracking-tighter leading-[0.95] fade-in">
+                        What is <br><span class="text-sky-500 italic">Pegasus AI?</span>
+                    </h2>
+                    <p class="text-lg text-slate-300 leading-relaxed font-light max-w-lg">
+                        PegasusAI is the next-generation AI-driven scientific workflow management system developed
+                        by a multi-institutional team funded by the <strong>U.S. National Science Foundation</strong>.
+                    </p>
+                </div>
+
+                <!-- Logo -->
                 <div class="relative flex justify-center items-center">
                     <div class="hero-glow"></div>
                     <img src="assets/img/image1.png" alt="Pegasus AI — dark mode hero logo" class="logo-hero-xl relative z-10 dark-logo-img">
                     <img src="assets/img/image.png" alt="Pegasus AI — light mode hero logo" class="logo-hero-xl relative z-10 light-logo-img">
                 </div>
-
-                <div class="space-y-12">
-                    <div class="space-y-6">
-                        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-sky-500/20 transition-colors">
-                            <img src="assets/img/nsf.png" alt="NSF" width="16" height="16"> Funded by the National Science Foundation · Award #2513101
-                        </a>
-                        <h2 class="text-7xl font-black tracking-tighter leading-none">
-                            What is <span class="text-sky-500 italic">Pegasus AI?</span>
-                        </h2>
-                        <p class="text-xl text-slate-300 leading-relaxed font-light">
-                            PegasusAI is the next-generation AI-driven scientific workflow management system developed
-                            by a multi-institutional team funded by the <strong>U.S. National Science
-                                Foundation</strong>.
-                        </p>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="p-6 glass-card rounded-2xl">
-                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="brain"
-                                    class="w-4 h-4 text-sky-500"></i> Intelligent Planning</h4>
-                            <p class="text-sm text-slate-400">ML models to predict resource needs and optimize
-                                execution.</p>
-                        </div>
-                        <div class="p-6 glass-card rounded-2xl">
-                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="zap"
-                                    class="w-4 h-4 text-sky-500"></i> Adaptive Mgmt</h4>
-                            <p class="text-sm text-slate-400">Real-time anomaly detection and automatic plan adjustment.
-                            </p>
-                        </div>
-                        <div class="p-6 glass-card rounded-2xl">
-                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="users"
-                                    class="w-4 h-4 text-sky-500"></i> Human-in-Loop</h4>
-                            <p class="text-sm text-slate-400">AI-augmented tools for creation, monitoring, and
-                                debugging.</p>
-                        </div>
-                        <div class="p-6 glass-card rounded-2xl">
-                            <h4 class="font-bold flex items-center gap-2 mb-2"><i data-lucide="database"
-                                    class="w-4 h-4 text-sky-500"></i> AI-Ready Data</h4>
-                            <p class="text-sm text-slate-400">Curated datasets to advance cyberinfrastructure research.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
+            <!-- Stats row -->
+            <div class="grid grid-cols-3 divide-x divide-white/5 border border-white/5 rounded-2xl overflow-hidden">
+                <div class="flex flex-col gap-1 px-8 py-7">
+                    <div class="w-8 h-0.5 rounded-full bg-sky-400/60 mb-3"></div>
+                    <div class="stat-val">20+</div>
+                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2">Open Workflows</p>
+                </div>
+                <div class="flex flex-col gap-1 px-8 py-7">
+                    <div class="w-8 h-0.5 rounded-full bg-violet-400/60 mb-3"></div>
+                    <div class="stat-val">5</div>
+                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2">Institutions</p>
+                </div>
+                <div class="flex flex-col gap-1 px-8 py-7">
+                    <div class="w-8 h-0.5 rounded-full bg-emerald-400/60 mb-3"></div>
+                    <div class="stat-val">NSF</div>
+                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2">Funded Research</p>
+                </div>
+            </div>
+
+            <!-- Feature cards — 4 columns full width -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="brain" class="w-4 h-4 text-sky-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm">Intelligent Planning</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">ML models predict resource needs and optimize execution.</p>
+                </div>
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="zap" class="w-4 h-4 text-sky-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm">Adaptive Management</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Real-time anomaly detection and automatic plan adjustment.</p>
+                </div>
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="users" class="w-4 h-4 text-sky-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm">Human-in-the-Loop</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">AI-augmented tools for creation, monitoring, and debugging.</p>
+                </div>
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="database" class="w-4 h-4 text-sky-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm">AI-Ready Data</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Curated datasets to advance cyberinfrastructure research.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -975,17 +1338,12 @@
 
                 <div class="lg:col-span-2 space-y-8 z-10">
                     <div>
-                        <h2
-                            class="text-7xl md:text-8xl font-black tracking-tighter uppercase italic text-white leading-[0.8]">
-                            Pegasus <br>
-                            <span class="text-sky-500">In Context</span>
-                        </h2>
-                        <div class="mt-8 flex items-center gap-4">
-                            <div class="h-[2px] w-12 bg-sky-500"></div>
-                            <span class="font-mono text-[11px] tracking-[0.5em] text-sky-400 uppercase font-bold">
-                                Ecosystem Architecture
-                            </span>
+                        <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
+                            <i data-lucide="layers" class="w-3 h-3"></i> Ecosystem Architecture
                         </div>
+                        <h2 class="text-6xl font-black uppercase italic tracking-tighter fade-in">
+                            Pegasus <br><span class="text-sky-500">In Context</span>
+                        </h2>
                     </div>
 
                     <p class="text-xl text-slate-300 leading-relaxed font-light max-w-xl">
@@ -995,20 +1353,14 @@
                         data generation and large-scale execution.
                     </p>
 
-                    <div class="flex gap-12 pt-6">
-                        <div class="group">
-                            <div
-                                class="text-white font-black text-4xl tracking-tighter group-hover:text-sky-400 transition-colors">
-                                100%</div>
-                            <div class="text-[10px] uppercase tracking-[0.3em] text-slate-500 font-mono mt-1">Automated
-                                Workflow</div>
+                    <div class="flex gap-10 pt-4">
+                        <div>
+                            <div class="text-white font-black text-3xl tracking-tighter">100%</div>
+                            <div class="text-[9px] uppercase tracking-[0.3em] text-slate-500 mono mt-1">Automated Workflow</div>
                         </div>
-                        <div class="group">
-                            <div
-                                class="text-white font-black text-4xl tracking-tighter group-hover:text-sky-400 transition-colors">
-                                Global</div>
-                            <div class="text-[10px] uppercase tracking-[0.3em] text-slate-500 font-mono mt-1">
-                                Infrastructure</div>
+                        <div>
+                            <div class="text-white font-black text-3xl tracking-tighter">Global</div>
+                            <div class="text-[9px] uppercase tracking-[0.3em] text-slate-500 mono mt-1">Infrastructure</div>
                         </div>
                     </div>
                 </div>
@@ -1343,45 +1695,100 @@
                 </div>
             </div>
     </section>
-    <section id="tech">
-        <div class="max-w-7xl mx-auto w-full">
-            <h2 class="text-6xl font-black uppercase mb-16">Technical <span class="text-sky-500">Approach</span></h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="p-8 glass-card rounded-[2rem] space-y-4">
-                    <h3 class="text-xl font-bold text-white">Task Performance Prediction</h3>
-                    <p class="text-slate-400 text-sm">ML models that predict task runtime, memory usage, and resource needs to enable smarter scheduling and planning decisions.</p>
+    <section id="tech" class="bg-slate-900">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+
+            <!-- Section header -->
+            <div class="mb-14">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
+                    <i data-lucide="flask-conical" class="w-3 h-3"></i> Research Areas
                 </div>
-                <div class="p-8 glass-card rounded-[2rem] space-y-4">
-                    <h3 class="text-xl font-bold text-white">Comprehensive Online Monitoring</h3>
-                    <p class="text-slate-400 text-sm">Real-time performance tracking and debugging tools that detect anomalies, surface bottlenecks, and support live workflow introspection.</p>
-                </div>
-                <div class="p-8 glass-card rounded-[2rem] space-y-4">
-                    <h3 class="text-xl font-bold text-white">AI-Assisted Workflow Creation</h3>
-                    <p class="text-slate-400 text-sm">LLM-powered tools that help scientists compose, validate, and refine scientific workflows through natural language interaction.</p>
-                </div>
-                <div class="p-8 glass-card rounded-[2rem] space-y-4">
-                    <h3 class="text-xl font-bold text-white">PegasusAI in the Classroom</h3>
-                    <p class="text-slate-400 text-sm">Educational integration of Pegasus AI into academic curricula, enabling students to engage with real-world scientific computing.</p>
-                </div>
+                <h2 class="text-6xl font-black uppercase fade-in">Technical <span class="text-sky-500">Approach</span></h2>
             </div>
-            <div
-                class="mt-8 p-10 glass-card rounded-[2rem] border-l-4 border-l-sky-500 flex items-center justify-between">
-                <div>
-                    <h3 class="text-2xl font-bold text-white mb-2">CI-Ready Design</h3>
-                    <p class="text-slate-400">Implement within Pegasus's modular architecture to ensure compatibility
-                        with the NSF CI ecosystem.</p>
-                </div>
-                <i data-lucide="component" class="w-12 h-12 text-sky-500 opacity-30"></i>
+
+            <!-- Top row: 3 cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <a href="blog.html?category=task-performance" class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="bar-chart-2" class="w-4 h-4 text-sky-400"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Task Performance Prediction</h3>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">ML models that predict task runtime, memory usage, and resource needs to enable smarter scheduling decisions.</p>
+                    <span class="mt-auto pt-3 border-t border-white/5 flex items-center gap-1.5 mono text-[10px] tracking-widest text-slate-600 group-hover:text-sky-400 uppercase transition-colors">
+                        Read posts <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                    </span>
+                </a>
+
+                <a href="blog.html?category=monitoring" class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="activity" class="w-4 h-4 text-violet-400"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Comprehensive Online Monitoring</h3>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">Real-time performance tracking that detects anomalies, surfaces bottlenecks, and supports live workflow introspection.</p>
+                    <span class="mt-auto pt-3 border-t border-white/5 flex items-center gap-1.5 mono text-[10px] tracking-widest text-slate-600 group-hover:text-sky-400 uppercase transition-colors">
+                        Read posts <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                    </span>
+                </a>
+
+                <a href="blog.html?category=ai-workflows" class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="bot" class="w-4 h-4 text-emerald-400"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">AI-Assisted Workflow Creation</h3>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">LLM-powered tools that help scientists compose, validate, and refine scientific workflows through natural language.</p>
+                    <span class="mt-auto pt-3 border-t border-white/5 flex items-center gap-1.5 mono text-[10px] tracking-widest text-slate-600 group-hover:text-sky-400 uppercase transition-colors">
+                        Read posts <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                    </span>
+                </a>
+
+                <a href="blog.html?category=education" class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="book-open" class="w-4 h-4 text-amber-400"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">PegasusAI in the Classroom</h3>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">Educational integration of Pegasus AI into academic curricula, enabling students to engage with real-world scientific computing.</p>
+                    <span class="mt-auto pt-3 border-t border-white/5 flex items-center gap-1.5 mono text-[10px] tracking-widest text-slate-600 group-hover:text-sky-400 uppercase transition-colors">
+                        Read posts <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                    </span>
+                </a>
+
+                <a href="blog.html?category=ci-design" class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="component" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">CI-Ready Design</h3>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">Implemented within Pegasus's modular architecture to ensure compatibility with the NSF cyberinfrastructure ecosystem.</p>
+                    <span class="mt-auto pt-3 border-t border-white/5 flex items-center gap-1.5 mono text-[10px] tracking-widest text-slate-600 group-hover:text-sky-400 uppercase transition-colors">
+                        Read posts <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                    </span>
+                </a>
             </div>
+
         </div>
     </section>
 
 
 
     <section id="engine">
-        <div class="pulse-bg"></div>
-        <div class="max-w-[1700px] mx-auto grid lg:grid-cols-12 gap-10 items-center w-full">
-            <div class="lg:col-span-5 flex flex-col items-center gap-12">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+                <i data-lucide="rotate-cw" class="w-3 h-3"></i> Lifecycle Engine
+            </div>
+            <h2 class="text-6xl font-black uppercase italic tracking-tighter fade-in">Workflow <span class="text-sky-500">Engine</span></h2>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto px-6 grid lg:grid-cols-12 gap-8 items-center w-full">
+            <div class="lg:col-span-5 flex flex-col items-center gap-4">
                 <div class="stage-viewport">
                     <svg id="lifecycle-svg" viewBox="0 0 600 600">
                         <g id="segments">
@@ -1396,43 +1803,69 @@
                             <path id="svg-4" class="stage-path" d="M50,185 A280,280 0 0,1 300,20 L300,300 Z"
                                 fill="var(--c-publish)" onclick="manualSet(4)" />
                         </g>
-                        <g class="orbital-loop">
-                            <defs>
-                                <path id="lp" d="M 300,300 m -140,0 a 140,140 0 1,1 280,0 a 140,140 0 1,1 -280,0" />
-                            </defs>
-                            <text class="mono font-bold text-[12px]" fill="var(--active-color)">
-                                <textPath href="#lp">MODIFY • ADAPT • MONITOR • </textPath>
-                            </text>
+                        <!-- Segment labels — rotate with the wheel, readable at active position -->
+                        <g id="seg-labels" style="pointer-events:none">
+                            <text id="lbl-0" class="seg-label" x="415" y="152" text-anchor="middle" dominant-baseline="middle">Create</text>
+                            <text id="lbl-1" class="seg-label" x="486" y="362" text-anchor="middle" dominant-baseline="middle">Plan</text>
+                            <text id="lbl-2" class="seg-label" x="300" y="490" text-anchor="middle" dominant-baseline="middle">Provision</text>
+                            <text id="lbl-3" class="seg-label" x="114" y="362" text-anchor="middle" dominant-baseline="middle">Execute</text>
+                            <text id="lbl-4" class="seg-label" x="185" y="152" text-anchor="middle" dominant-baseline="middle">Publish</text>
                         </g>
-                        <g>
-                            <circle cx="300" cy="300" r="105" fill="var(--bg-main)" stroke="var(--active-color)"
-                                stroke-width="4" />
 
-                            <image class="svg-logo-dark" href="image1.png" x="205" y="205" width="190" height="170" />
-
-                            <image class="svg-logo-light" href="assets/img/image.png" x="205" y="205" width="190" height="170" />
+                        <!-- Logo group counter-rotates to stay upright -->
+                        <g id="logo-group">
+                            <circle cx="300" cy="300" r="105" fill="var(--bg-main)" stroke="var(--active-color)" stroke-width="3" />
+                            <image class="svg-logo-dark" href="assets/img/image1.png" x="215" y="210" width="170" height="155" />
+                            <image class="svg-logo-light" href="assets/img/image.png" x="215" y="210" width="170" height="155" />
                         </g>
                     </svg>
                 </div>
-                <div class="flex gap-4 p-3 glass-card rounded-2xl">
-                    <button onclick="manualSet(0)" id="btn-0" class="w-10 h-10 rounded-lg mono text-xs">01</button>
-                    <button onclick="manualSet(1)" id="btn-1" class="w-10 h-10 rounded-lg mono text-xs">02</button>
-                    <button onclick="manualSet(2)" id="btn-2" class="w-10 h-10 rounded-lg mono text-xs">03</button>
-                    <button onclick="manualSet(3)" id="btn-3" class="w-10 h-10 rounded-lg mono text-xs">04</button>
-                    <button onclick="manualSet(4)" id="btn-4" class="w-10 h-10 rounded-lg mono text-xs">05</button>
+                <!-- Timeline -->
+                <div class="relative w-full max-w-sm mx-auto px-2 pt-2">
+                    <!-- Track -->
+                    <div class="absolute h-[2px] rounded-full bg-white/10" style="top:11px;left:22px;right:22px"></div>
+                    <!-- Progress -->
+                    <div id="timeline-progress" class="absolute h-[2px] rounded-full" style="top:11px;left:22px;width:0%;transition:width 1.2s cubic-bezier(0.2,0.8,0.2,1),background 0.4s ease"></div>
+                    <!-- Dots + labels -->
+                    <div class="flex justify-between relative z-10">
+                        <button onclick="manualSet(0)" id="btn-0" class="tl-btn flex flex-col items-center gap-2">
+                            <div class="tl-dot"></div>
+                            <span class="tl-label">Create</span>
+                        </button>
+                        <button onclick="manualSet(1)" id="btn-1" class="tl-btn flex flex-col items-center gap-2">
+                            <div class="tl-dot"></div>
+                            <span class="tl-label">Plan</span>
+                        </button>
+                        <button onclick="manualSet(2)" id="btn-2" class="tl-btn flex flex-col items-center gap-2">
+                            <div class="tl-dot"></div>
+                            <span class="tl-label">Provision</span>
+                        </button>
+                        <button onclick="manualSet(3)" id="btn-3" class="tl-btn flex flex-col items-center gap-2">
+                            <div class="tl-dot"></div>
+                            <span class="tl-label">Execute</span>
+                        </button>
+                        <button onclick="manualSet(4)" id="btn-4" class="tl-btn flex flex-col items-center gap-2">
+                            <div class="tl-dot"></div>
+                            <span class="tl-label">Publish</span>
+                        </button>
+                    </div>
                 </div>
             </div>
+
             <div class="lg:col-span-7">
-                <div class="glass-card p-12 rounded-[3rem]">
-                    <h2 id="step-title" class="text-7xl font-black uppercase mb-10 transition-all duration-500"></h2>
-                    <div id="step-bullets" class="space-y-6"></div>
-                    <div class="mt-12 pt-8 border-t border-white/5 flex items-center justify-between">
-                        <div class="flex gap-6 mono text-[10px] tracking-widest font-bold">
-                            <span id="tag-modify">MODIFY</span><span id="tag-adapt">ADAPT</span><span
-                                id="tag-monitor">MONITOR</span>
-                        </div>
-                        <button onclick="toggleAutoplay()" class="p-3 glass-card rounded-full"><i data-lucide="pause"
-                                id="play-icon" class="w-4 h-4"></i></button>
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <div class="flex items-start justify-between mb-5">
+                        <h2 id="step-title" class="text-4xl font-black uppercase leading-tight transition-all duration-500"></h2>
+                        <button onclick="toggleAutoplay()" class="p-3 glass-card rounded-full flex-shrink-0 ml-4 hover:border-sky-500/40 transition-colors">
+                            <i data-lucide="pause" id="play-icon" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div id="step-bullets" class="space-y-3"></div>
+                    <div class="mt-5 pt-4 border-t border-white/5 flex items-center gap-4">
+                        <span class="mono text-[9px] tracking-[0.25em] text-slate-500 uppercase">Loop:</span>
+                        <span id="tag-modify" class="loop-tag">Modify</span>
+                        <span id="tag-adapt" class="loop-tag">Adapt</span>
+                        <span id="tag-monitor" class="loop-tag">Monitor</span>
                     </div>
                 </div>
             </div>
@@ -1444,168 +1877,199 @@
                 <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
                     <i data-lucide="git-branch" class="w-3 h-3"></i> Open Source
                 </div>
-                <h2 class="text-6xl font-black uppercase italic tracking-tighter">Workflow <span class="text-sky-500">Examples</span></h2>
-                <p class="text-slate-400 mono text-xs tracking-[0.4em] mt-2">REAL-WORLD PEGASUS AI WORKFLOWS</p>
+                <h2 class="text-6xl font-black uppercase italic tracking-tighter fade-in">Workflow <span class="text-sky-500">Examples</span></h2>
+                <p class="text-slate-400 mono text-xs tracking-[0.4em] mt-2">Real-world Pegasus AI pipelines — open source, runnable today</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                <a href="https://github.com/pegasus-isi/airquality-workflow" target="_blank" rel="noopener noreferrer"
+                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="wind" class="w-4 h-4 text-cyan-400"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Air Quality Workflow</h3>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">Air quality sensor data ingestion and analysis at regional scale.</p>
+                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/airquality-workflow <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
+                </a>
 
                 <a href="https://github.com/pegasus-isi/napkin-vibe-example" target="_blank" rel="noopener noreferrer"
-                    class="group glass-card p-8 rounded-[2rem] space-y-4 hover:border-sky-500/60 transition-all duration-300 flex flex-col">
-                    <div class="flex items-start justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="pencil-line" class="w-5 h-5 text-sky-400"></i>
+                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="pencil-line" class="w-4 h-4 text-sky-400"></i>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[9px] font-bold tracking-[0.2em] uppercase">
-                                <i data-lucide="book-open" class="w-3 h-3"></i> Training
-                            </span>
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-sky-400 transition-colors"></i>
-                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Napkin Vibe Example</h3>
                     </div>
-                    <div class="flex-1 space-y-2">
-                        <h3 class="text-lg font-bold text-white group-hover:text-sky-400 transition-colors">Napkin Vibe Example</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">A quick-start template demonstrating how to sketch and prototype Pegasus AI workflows using a minimal, expressive style.</p>
-                    </div>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 uppercase">pegasus-isi/napkin-vibe-example</span>
+                    <p class="text-slate-500 text-sm leading-relaxed">Sketch and prototype Pegasus AI workflows from a minimal starting point.</p>
+                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/napkin-vibe-example <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
                 </a>
 
                 <a href="https://github.com/pegasus-isi/sra-search-pegasus-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group glass-card p-8 rounded-[2rem] space-y-4 hover:border-sky-500/60 transition-all duration-300 flex flex-col">
-                    <div class="flex items-start justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="dna" class="w-5 h-5 text-indigo-400"></i>
+                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="dna" class="w-4 h-4 text-indigo-400"></i>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[9px] font-bold tracking-[0.2em] uppercase">
-                                <i data-lucide="book-open" class="w-3 h-3"></i> Training
-                            </span>
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-indigo-400 transition-colors"></i>
-                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">SRA Search Workflow</h3>
                     </div>
-                    <div class="flex-1 space-y-2">
-                        <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">SRA Search Workflow</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">A bioinformatics workflow that searches the NCBI Sequence Read Archive (SRA) at scale using distributed Pegasus execution.</p>
-                    </div>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 uppercase">pegasus-isi/sra-search-pegasus-workflow</span>
+                    <p class="text-slate-500 text-sm leading-relaxed">Large-scale NCBI Sequence Read Archive search using distributed execution.</p>
+                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/sra-search <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
                 </a>
 
                 <a href="https://github.com/pegasus-isi/earthquake-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group glass-card p-8 rounded-[2rem] space-y-4 hover:border-sky-500/60 transition-all duration-300 flex flex-col">
-                    <div class="flex items-start justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="activity" class="w-5 h-5 text-orange-400"></i>
+                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="activity" class="w-4 h-4 text-orange-400"></i>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[9px] font-bold tracking-[0.2em] uppercase">
-                                <i data-lucide="book-open" class="w-3 h-3"></i> Training
-                            </span>
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-orange-400 transition-colors"></i>
-                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Earthquake Workflow</h3>
                     </div>
-                    <div class="flex-1 space-y-2">
-                        <h3 class="text-lg font-bold text-white group-hover:text-orange-400 transition-colors">Earthquake Workflow</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Seismic data processing pipeline for large-scale earthquake simulation and ground motion analysis across HPC infrastructure.</p>
-                    </div>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 uppercase">pegasus-isi/earthquake-workflow</span>
+                    <p class="text-slate-500 text-sm leading-relaxed">Seismic data processing and ground motion analysis across HPC infrastructure.</p>
+                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/earthquake-workflow <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
                 </a>
 
                 <a href="https://github.com/pegasus-isi/crophealth-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group glass-card p-8 rounded-[2rem] space-y-4 hover:border-sky-500/60 transition-all duration-300 flex flex-col">
-                    <div class="flex items-start justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="leaf" class="w-5 h-5 text-emerald-400"></i>
+                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="leaf" class="w-4 h-4 text-emerald-400"></i>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[9px] font-bold tracking-[0.2em] uppercase">
-                                <i data-lucide="book-open" class="w-3 h-3"></i> Training
-                            </span>
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-emerald-400 transition-colors"></i>
-                        </div>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Crop Health Workflow</h3>
                     </div>
-                    <div class="flex-1 space-y-2">
-                        <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">Crop Health Workflow</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Remote sensing and ML pipeline for monitoring agricultural crop health using satellite imagery and distributed compute.</p>
-                    </div>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 uppercase">pegasus-isi/crophealth-workflow</span>
-                </a>
-
-                <a href="https://github.com/pegasus-isi/airquality-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group glass-card p-8 rounded-[2rem] space-y-4 hover:border-sky-500/60 transition-all duration-300 flex flex-col">
-                    <div class="flex items-start justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="wind" class="w-5 h-5 text-cyan-400"></i>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[9px] font-bold tracking-[0.2em] uppercase">
-                                <i data-lucide="book-open" class="w-3 h-3"></i> Training
-                            </span>
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-cyan-400 transition-colors"></i>
-                        </div>
-                    </div>
-                    <div class="flex-1 space-y-2">
-                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Air Quality Workflow</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Environmental data workflow for ingesting, processing, and analyzing air quality sensor data at regional and national scale.</p>
-                    </div>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 uppercase">pegasus-isi/airquality-workflow</span>
+                    <p class="text-slate-500 text-sm leading-relaxed">Satellite imagery ML pipeline for monitoring agricultural crop health.</p>
+                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/crophealth-workflow <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
                 </a>
 
                 <a href="https://pegasushub.io/" target="_blank" rel="noopener noreferrer"
-                    class="group glass-card p-8 rounded-[2rem] space-y-4 hover:border-sky-500/60 transition-all duration-300 flex flex-col">
-                    <div class="flex items-start justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="layout-dashboard" class="w-5 h-5 text-sky-400"></i>
+                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="layout-dashboard" class="w-4 h-4 text-sky-400"></i>
                         </div>
-                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-sky-400 transition-colors"></i>
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">PegasusHub</h3>
                     </div>
-                    <div class="flex-1 space-y-2">
-                        <h3 class="text-lg font-bold group-hover:text-sky-400 transition-colors"><span class="text-white">PEGASUS</span><span class="text-sky-400">HUB</span></h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">A centralized hub for discovering, sharing, and exploring Pegasus AI workflows across the community.</p>
-                    </div>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 uppercase">pegasushub.io</span>
+                    <p class="text-slate-500 text-sm leading-relaxed">Centralized hub for discovering and sharing Pegasus AI workflows.</p>
+                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasushub.io <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
                 </a>
 
             </div>
         </div>
     </section>
 
-    <section id="partners" class="py-24 bg-slate-950">
+    <section id="studio" class="py-16 bg-slate-950 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 w-full">
-            <h2 class="text-6xl font-black uppercase mb-16 text-center italic">Project <span
-                    class="text-sky-500">Partners</span></h2>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div
-                    class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
-                    <div class="h-24 flex items-center justify-center">
-                        <img src="assets/img/access.png" alt="ACCESS Logo" loading="lazy"
-                            class="max-h-full w-auto object-contain filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-500">
+            <div class="flex flex-col lg:flex-row items-center gap-10">
+                <!-- Text -->
+                <div class="lg:w-80 shrink-0 flex flex-col gap-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase w-fit">
+                        <i data-lucide="play-circle" class="w-3 h-3"></i> Watch
                     </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">ACCESS</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">NSF-funded program providing unified access to
-                            over 20 compute and storage systems.</p>
-                    </div>
-                    <a href="https://access-ci.org" target="_blank"
-                        class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
-                        Visit access-ci.org <i data-lucide="external-link" class="w-3 h-3"></i>
-                    </a>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tighter leading-tight">
+                        Pegasus <span class="text-sky-500 italic">AI Studio</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm leading-relaxed">A walkthrough of the interface — project setup, workflow visualization, and job monitoring.</p>
                 </div>
+                <!-- Video -->
+                <div class="flex-1 min-w-0 rounded-xl border border-white/8 overflow-hidden hover:border-sky-500/30 transition-all duration-300">
+                    <video controls preload="metadata" class="w-full block" style="background:#000">
+                        <source src="assets/videos/pegasusai-studio-orientation-v2-720p30.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div
-                    class="glass-card p-12 rounded-[3rem] text-center space-y-8 hover:border-sky-500/40 transition-all duration-500 group">
-                    <div class="h-24 flex items-center justify-center">
+    <section id="partners" class="py-24 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="mb-14">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
+                    <i data-lucide="link" class="w-3 h-3"></i> NSF Partners
+                </div>
+                <h2 class="text-6xl font-black uppercase italic tracking-tighter fade-in">Project <span class="text-sky-500">Partners</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-5">
+                <a href="https://access-ci.org" target="_blank" rel="noopener noreferrer"
+                    class="group flex items-center gap-6 p-6 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="w-20 h-10 shrink-0 flex items-center">
+                        <img src="assets/img/access.png" alt="ACCESS Logo" loading="lazy"
+                            class="w-full h-full object-contain filter brightness-0 invert opacity-50 group-hover:opacity-90 transition-opacity duration-300">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">ACCESS</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed mt-0.5">NSF-funded program providing unified access to over 20 compute and storage systems.</p>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-700 group-hover:text-sky-400 transition-colors shrink-0"></i>
+                </a>
+
+                <a href="https://path-cc.io" target="_blank" rel="noopener noreferrer"
+                    class="group flex items-center gap-6 p-6 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
+                    <div class="w-20 h-10 shrink-0 flex items-center">
                         <img src="https://path-cc.io/images/logo/Logo_Primary_Acronym.png" alt="PATh Logo"
-                            class="max-h-full w-auto object-contain filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-500">
+                            class="w-full h-full object-contain filter brightness-0 invert opacity-50 group-hover:opacity-90 transition-opacity duration-300">
                     </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold tracking-tighter uppercase text-white">PATh & OSG</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Partnership to Advance Throughput Computing
-                            for large-scale distributed US open science.</p>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">PATh & OSG</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed mt-0.5">Partnership to Advance Throughput Computing for large-scale distributed US open science.</p>
                     </div>
-                    <a href="https://path-cc.io" target="_blank"
-                        class="inline-flex items-center gap-2 text-sky-400 font-bold tracking-widest uppercase text-[10px] border border-sky-500/20 px-4 py-2 rounded-full hover:bg-sky-500/10 transition">
-                        Visit path-cc.io <i data-lucide="external-link" class="w-3 h-3"></i>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-700 group-hover:text-sky-400 transition-colors shrink-0"></i>
+                </a>
+            </div>
+
+            <!-- Developing Institutions -->
+            <div class="mt-16">
+                <div class="flex items-center gap-4 mb-8 justify-center">
+                    <div class="h-px flex-1 bg-white/5"></div>
+                    <span class="mono text-[9px] tracking-[0.5em] text-slate-500 uppercase">Developed By</span>
+                    <div class="h-px flex-1 bg-white/5"></div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="https://www.isi.edu" target="_blank" rel="noopener noreferrer"
+                        class="flex flex-col items-center gap-5 p-7 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300 group fade-in">
+                        <div class="w-[140px] h-[90px] flex items-center justify-center mx-auto">
+                            <img src="https://swarm-workflows.org/images/isi.png" alt="USC ISI"
+                                class="w-full h-full object-contain filter brightness-0 invert opacity-40 group-hover:opacity-90 transition-opacity duration-300">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs font-bold text-white">USC ISI</p>
+                            <p class="text-[9px] text-slate-600 mt-1 mono uppercase tracking-wider">Lead Institution</p>
+                        </div>
+                    </a>
+                    <a href="https://www.utk.edu" target="_blank" rel="noopener noreferrer"
+                        class="flex flex-col items-center gap-5 p-7 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300 group fade-in fade-in-d1">
+                        <div class="w-[180px] h-[90px] flex items-center justify-center mx-auto">
+                            <img src="https://brand.utk.edu/wp-content/uploads/2019/02/University-CenteredLogo-RGB.png" alt="UT Knoxville"
+                                class="w-full h-full object-contain filter brightness-0 invert opacity-40 group-hover:opacity-90 transition-opacity duration-300">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs font-bold text-white">UT Knoxville</p>
+                            <p class="text-[9px] text-slate-600 mt-1 mono uppercase tracking-wider">Partner</p>
+                        </div>
+                    </a>
+                    <a href="https://renci.org" target="_blank" rel="noopener noreferrer"
+                        class="flex flex-col items-center gap-5 p-7 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300 group fade-in fade-in-d2">
+                        <div class="w-[140px] h-[90px] flex items-center justify-center mx-auto">
+                            <img src="https://swarm-workflows.org/images/RENCI.png" alt="RENCI"
+                                class="w-full h-full object-contain filter brightness-0 invert opacity-40 group-hover:opacity-90 transition-opacity duration-300">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs font-bold text-white">RENCI / UNC</p>
+                            <p class="text-[9px] text-slate-600 mt-1 mono uppercase tracking-wider">Partner</p>
+                        </div>
+                    </a>
+                    <a href="https://www.umass.edu" target="_blank" rel="noopener noreferrer"
+                        class="flex flex-col items-center gap-5 p-7 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300 group fade-in fade-in-d3">
+                        <div class="w-[140px] h-[90px] flex items-center justify-center mx-auto">
+                            <img src="https://www.umass.edu/brand/sites/default/files/styles/tile_max_250px/public/2026-02/UMassAmherst_longform-nowhitespace.png" alt="UMass Amherst"
+                                class="w-full h-full object-contain filter brightness-0 invert opacity-40 group-hover:opacity-90 transition-opacity duration-300">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs font-bold text-white">UMass Amherst</p>
+                            <p class="text-[9px] text-slate-600 mt-1 mono uppercase tracking-wider">Partner</p>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -1614,9 +2078,9 @@
     <section id="team" class="py-24 bg-slate-950/50 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-16">
-                <h2 class="text-6xl font-black uppercase italic tracking-tighter">The <span
+                <h2 class="text-6xl font-black uppercase italic tracking-tighter fade-in">The <span
                         class="text-sky-500">Team</span></h2>
-                <p class="text-slate-500 mono text-xs tracking-[0.4em] mt-2">MULTI-INSTITUTIONAL COLLABORATORS</p>
+                <p class="text-slate-400 mono text-xs tracking-[0.4em] mt-2">Multi-institutional collaborators across the NSF ecosystem</p>
             </div>
 
             <div id="active-team-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -1633,7 +2097,7 @@
                     <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
                         <i data-lucide="rss" class="w-3 h-3"></i> Latest Posts
                     </div>
-                    <h2 class="text-6xl font-black uppercase italic tracking-tighter">The <span class="text-sky-500">Blog</span></h2>
+                    <h2 class="text-6xl font-black uppercase italic tracking-tighter fade-in">The <span class="text-sky-500">Blog</span></h2>
                     <p class="text-slate-500 mono text-xs tracking-[0.4em] mt-2 uppercase">Research · Updates · Insights</p>
                 </div>
                 <a href="blog.html"
@@ -1648,102 +2112,140 @@
         </div>
     </section>
 
-    <footer id="contact" class="py-24 bg-slate-950 border-t border-white/5 relative overflow-hidden">
-        <div class="max-w-[1500px] mx-auto px-6">
-            <div class="grid lg:grid-cols-5 gap-16 items-start">
+    <footer id="contact" class="relative bg-slate-950 border-t border-white/5 overflow-hidden">
 
-                <div class="lg:col-span-2 space-y-6">
-                    <div>
-                        <h2
-                            class="text-7xl md:text-8xl font-black tracking-tighter uppercase italic text-white leading-[0.8]">
-                            Get In <br>
-                            <span class="text-sky-500">Touch</span>
-                        </h2>
-                        <div class="mt-6 flex items-center gap-4">
-                            <div class="h-px w-12 bg-sky-500/50"></div>
-                            <span class="font-mono text-[10px] tracking-[0.4em] text-sky-400/60 uppercase font-bold">
-                                Strategic Inquiries
-                            </span>
-                        </div>
-                    </div>
-                    <p class="text-slate-400 font-light text-lg max-w-sm">
-                        Connect with the ISI team or explore the foundational Pegasus WMS framework.
+        <!-- Background glow -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div style="position:absolute;bottom:-120px;left:10%;width:600px;height:400px;background:radial-gradient(ellipse,rgba(56,189,248,0.06) 0%,transparent 70%);border-radius:50%"></div>
+            <div style="position:absolute;bottom:-80px;right:5%;width:400px;height:300px;background:radial-gradient(ellipse,rgba(139,92,246,0.05) 0%,transparent 70%);border-radius:50%"></div>
+        </div>
+
+        <!-- CTA band -->
+        <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-14 border-b border-white/5">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="flex flex-col gap-3 max-w-xl">
+                    <span class="mono text-[10px] tracking-[0.25em] uppercase text-sky-400/70 font-bold">Get In Touch</span>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
+                        Ready to scale your<br class="hidden sm:block"> scientific workflows?
+                    </h2>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Connect with the team at USC ISI — we're building the next generation of AI-driven workflow automation.
                     </p>
                 </div>
-
-                <div class="lg:col-span-3 space-y-6">
-
+                <div class="flex flex-col sm:flex-row gap-3 shrink-0">
                     <a href="mailto:pegasusai@isi.edu?subject=Pegasus%20AI%20Inquiry"
-                        class="group relative flex flex-col md:flex-row items-center justify-between p-10 rounded-[2rem] bg-white/5 border border-white/10 hover:border-sky-500/40 transition-all duration-500 overflow-hidden">
-                        <div class="relative z-10 flex items-center gap-6">
-                            <div
-                                class="w-24 h-24 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center group-hover:scale-110 transition-transform p-3">
-                                <img src="https://pegasus.isi.edu/wordpress/wp-content/uploads/2016/01/logo-vertical-1.png"
-                                    alt="Pegasus AI"
-                                    class="w-full h-full object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity">
-                            </div>
-                            <div>
-                                <span
-                                    class="block font-mono text-[9px] tracking-[0.3em] text-slate-500 uppercase mb-1">Direct
-                                    Channel</span>
-                                <h3
-                                    class="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-sky-400 transition-colors italic">
-                                    pegasusai@isi.edu
-                                </h3>
-                            </div>
-                        </div>
-                        <div
-                            class="relative z-10 mt-6 md:mt-0 px-6 py-3 bg-white/5 rounded-full border border-white/10 text-white font-bold text-[10px] uppercase tracking-widest group-hover:bg-white group-hover:text-slate-950 transition-all">
-                            Send Message
-                        </div>
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-sky-500 text-white font-bold text-sm hover:bg-sky-400 transition-all hover:shadow-[0_0_24px_rgba(56,189,248,0.35)] group">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        Email Us
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
                     </a>
-
-                    <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer"
-                        class="group relative flex flex-col md:flex-row items-center justify-between p-10 rounded-[2rem] bg-gradient-to-r from-indigo-500/5 to-transparent border border-white/10 hover:border-indigo-500/40 transition-all duration-500">
-                        <div class="relative z-10 flex items-center gap-6">
-                            <div
-                                class="w-24 h-24 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center group-hover:scale-110 transition-transform p-3">
-                                <img src="https://pegasus.isi.edu/wordpress/wp-content/uploads/2016/01/logo-vertical-1.png"
-                                    alt="Pegasus WMS"
-                                    class="w-full h-full object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity">
-                            </div>
-                            <div>
-                                <span
-                                    class="block font-mono text-[9px] tracking-[0.3em] text-slate-500 uppercase mb-1">Official
-                                    Framework</span>
-                                <h3
-                                    class="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors italic uppercase">
-                                    Pegasus WMS <span class="text-indigo-500">Website</span>
-                                </h3>
-                            </div>
-                        </div>
-                        <div
-                            class="relative z-10 mt-6 md:mt-0 flex items-center gap-2 text-indigo-400 font-bold text-[10px] uppercase tracking-widest">
-                            Explore Docs <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                        </div>
+                    <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/15 text-slate-300 font-semibold text-sm hover:border-white/30 hover:text-white transition-all group">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        GitHub
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div
-                class="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-8 font-mono text-[9px] tracking-widest uppercase opacity-50">
-                    <span>© 2026 Pegasus AI</span>
-                    <span class="hidden md:block h-3 w-px bg-slate-800"></span>
-                    <span>Information Sciences Institute</span>
+        <!-- Link grid -->
+        <div class="relative max-w-7xl mx-auto px-6 pt-12 pb-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-10">
+
+                <!-- Brand -->
+                <div class="col-span-2 md:col-span-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-3">
+                        <div class="shrink-0 overflow-hidden" style="width:34px;height:34px">
+                            <img src="assets/img/image1.png" alt="Pegasus AI" class="dark-logo-img" style="width:34px;height:46px;object-fit:cover;object-position:top center;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.3))">
+                            <img src="assets/img/image.png" alt="Pegasus AI" class="light-logo-img" style="width:34px;height:46px;object-fit:cover;object-position:top center">
+                        </div>
+                        <div class="flex flex-col leading-none">
+                            <span class="text-[15px] font-extrabold tracking-tight text-white">Pegasus <span class="text-sky-400">AI</span></span>
+                            <span class="mono text-[7px] tracking-[0.3em] text-sky-400/50 mt-0.5 uppercase">Next-Gen Workflows</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        NSF-funded AI-driven scientific workflow management for HPC and cloud infrastructure.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-white hover:border-white/20 transition-all">
+                            <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="mailto:pegasusai@isi.edu" aria-label="Email"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-sky-400 hover:border-sky-500/30 transition-all">
+                            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer" aria-label="Website"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-white hover:border-white/20 transition-all">
+                            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Navigate -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Navigate</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="#about"     class="footer-link">About</a>
+                        <a href="#workflows" class="footer-link">Workflows</a>
+                        <a href="#team"      class="footer-link">Team</a>
+                        <a href="blog.html"  class="footer-link text-sky-400/80 hover:text-sky-400">Blog ↗</a>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Resources</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer" class="footer-link">Pegasus WMS ↗</a>
+                        <a href="https://pegasus.isi.edu/documentation" target="_blank" rel="noopener noreferrer" class="footer-link">Documentation ↗</a>
+                        <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a>
+                        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer" class="footer-link">NSF Award ↗</a>
+                    </div>
+                </div>
+
+                <!-- Contact info -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Contact</p>
+                    <div class="flex flex-col gap-3">
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Email</p>
+                            <a href="mailto:pegasusai@isi.edu" class="text-sm text-slate-300 hover:text-sky-400 transition-colors font-medium">pegasusai@isi.edu</a>
+                        </div>
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Institution</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">USC Information Sciences<br>Institute, Marina del Rey CA</p>
+                        </div>
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Collaborators</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">UTK · RENCI<br>UMass Amherst</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="mono text-[9px] tracking-widest uppercase text-slate-700">
+                    © 2026 Pegasus AI · USC Information Sciences Institute · NSF Award #2513101
+                </p>
                 <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
-                    class="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity">
-                    <img src="assets/img/nsf.png"
-                        alt="NSF Logo" width="36" height="36" loading="lazy">
-                    <span class="font-mono text-[9px] tracking-widest uppercase text-slate-400 leading-relaxed">
-                        Funded by the<br>National Science Foundation<br>
-                        <span class="text-sky-400">Award #2513101</span>
-                    </span>
+                    class="flex items-center gap-2.5 opacity-40 hover:opacity-80 transition-opacity">
+                    <img src="assets/img/nsf.png" alt="NSF" width="20" height="20" loading="lazy">
+                    <span class="mono text-[8px] tracking-widest uppercase text-slate-400">Funded by NSF · <span class="text-sky-400">#2513101</span></span>
                 </a>
             </div>
         </div>
+
     </footer>
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+        <i data-lucide="chevron-up" class="w-5 h-5"></i>
+    </button>
+
     <button onclick="toggleTheme()" class="theme-toggle" aria-label="Switch Theme">
         <div class="icon-wrapper">
             <svg class="sun-icon text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1773,16 +2275,71 @@
         function updateUI() {
             const d = lifecycleData[currentStep];
             document.documentElement.style.setProperty('--active-color', d.color);
+
+            // Rotate wheel so active segment comes to top; counter-rotate logo to stay upright
             document.getElementById('lifecycle-svg').style.transform = `rotate(${-currentStep * 72}deg)`;
+            document.getElementById('logo-group').style.transform   = `rotate(${currentStep  * 72}deg)`;
+
+            // SVG segments
             document.querySelectorAll('.stage-path').forEach((p, i) => p.classList.toggle('active', i === currentStep));
-            document.getElementById('step-title').innerHTML = d.title;
-            document.getElementById('step-title').style.color = d.color;
-            document.getElementById('step-bullets').innerHTML = d.bullets.map(b => `<div class="p-4 rounded-xl bg-white/5 border border-white/5 text-2xl font-medium">${b}</div>`).join('');
+
+            // Segment labels — active label bright, others dimmed
+            for (let i = 0; i < 5; i++) {
+                const lbl = document.getElementById(`lbl-${i}`);
+                if (lbl) lbl.style.opacity = i === currentStep ? '1' : '0.25';
+            }
+
+            // Title
+            const titleEl = document.getElementById('step-title');
+            titleEl.innerHTML = d.title;
+            titleEl.style.color = d.color;
+
+            // Bullets — smaller, color-tinted
+            document.getElementById('step-bullets').innerHTML = d.bullets.map(b => `
+                <div class="flex items-center gap-4 p-4 rounded-xl border text-sm font-medium transition-colors"
+                    style="background:${d.color}12; border-color:${d.color}30">
+                    <div class="w-2 h-2 rounded-full flex-shrink-0" style="background:${d.color}"></div>
+                    ${b}
+                </div>`).join('');
+
+            // Timeline progress bar (0 → 100% across 4 gaps)
+            const prog = document.getElementById('timeline-progress');
+            if (prog) { prog.style.width = `${currentStep / 4 * 100}%`; prog.style.background = d.color; }
+
+            // Timeline dots + labels
+            document.querySelectorAll('.tl-btn').forEach((btn, i) => {
+                const dot   = btn.querySelector('.tl-dot');
+                const label = btn.querySelector('.tl-label');
+                const past  = i < currentStep;
+                const active = i === currentStep;
+                if (dot) {
+                    dot.style.background    = (active || past) ? d.color : '';
+                    dot.style.borderColor   = (active || past) ? d.color : '';
+                    dot.style.boxShadow     = active ? `0 0 10px ${d.color}` : '';
+                    dot.style.transform     = active ? 'scale(1.3)' : '';
+                }
+                if (label) {
+                    label.style.color   = active ? d.color : '';
+                    label.style.opacity = active ? '1' : past ? '0.55' : '0.3';
+                }
+            });
+
+            // Loop tags
+            ['modify', 'adapt', 'monitor'].forEach(tag => {
+                const el = document.getElementById(`tag-${tag}`);
+                if (!el) return;
+                const isActive = tag === d.loop;
+                el.classList.toggle('active', isActive);
+                el.style.color = isActive ? d.color : '';
+            });
+
+            // Pause/play icon
+            document.getElementById('play-icon').setAttribute('data-lucide', isPaused ? 'play' : 'pause');
             lucide.createIcons();
         }
         setInterval(() => { if (!isPaused) { currentStep = (currentStep + 1) % 5; updateUI(); } }, 3500);
         function manualSet(i) { currentStep = i; updateUI(); }
-        function toggleAutoplay() { isPaused = !isPaused; lucide.createIcons(); }
+        function toggleAutoplay() { isPaused = !isPaused; updateUI(); }
         updateUI();
 
 
@@ -1797,24 +2354,24 @@
 
                 // Helper to generate the HTML for each person
                 const createCard = (person) => `
-    <div class="member-card glass-card rounded-[2rem] p-5 group">
-        <div class="image-wrapper mb-4 border border-white/5">
+    <div class="member-card flex flex-col rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300 overflow-hidden group">
+        <div class="image-wrapper border-b border-white/5">
             <img src="assets/img/image.png" class="hover-logo" alt="Pegasus Logo">
-            
             <img src="${person.image}" alt="Photo of ${person.name}" loading="lazy" width="200" height="200"
-                 class="w-full h-full aspect-square object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100">
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                 class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </div>
-
-        <h4 class="text-lg font-bold text-white mb-1">${person.name}</h4>
-        <p class="text-sky-400 mono text-[10px] font-bold tracking-widest uppercase mb-4">${person.role}</p>
-        
-        <div class="flex items-center justify-between">
-            <a href="mailto:${person.email}" class="p-2 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-400 hover:text-sky-400 transition">
-                <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
-            <span class="text-[9px] text-slate-600 mono uppercase tracking-widest">${person.status}</span>
+        <div class="p-4 flex flex-col gap-3">
+            <div>
+                <h4 class="text-sm font-bold text-white leading-tight">${person.name}</h4>
+                <p class="text-sky-400 mono text-[9px] font-bold tracking-widest uppercase mt-0.5">${person.role}</p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-white/5">
+                <a href="mailto:${person.email}" class="p-1.5 rounded-lg hover:bg-sky-500/10 text-slate-600 hover:text-sky-400 transition-colors">
+                    <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                </a>
+                <span class="text-[8px] text-slate-700 mono uppercase tracking-widest">${person.status}</span>
+            </div>
         </div>
     </div>
 `;
@@ -1862,18 +2419,25 @@
                     return { slug, ...meta };
                 }));
 
+                if (posts.length === 2) {
+                    grid.className = grid.className.replace('md:grid-cols-3', 'md:grid-cols-2');
+                }
+
                 grid.innerHTML = posts.map(post => `
                     <a href="blog.html?post=${post.slug}"
-                        class="group glass-card p-8 rounded-[2rem] flex flex-col gap-5 hover:border-sky-500/60 transition-all duration-300">
+                        class="group flex flex-col gap-5 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300 blog-cat-${post.category || ''}">
                         <div class="flex items-center justify-between">
-                            <span class="mono text-[9px] tracking-[0.3em] text-sky-400/70 uppercase">${formatBlogDate(post.date)}</span>
+                            ${post.tag ? `<span onclick="event.preventDefault();event.stopPropagation();window.location='blog.html?category=${post.category}'" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[9px] font-bold tracking-[0.2em] uppercase cursor-pointer hover:bg-sky-500/20 transition-colors">${post.tag}</span>` : '<span></span>'}
                             <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-sky-400 transition-colors"></i>
                         </div>
-                        <div class="flex-1 space-y-3">
-                            <h3 class="text-lg font-bold leading-snug group-hover:text-sky-400 transition-colors">${post.title}</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed">${post.description}</p>
+                        <div class="flex-1 space-y-2">
+                            <h3 class="text-base font-semibold leading-snug group-hover:text-sky-400 transition-colors">${post.title}</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed">${post.description}</p>
                         </div>
-                        <span class="mono text-[9px] tracking-widest text-slate-600 uppercase">${post.author}</span>
+                        <div class="flex items-center justify-between mono text-[9px] tracking-widest text-slate-600 uppercase pt-4 border-t border-white/5">
+                            <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3 h-3"></i> ${post.author}</span>
+                            <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3 h-3"></i> ${formatBlogDate(post.date)}</span>
+                        </div>
                     </a>
                 `).join('');
 
@@ -1890,6 +2454,23 @@
         }
 
         document.addEventListener('DOMContentLoaded', loadBlogPreviews);
+
+        // --- Scroll progress, back-to-top & header shrink ---
+        (function () {
+            const bar = document.getElementById('scroll-progress');
+            const btn = document.getElementById('back-to-top');
+            const hdr = document.getElementById('main-header');
+            window.addEventListener('scroll', function () {
+                const scrolled = document.documentElement.scrollTop;
+                const total = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                bar.style.width = (scrolled / total * 100) + '%';
+                if (scrolled > 400) btn.classList.add('visible');
+                else btn.classList.remove('visible');
+                if (scrolled > 60) hdr.classList.add('header-scrolled');
+                else hdr.classList.remove('header-scrolled');
+            }, { passive: true });
+        })();
+
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
@@ -1898,15 +2479,16 @@
 
         // Scroll spy — highlight active nav section
         (function () {
-            const sections = ['about', 'ecosystem', 'tech', 'engine', 'workflows', 'team'];
-            const navLinks = document.querySelectorAll('#main-nav a');
+            const sections = ['hero', 'about', 'ecosystem', 'tech', 'engine', 'workflows', 'team'];
+            const navLinks = document.querySelectorAll('#main-nav .nav-link');
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        navLinks.forEach(a => a.classList.remove('text-white'));
+                        navLinks.forEach(a => a.classList.remove('active'));
                         const active = document.querySelector(`#main-nav a[href="#${entry.target.id}"]`);
-                        if (active) active.classList.add('text-white');
+                        if (active) active.classList.add('active');
+                        // hero has no nav link → all items correctly un-highlighted
                     }
                 });
             }, { rootMargin: '-40% 0px -55% 0px' });
@@ -1915,6 +2497,19 @@
                 const el = document.getElementById(id);
                 if (el) observer.observe(el);
             });
+        })();
+
+        // Fade-in on scroll
+        (function () {
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
         })();
 
         function applyTheme(mode) {

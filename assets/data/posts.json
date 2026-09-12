@@ -1,1 +1,10 @@
-[]
+[
+  "intro-task-performance",
+  "runtime-prediction-interval-envelopes",
+  "intro-monitoring",
+  "intro-ai-workflows",
+  "build-a-pegasus-workflow-with-claude-skills",
+  "spec-driven-scientific-workflows",
+  "intro-education",
+  "intro-ci-design"
+]
