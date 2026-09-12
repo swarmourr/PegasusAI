@@ -74,14 +74,14 @@
             z-index: 1000;
             display: flex;
             align-items: center;
-            padding: 0 5%;
+            padding: 0 clamp(1.5rem, 4%, 3rem);
             transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.07);
         }
         body:not(.light-mode) header {
             background: rgba(11, 22, 43, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.07);
         }
         body.light-mode header {
             background: rgba(255, 255, 255, 0.9);
@@ -90,10 +90,11 @@
             border-bottom: 1px solid var(--border-color);
             box-shadow: 0 1px 12px rgba(2, 6, 23, 0.05);
         }
-        header.header-scrolled { height: 60px; }
+        header.header-scrolled { height: 68px; }
         body:not(.light-mode) header.header-scrolled {
             background: rgba(11, 22, 43, 0.96);
             border-bottom-color: rgba(56, 189, 248, 0.13);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
         }
         body.light-mode header.header-scrolled {
             background: rgba(255, 255, 255, 0.98);
@@ -123,10 +124,9 @@
         }
 
         @media (max-width: 1024px) {
-            header { height: 60px; }
+            header { height: 68px; }
         }
         @media (max-width: 768px) {
-            header { height: 60px; }
             #main-nav { display: none; }
             #hamburger { display: flex !important; }
         }
@@ -383,8 +383,8 @@
             <a href="index.html#studio"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Studio</a>
             <a href="index.html#team"      class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Team</a>
             <div class="w-px h-4 bg-white/10 mx-2"></div>
-            <a href="blog.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-[14px] font-bold">
-                Blog
+            <a href="blog.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-[14px] font-bold hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-all">
+                Blog <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
             </a>
         </nav>
 
