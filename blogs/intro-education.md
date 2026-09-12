@@ -1,6 +1,6 @@
 ---
 title: "Teaching Scientific Computing at Scale: PegasusAI in the Classroom"
-date: 2026-09-12
+date: 2026-09-03
 author: Pegasus AI Team
 category: education
 tag: Education

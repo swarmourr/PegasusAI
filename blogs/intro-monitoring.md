@@ -1,6 +1,6 @@
 ---
 title: "Always On: Real-Time Workflow Monitoring with Pegasus AI"
-date: 2026-09-12
+date: 2026-07-28
 author: Pegasus AI Team
 category: monitoring
 tag: Monitoring

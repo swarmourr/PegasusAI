@@ -1,6 +1,6 @@
 ---
 title: "From Idea to HPC Pipeline: AI-Assisted Workflow Creation"
-date: 2026-09-12
+date: 2026-08-05
 author: Pegasus AI Team
 category: ai-workflows
 tag: AI Workflows

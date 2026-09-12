@@ -1,6 +1,6 @@
 ---
 title: "Beyond Point Estimates: Predicting HPC Job Runtime as an Interval"
-date: 2026-09-12
+date: 2026-08-26
 author: Pegasus AI Team
 category: task-performance
 tag: Research

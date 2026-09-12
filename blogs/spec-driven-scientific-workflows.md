@@ -1,6 +1,6 @@
 ---
 title: Write the Spec First: A Worked Example
-date: 2026-09-08
+date: 2026-08-19
 author: Pegasus AI Team
 category: ai-workflows
 tag: Best Practices

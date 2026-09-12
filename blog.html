@@ -70,41 +70,65 @@
             position: fixed;
             top: 0;
             width: 100%;
-            height: 100px;
-            background: var(--header-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
+            height: 80px;
             z-index: 1000;
             display: flex;
             align-items: center;
             padding: 0 5%;
-            transition: all 0.3s ease;
+            transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.07);
+        }
+        body:not(.light-mode) header {
+            background: rgba(11, 22, 43, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body.light-mode header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 12px rgba(2, 6, 23, 0.05);
+        }
+        header.header-scrolled { height: 60px; }
+        body:not(.light-mode) header.header-scrolled {
+            background: rgba(11, 22, 43, 0.96);
+            border-bottom-color: rgba(56, 189, 248, 0.13);
+        }
+        body.light-mode header.header-scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(2, 6, 23, 0.08);
         }
 
-        nav a {
-            color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
+        .nav-link {
+            position: relative;
+            color: #94a3b8;
             transition: color 0.3s ease;
         }
-        nav a:hover, nav a.active { color: var(--accent); }
+        .nav-link:hover { color: #f8fafc; }
+        .nav-link.active { color: #fff !important; }
+        body.light-mode .nav-link { color: #475569; }
+        body.light-mode .nav-link:hover { color: #0f172a; }
+        body.light-mode .nav-link.active { color: var(--accent) !important; }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #38bdf8;
+        }
 
         @media (max-width: 1024px) {
-            nav a { font-size: 11px; letter-spacing: 0.1em; }
-            #main-nav { gap: 1.5rem; }
+            header { height: 60px; }
         }
         @media (max-width: 768px) {
+            header { height: 60px; }
             #main-nav { display: none; }
             #hamburger { display: flex !important; }
-        }
-
-        .logo-header-static {
-            height: 70px;
-            width: auto;
-            filter: brightness(1.2) drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
-            transition: filter 0.3s ease;
         }
 
         /* Logo switching */
@@ -112,9 +136,6 @@
         .dark-logo-img { display: block !important; }
         body.light-mode .dark-logo-img { display: none !important; }
         body.light-mode .light-logo-img { display: block !important; }
-        body.light-mode .logo-header-static {
-            filter: drop-shadow(0 10px 20px rgba(14, 165, 233, 0.06));
-        }
 
         /* Glass card */
         .glass-card {
@@ -177,7 +198,7 @@
 
         /* Main content area */
         main {
-            padding-top: 140px;
+            padding-top: 110px;
             min-height: 100vh;
             max-width: 1100px;
             margin: 0 auto;
@@ -337,49 +358,74 @@
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-sky-500 focus:text-white focus:rounded-lg focus:font-bold">Skip to content</a>
 
-    <header>
-        <a href="index.html" class="flex items-center gap-8">
-            <img src="assets/img/image1.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static dark-logo-img">
-            <img src="assets/img/image.png" alt="Pegasus AI logo" width="70" height="70" class="logo-header-static light-logo-img">
-            <div class="flex flex-col">
-                <h1 class="text-4xl font-black uppercase italic tracking-tighter leading-none">
-                    Pegasus <span class="text-sky-500">AI</span>
-                </h1>
-                <span class="mono text-[9px] tracking-[0.4em] text-sky-400/60 mt-1">NEXT-GEN WORKFLOWS</span>
+    <header id="main-header">
+        <!-- Brand -->
+        <a href="index.html" class="flex items-center gap-3 shrink-0 no-underline" style="text-decoration:none">
+            <div class="dark-logo-img shrink-0 overflow-hidden" style="width:46px;height:46px">
+                <img src="assets/img/image1.png" alt="Pegasus AI" style="width:46px;height:62px;object-fit:cover;object-position:top center;display:block;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.35))">
+            </div>
+            <div class="light-logo-img shrink-0 overflow-hidden" style="width:46px;height:46px">
+                <img src="assets/img/image.png" alt="Pegasus AI" style="width:46px;height:62px;object-fit:cover;object-position:top center;display:block">
+            </div>
+            <div class="flex flex-col leading-none">
+                <span class="text-[22px] font-extrabold tracking-tight" style="color:var(--text-main)">Pegasus <span class="text-sky-400">AI</span></span>
+                <span class="mono text-[8px] tracking-[0.35em] text-sky-400/50 mt-0.5 uppercase">Next-Gen Workflows</span>
             </div>
         </a>
 
-        <nav id="main-nav" class="ml-auto flex gap-10 mono font-bold tracking-widest text-slate-400">
-            <a href="index.html#about">01 ABOUT</a>
-            <a href="index.html#ecosystem">02 ECOSYSTEM</a>
-            <a href="index.html#tech">03 TECH</a>
-            <a href="index.html#engine">04 ENGINE</a>
-            <a href="index.html#workflows">05 WORKFLOWS</a>
-            <a href="index.html#team">06 TEAM</a>
-            <a href="blog.html" class="text-sky-400 active">07 BLOG</a>
+        <!-- Desktop nav -->
+        <nav id="main-nav" class="ml-auto flex items-center gap-1">
+            <a href="index.html#about"     class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">About</a>
+            <a href="index.html#ecosystem" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Ecosystem</a>
+            <a href="index.html#tech"      class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Tech</a>
+            <a href="index.html#engine"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Engine</a>
+            <a href="index.html#workflows" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Workflows</a>
+            <a href="index.html#studio"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Studio</a>
+            <a href="index.html#team"      class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Team</a>
+            <div class="w-px h-4 bg-white/10 mx-2"></div>
+            <a href="blog.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-[14px] font-bold">
+                Blog
+            </a>
         </nav>
 
+        <!-- Hamburger (mobile only) -->
         <button id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"
-            class="ml-auto hidden flex-col gap-[5px] p-2 cursor-pointer">
-            <span class="block w-6 h-[2px] bg-current transition-all"></span>
-            <span class="block w-6 h-[2px] bg-current transition-all"></span>
-            <span class="block w-6 h-[2px] bg-current transition-all"></span>
+            class="ml-auto hidden flex-col gap-[5px] p-2 cursor-pointer text-slate-400 hover:text-white transition-colors">
+            <span class="block w-5 h-[1.5px] bg-current transition-all rounded-full"></span>
+            <span class="block w-5 h-[1.5px] bg-current transition-all rounded-full"></span>
+            <span class="block w-3.5 h-[1.5px] bg-current transition-all rounded-full"></span>
         </button>
     </header>
 
-    <div id="mobile-menu" class="fixed inset-0 z-[999] hidden flex-col items-center justify-center gap-8"
-        style="background: var(--bg-main);">
-        <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-slate-400 hover:text-white">
-            <i data-lucide="x" class="w-7 h-7"></i>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[999] hidden flex-col items-center justify-center gap-6"
+        style="background: rgba(2, 6, 23, 0.97); backdrop-filter: blur(20px);">
+        <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <nav class="flex flex-col items-center gap-8 mono font-bold tracking-widest text-slate-400 text-2xl">
-            <a href="index.html#about" onclick="toggleMobileMenu()" class="hover:text-white transition-all">01 ABOUT</a>
-            <a href="index.html#ecosystem" onclick="toggleMobileMenu()" class="hover:text-white transition-all">02 ECOSYSTEM</a>
-            <a href="index.html#tech" onclick="toggleMobileMenu()" class="hover:text-white transition-all">03 TECH</a>
-            <a href="index.html#engine" onclick="toggleMobileMenu()" class="hover:text-white transition-all">04 ENGINE</a>
-            <a href="index.html#workflows" onclick="toggleMobileMenu()" class="hover:text-white transition-all">05 WORKFLOWS</a>
-            <a href="index.html#team" onclick="toggleMobileMenu()" class="hover:text-white transition-all">06 TEAM</a>
-            <a href="blog.html" onclick="toggleMobileMenu()" class="text-sky-400 hover:text-white transition-all">07 BLOG</a>
+        <!-- Brand in mobile menu -->
+        <div class="flex items-center gap-2 mb-4">
+            <div class="dark-logo-img shrink-0 overflow-hidden" style="width:36px;height:36px">
+                <img src="assets/img/image1.png" alt="" style="width:36px;height:48px;object-fit:cover;object-position:top center;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.3))">
+            </div>
+            <div class="light-logo-img shrink-0 overflow-hidden" style="width:36px;height:36px">
+                <img src="assets/img/image.png" alt="" style="width:36px;height:48px;object-fit:cover;object-position:top center">
+            </div>
+            <span class="text-base font-extrabold tracking-tight text-white">Pegasus <span class="text-sky-400">AI</span></span>
+        </div>
+        <nav class="flex flex-col items-center gap-1 w-full max-w-xs px-4">
+            <a href="index.html#about"     onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">About</a>
+            <a href="index.html#ecosystem" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Ecosystem</a>
+            <a href="index.html#tech"      onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Tech</a>
+            <a href="index.html#engine"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Engine</a>
+            <a href="index.html#workflows" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Workflows</a>
+            <a href="index.html#studio"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Studio</a>
+            <a href="index.html#team"      onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Team</a>
+            <div class="w-full h-px bg-white/5 my-2"></div>
+            <a href="blog.html" onclick="toggleMobileMenu()"
+                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-sm font-bold">
+                Blog
+            </a>
         </nav>
     </div>
 
@@ -442,12 +488,21 @@
     </button>
 
     <script>
-        // --- Theme ---
+        // --- Mobile menu ---
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
             menu.classList.toggle('flex');
         }
+
+        // --- Header shrink on scroll ---
+        (function () {
+            const hdr = document.getElementById('main-header');
+            window.addEventListener('scroll', function () {
+                if (document.documentElement.scrollTop > 60) hdr.classList.add('header-scrolled');
+                else hdr.classList.remove('header-scrolled');
+            }, { passive: true });
+        })();
 
         function applyTheme(mode) {
             if (mode === 'light') document.body.classList.add('light-mode');
@@ -468,18 +523,8 @@
                 slug: 'intro-task-performance',
                 title: 'Smarter Scheduling: Why HPC Needs Better Runtime Estimates',
                 author: 'Pegasus AI Team',
-                date: '2026-09-12',
+                date: '2026-07-14',
                 description: 'Why a single walltime estimate is not enough for production HPC workloads — and how Pegasus AI uses ML-based runtime envelopes to give schedulers the information they actually need.',
-                category: 'task-performance',
-                tag: 'Task Performance',
-                icon: 'bar-chart-2'
-            },
-            {
-                slug: 'runtime-prediction-interval-envelopes',
-                title: 'Beyond Point Estimates: Predicting HPC Job Runtime as an Interval',
-                author: 'Pegasus AI Team',
-                date: '2026-09-12',
-                description: 'A single runtime estimate is not enough for HPC scheduling. We show how a lower–central–upper envelope cuts under-prediction by up to 6.7× compared to standard methods.',
                 category: 'task-performance',
                 tag: 'Task Performance',
                 icon: 'bar-chart-2'
@@ -488,7 +533,7 @@
                 slug: 'intro-monitoring',
                 title: 'Always On: Real-Time Workflow Monitoring with Pegasus AI',
                 author: 'Pegasus AI Team',
-                date: '2026-09-12',
+                date: '2026-07-28',
                 description: 'Scientific workflows run for hours or days. Pegasus AI watches every job in real time — detecting anomalies, surfacing bottlenecks, and giving researchers the introspection they need to act before a run goes wrong.',
                 category: 'monitoring',
                 tag: 'Monitoring',
@@ -498,7 +543,7 @@
                 slug: 'intro-ai-workflows',
                 title: 'From Idea to HPC Pipeline: AI-Assisted Workflow Creation',
                 author: 'Pegasus AI Team',
-                date: '2026-09-12',
+                date: '2026-08-05',
                 description: 'Most scientists who need HPC workflows are not workflow engineers. Pegasus AI uses LLM-powered tools to help researchers compose, validate, and run scientific pipelines — from a description of the problem.',
                 category: 'ai-workflows',
                 tag: 'AI Workflows',
@@ -508,7 +553,7 @@
                 slug: 'build-a-pegasus-workflow-with-claude-skills',
                 title: 'From Scripts to HPC: A Worked Example with Pegasus and Claude Code',
                 author: 'Pegasus AI Team',
-                date: '2026-09-08',
+                date: '2026-08-12',
                 description: 'A complete walkthrough of turning five Python scripts into a parallel HPC workflow using Pegasus AI — from a single prompt to a 25-job run on a live HTCondor pool.',
                 category: 'ai-workflows',
                 tag: 'AI Workflows',
@@ -518,17 +563,27 @@
                 slug: 'spec-driven-scientific-workflows',
                 title: 'Write the Spec First: A Worked Example',
                 author: 'Pegasus AI Team',
-                date: '2026-09-08',
+                date: '2026-08-19',
                 description: 'How writing a specification document before any code saves time, surfaces hidden assumptions, and produces better scientific workflows — shown on a real GBIF species comparison pipeline.',
                 category: 'ai-workflows',
                 tag: 'AI Workflows',
                 icon: 'file-text'
             },
             {
+                slug: 'runtime-prediction-interval-envelopes',
+                title: 'Beyond Point Estimates: Predicting HPC Job Runtime as an Interval',
+                author: 'Pegasus AI Team',
+                date: '2026-08-26',
+                description: 'A single runtime estimate is not enough for HPC scheduling. We show how a lower–central–upper envelope cuts under-prediction by up to 6.7× compared to standard methods.',
+                category: 'task-performance',
+                tag: 'Research',
+                icon: 'bar-chart-2'
+            },
+            {
                 slug: 'intro-education',
                 title: 'Teaching Scientific Computing at Scale: PegasusAI in the Classroom',
                 author: 'Pegasus AI Team',
-                date: '2026-09-12',
+                date: '2026-09-03',
                 description: 'HPC workflows are not just a research tool — they are a skill students need. Pegasus AI integrates into academic courses to give students direct experience with real scientific computing infrastructure.',
                 category: 'education',
                 tag: 'Education',
@@ -538,7 +593,7 @@
                 slug: 'intro-ci-design',
                 title: 'Built for the Infrastructure: CI-Ready Design in Pegasus AI',
                 author: 'Pegasus AI Team',
-                date: '2026-09-12',
+                date: '2026-09-10',
                 description: 'Pegasus AI is designed from the ground up to work within the NSF cyberinfrastructure ecosystem. What CI-ready design means in practice, and why it matters for reproducibility and interoperability.',
                 category: 'ci-design',
                 tag: 'CI Design',

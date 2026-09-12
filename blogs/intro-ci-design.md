@@ -1,6 +1,6 @@
 ---
 title: "Built for the Infrastructure: CI-Ready Design in Pegasus AI"
-date: 2026-09-12
+date: 2026-09-10
 author: Pegasus AI Team
 category: ci-design
 tag: CI Design

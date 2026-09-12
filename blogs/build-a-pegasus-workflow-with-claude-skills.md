@@ -1,6 +1,6 @@
 ---
 title: From Scripts to HPC: A Worked Example with Pegasus and Claude Code
-date: 2026-09-08
+date: 2026-08-12
 author: Pegasus AI Team
 category: ai-workflows
 tag: Workflows
