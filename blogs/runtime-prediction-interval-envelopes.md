@@ -21,7 +21,7 @@ A single predicted runtime cannot represent this. It either covers the tail and 
 
 ## A three-point runtime envelope
 
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:1rem;overflow:hidden">
+<div style="margin:2rem 0;padding:1.5rem;background:#0f172a;border:1px solid rgba(56,189,248,0.12);border-radius:1rem;overflow:hidden">
 <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;font-family:inherit">
   <!-- shaded envelope band -->
   <polygon points="60,200 160,155 260,120 360,105 460,98 560,90 580,90 580,48 460,55 360,62 260,70 160,100 60,148" fill="rgba(56,189,248,0.08)" />
@@ -54,7 +54,7 @@ A single predicted runtime cannot represent this. It either covers the tail and 
   <!-- title -->
   <text x="340" y="15" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="0.05em">THREE-POINT RUNTIME ENVELOPE</text>
 </svg>
-<p style="text-align:center;color:#64748b;font-size:0.75rem;margin:0.5rem 0 0">Each job receives a lower bound, central estimate, and upper bound — the envelope adapts to each task type.</p>
+<p style="text-align:center;color:#94a3b8;font-size:0.75rem;margin:0.5rem 0 0">Each job receives a lower bound, central estimate, and upper bound — the envelope adapts to each task type.</p>
 </div>
 
 We formulate runtime prediction as three values:
@@ -90,7 +90,7 @@ A single model trained on the dataset's majority will behave poorly on the minor
 
 Every path produces the same lower–central–upper representation, so the rest of the system does not need to know which path was taken.
 
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:1rem;overflow:hidden">
+<div style="margin:2rem 0;padding:1.5rem;background:#0f172a;border:1px solid rgba(56,189,248,0.12);border-radius:1rem;overflow:hidden">
 <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;font-family:inherit">
   <!-- title -->
   <text x="340" y="20" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="0.05em">HISTORY-AWARE ESTIMATION STRATEGY</text>
@@ -140,7 +140,7 @@ Every path produces the same lower–central–upper representation, so the rest
     </marker>
   </defs>
 </svg>
-<p style="text-align:center;color:#64748b;font-size:0.75rem;margin:0.5rem 0 0">The strategy router adapts estimation based on available task history — zero-shot tasks receive hierarchical fallback references.</p>
+<p style="text-align:center;color:#94a3b8;font-size:0.75rem;margin:0.5rem 0 0">The strategy router adapts estimation based on available task history — zero-shot tasks receive hierarchical fallback references.</p>
 </div>
 
 ### Zero-shot: when a task has never been seen before
@@ -182,7 +182,7 @@ The evaluation used 262,401 jobs across 223 task types, with a held-out temporal
 | MOGB | 79.5% | 9.3% | 2307.1 |
 | **Ours** | **85.8%** | **4.3%** | **1911.8** |
 
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:1rem;overflow:hidden">
+<div style="margin:2rem 0;padding:1.5rem;background:#0f172a;border:1px solid rgba(56,189,248,0.12);border-radius:1rem;overflow:hidden">
 <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;font-family:inherit">
   <!-- title -->
   <text x="340" y="20" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="0.05em">ZERO-SHOT UNDER-PREDICTION RATE (%)</text>
@@ -217,7 +217,7 @@ The evaluation used 262,401 jobs across 223 task types, with a held-out temporal
   <!-- lower is better label -->
   <text x="640" y="230" fill="#64748b" font-size="9" text-anchor="end">↓ lower is better</text>
 </svg>
-<p style="text-align:center;color:#64748b;font-size:0.75rem;margin:0.5rem 0 0">Under-prediction rate on zero-shot tasks (37 task types, 6,976 jobs). The proposed method reduces under-prediction by 6.7× vs. Task Median.</p>
+<p style="text-align:center;color:#94a3b8;font-size:0.75rem;margin:0.5rem 0 0">Under-prediction rate on zero-shot tasks (37 task types, 6,976 jobs). The proposed method reduces under-prediction by 6.7× vs. Task Median.</p>
 </div>
 
 The proposed approach reduces under-prediction from 28.9% (Task Median) to 4.3% — a 6.7× reduction — while achieving the tightest intervals of any method tested.
