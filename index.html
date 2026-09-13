@@ -2010,31 +2010,45 @@
                     const list = document.getElementById('papers-list');
                     try {
                         const papers = await fetch('assets/data/papers.json').then(r => r.json());
-                        list.innerHTML = papers.map(p => {
+                        list.innerHTML = papers.map((p, i) => {
                             const year = new Date(p.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                             const authorsStr = p.authors.join(', ');
                             const venueBadge = p.arxivId ? `arXiv:${p.arxivId}` : p.venue;
                             const linkLabel = p.arxivId ? 'arXiv' : 'View';
                             const firstTag = p.tags[0] || '';
                             const restTags = p.tags.slice(1);
+                            const absId = `abstract-${i}`;
                             return `
-                            <div class="group flex flex-col sm:flex-row sm:items-start gap-5 p-6 rounded-2xl border border-white/8 hover:border-sky-500/25 hover:bg-white/[0.02] transition-all duration-300">
-                                <div class="shrink-0 w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
-                                    <i data-lucide="file-text" class="w-4 h-4"></i>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <h3 class="font-bold text-base text-white group-hover:text-sky-300 transition-colors leading-snug mb-1">${p.title}</h3>
-                                    <p class="text-slate-400 text-sm mb-3">${authorsStr} · <span class="text-slate-500">${venueBadge} · ${year}</span></p>
-                                    ${p.summary ? `<p class="text-slate-500 text-xs leading-relaxed mb-3 max-w-2xl">${p.summary}</p>` : ''}
-                                    <div class="flex flex-wrap gap-2">
-                                        ${firstTag ? `<span class="mono text-[9px] tracking-widest px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 uppercase">${firstTag}</span>` : ''}
-                                        ${restTags.map(t => `<span class="mono text-[9px] tracking-widest px-2.5 py-1 rounded-full bg-white/5 border border-white/8 text-slate-400 uppercase">${t}</span>`).join('')}
+                            <div class="rounded-2xl border border-white/8 hover:border-sky-500/25 transition-all duration-300 overflow-hidden">
+                                <div class="group flex flex-col sm:flex-row sm:items-start gap-5 p-6">
+                                    <div class="shrink-0 w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+                                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-bold text-base text-white group-hover:text-sky-300 transition-colors leading-snug mb-1">${p.title}</h3>
+                                        <p class="text-slate-400 text-sm mb-3">${authorsStr} · <span class="text-slate-500">${venueBadge} · ${year}</span></p>
+                                        <div class="flex flex-wrap gap-2">
+                                            ${firstTag ? `<span class="mono text-[9px] tracking-widest px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 uppercase">${firstTag}</span>` : ''}
+                                            ${restTags.map(t => `<span class="mono text-[9px] tracking-widest px-2.5 py-1 rounded-full bg-white/5 border border-white/8 text-slate-400 uppercase">${t}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                    <div class="shrink-0 flex items-center gap-2">
+                                        ${p.abstract ? `
+                                        <button onclick="toggleAbstract('${absId}')" id="${absId}-btn"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 hover:border-sky-500/40 text-slate-400 hover:text-sky-400 mono text-[10px] tracking-widest uppercase transition-all">
+                                            Abstract <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-200" id="${absId}-chevron"></i>
+                                        </button>` : ''}
+                                        <a href="${p.url}" target="_blank" rel="noopener noreferrer"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 hover:border-sky-500/40 text-slate-400 hover:text-sky-400 mono text-[10px] tracking-widest uppercase transition-all">
+                                            ${linkLabel} <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                                        </a>
                                     </div>
                                 </div>
-                                <a href="${p.url}" target="_blank" rel="noopener noreferrer"
-                                    class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 hover:border-sky-500/40 text-slate-400 hover:text-sky-400 mono text-[10px] tracking-widest uppercase transition-all">
-                                    ${linkLabel} <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-                                </a>
+                                ${p.abstract ? `
+                                <div id="${absId}" class="hidden border-t border-white/5 px-6 py-4 bg-white/[0.02]">
+                                    <p class="mono text-[9px] tracking-[0.25em] text-sky-400/70 uppercase mb-2">Abstract</p>
+                                    <p class="text-slate-400 text-sm leading-relaxed">${p.abstract}</p>
+                                </div>` : ''}
                             </div>`;
                         }).join('');
                         lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
@@ -2534,6 +2548,14 @@
                 else hdr.classList.remove('header-scrolled');
             }, { passive: true });
         })();
+
+        function toggleAbstract(id) {
+            const panel = document.getElementById(id);
+            const chevron = document.getElementById(id + '-chevron');
+            const open = !panel.classList.contains('hidden');
+            panel.classList.toggle('hidden', open);
+            if (chevron) chevron.style.transform = open ? '' : 'rotate(180deg)';
+        }
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');

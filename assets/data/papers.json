@@ -7,7 +7,7 @@
     "arxivId": "2606.18425",
     "date": "2026-06-16",
     "url": "https://arxiv.org/abs/2606.18425",
-    "summary": "An LLM agent equipped with Pegasus workflow-specific capabilities generates and validates a federated learning pipeline spanning 101 sub-workflows and 2,679 jobs across four GPU sites on the FABRIC testbed — catching silent errors standard debugging misses.",
+    "abstract": "An LLM agent equipped with Pegasus workflow-specific capabilities generates and validates a federated learning pipeline spanning 101 sub-workflows and 2,679 jobs across four GPU sites on the FABRIC testbed — catching silent errors standard debugging misses.",
     "tags": ["AI Workflows", "Federated Learning", "LLM Agents", "Scientific Workflows"],
     "status": "published"
   }
