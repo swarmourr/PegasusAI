@@ -9,15 +9,15 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/image.png">
     <meta name="theme-color" content="#0b162b">
     <title>Pegasus AI | Blog</title>
-    <meta name="description" content="Research updates, insights, and announcements from the Pegasus AI team at USC ISI, UTK, RENCI, and UMass.">
+    <meta name="description" id="meta-description" content="Research updates, insights, and announcements from the Pegasus AI team at USC ISI, UTK, RENCI, and UMass.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://swarmourr.github.io/PegasusAI/blog.html">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://swarmourr.github.io/PegasusAI/blog.html">
-    <meta property="og:title" content="Pegasus AI | Blog">
-    <meta property="og:description" content="Research updates, insights, and announcements from the Pegasus AI team.">
+    <meta property="og:title" id="meta-og-title" content="Pegasus AI | Blog">
+    <meta property="og:description" id="meta-og-desc" content="Research updates, insights, and announcements from the Pegasus AI team.">
     <meta property="og:image" content="https://swarmourr.github.io/PegasusAI/assets/img/image1.png">
 
     <!-- Twitter Card -->
@@ -220,6 +220,13 @@
         body.light-mode .blog-card:hover {
             box-shadow: 0 12px 36px rgba(14, 165, 233, 0.1);
         }
+        .card-thumb {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; flex: 1; }
 
         /* Markdown rendered content */
         .md-content {
@@ -450,9 +457,9 @@
         <!-- Single post view -->
         <div id="post-view" class="hidden">
             <button id="back-btn" onclick="showListing()"
-                class="inline-flex items-center gap-2 mono text-[11px] tracking-widest text-slate-400 hover:text-sky-400 transition-colors mb-12 group">
-                <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-                BACK TO BLOG
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:border-sky-500/40 hover:bg-sky-500/5 hover:text-sky-400 mono text-[11px] tracking-widest text-slate-400 uppercase transition-all mb-12 group">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"></i>
+                All Posts
             </button>
 
             <div id="post-meta" class="mb-10"></div>
@@ -527,7 +534,8 @@
                 description: 'Why a single walltime estimate is not enough for production HPC workloads — and how Pegasus AI uses ML-based runtime envelopes to give schedulers the information they actually need.',
                 category: 'task-performance',
                 tag: 'Task Performance',
-                icon: 'bar-chart-2'
+                icon: 'bar-chart-2',
+                readTime: 4
             },
             {
                 slug: 'intro-monitoring',
@@ -537,7 +545,8 @@
                 description: 'Scientific workflows run for hours or days. Pegasus AI watches every job in real time — detecting anomalies, surfacing bottlenecks, and giving researchers the introspection they need to act before a run goes wrong.',
                 category: 'monitoring',
                 tag: 'Monitoring',
-                icon: 'activity'
+                icon: 'activity',
+                readTime: 4
             },
             {
                 slug: 'intro-ai-workflows',
@@ -547,7 +556,8 @@
                 description: 'Most scientists who need HPC workflows are not workflow engineers. Pegasus AI uses LLM-powered tools to help researchers compose, validate, and run scientific pipelines — from a description of the problem.',
                 category: 'ai-workflows',
                 tag: 'AI Workflows',
-                icon: 'bot'
+                icon: 'bot',
+                readTime: 5
             },
             {
                 slug: 'build-a-pegasus-workflow-with-claude-skills',
@@ -557,7 +567,8 @@
                 description: 'A complete walkthrough of turning five Python scripts into a parallel HPC workflow using Pegasus AI — from a single prompt to a 25-job run on a live HTCondor pool.',
                 category: 'ai-workflows',
                 tag: 'AI Workflows',
-                icon: 'cpu'
+                icon: 'cpu',
+                readTime: 8
             },
             {
                 slug: 'spec-driven-scientific-workflows',
@@ -567,7 +578,8 @@
                 description: 'How writing a specification document before any code saves time, surfaces hidden assumptions, and produces better scientific workflows — shown on a real GBIF species comparison pipeline.',
                 category: 'ai-workflows',
                 tag: 'AI Workflows',
-                icon: 'file-text'
+                icon: 'file-text',
+                readTime: 6
             },
             {
                 slug: 'runtime-prediction-interval-envelopes',
@@ -577,7 +589,8 @@
                 description: 'A single runtime estimate is not enough for HPC scheduling. We show how a lower–central–upper envelope cuts under-prediction by up to 6.7× compared to standard methods.',
                 category: 'task-performance',
                 tag: 'Research',
-                icon: 'bar-chart-2'
+                icon: 'bar-chart-2',
+                readTime: 6
             },
             {
                 slug: 'intro-education',
@@ -587,7 +600,8 @@
                 description: 'HPC workflows are not just a research tool — they are a skill students need. Pegasus AI integrates into academic courses to give students direct experience with real scientific computing infrastructure.',
                 category: 'education',
                 tag: 'Education',
-                icon: 'book-open'
+                icon: 'book-open',
+                readTime: 4
             },
             {
                 slug: 'intro-ci-design',
@@ -597,7 +611,8 @@
                 description: 'Pegasus AI is designed from the ground up to work within the NSF cyberinfrastructure ecosystem. What CI-ready design means in practice, and why it matters for reproducibility and interoperability.',
                 category: 'ci-design',
                 tag: 'CI Design',
-                icon: 'component'
+                icon: 'component',
+                readTime: 4
             }
         ];
 
@@ -633,24 +648,36 @@
             renderGrid();
         }
 
+        function getCategoryThumb(category) {
+            const thumbs = {
+                'task-performance': `<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block"><rect width="400" height="110" fill="rgba(56,189,248,0.04)"/><rect x="40" y="75" width="28" height="25" rx="3" fill="rgba(56,189,248,0.2)"/><rect x="82" y="52" width="28" height="48" rx="3" fill="rgba(56,189,248,0.28)"/><rect x="124" y="32" width="28" height="68" rx="3" fill="rgba(56,189,248,0.38)"/><rect x="166" y="42" width="28" height="58" rx="3" fill="rgba(56,189,248,0.28)"/><rect x="208" y="56" width="28" height="44" rx="3" fill="rgba(56,189,248,0.2)"/><polyline points="40,28 82,16 124,6 166,12 208,20 250,26" fill="none" stroke="rgba(56,189,248,0.5)" stroke-width="1.5" stroke-dasharray="4,2"/><polyline points="40,72 82,50 124,30 166,40 208,54 250,62" fill="none" stroke="#38bdf8" stroke-width="2"/><circle cx="250" cy="62" r="4" fill="#38bdf8"/><text x="310" y="85" fill="rgba(56,189,248,0.06)" font-size="80" font-weight="900" font-family="sans-serif">P</text></svg>`,
+                'monitoring': `<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block"><rect width="400" height="110" fill="rgba(52,211,153,0.04)"/><line x1="0" y1="28" x2="400" y2="28" stroke="rgba(52,211,153,0.07)" stroke-width="1"/><line x1="0" y1="82" x2="400" y2="82" stroke="rgba(52,211,153,0.07)" stroke-width="1"/><polyline points="0,55 50,55 70,18 90,92 110,55 160,55 178,36 196,74 214,55 270,55 292,22 314,88 336,55 400,55" fill="none" stroke="rgba(52,211,153,0.6)" stroke-width="2"/><circle cx="214" cy="55" r="5" fill="#34d399" opacity="0.9"/><circle cx="214" cy="55" r="14" fill="rgba(52,211,153,0.12)"/><text x="310" y="88" fill="rgba(52,211,153,0.06)" font-size="80" font-weight="900" font-family="sans-serif">M</text></svg>`,
+                'ai-workflows': `<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block"><rect width="400" height="110" fill="rgba(129,140,248,0.04)"/><circle cx="55" cy="55" r="12" fill="rgba(129,140,248,0.15)" stroke="rgba(129,140,248,0.45)" stroke-width="1.2"/><circle cx="145" cy="28" r="10" fill="rgba(129,140,248,0.15)" stroke="rgba(129,140,248,0.4)" stroke-width="1.2"/><circle cx="145" cy="82" r="10" fill="rgba(129,140,248,0.15)" stroke="rgba(129,140,248,0.4)" stroke-width="1.2"/><circle cx="235" cy="55" r="13" fill="rgba(129,140,248,0.22)" stroke="rgba(129,140,248,0.55)" stroke-width="1.5"/><circle cx="315" cy="35" r="9" fill="rgba(129,140,248,0.15)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/><circle cx="315" cy="75" r="9" fill="rgba(129,140,248,0.15)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/><line x1="67" y1="50" x2="135" y2="33" stroke="rgba(129,140,248,0.3)" stroke-width="1"/><line x1="67" y1="60" x2="135" y2="77" stroke="rgba(129,140,248,0.3)" stroke-width="1"/><line x1="155" y1="33" x2="222" y2="50" stroke="rgba(129,140,248,0.3)" stroke-width="1"/><line x1="155" y1="77" x2="222" y2="60" stroke="rgba(129,140,248,0.3)" stroke-width="1"/><line x1="248" y1="50" x2="306" y2="39" stroke="rgba(129,140,248,0.3)" stroke-width="1"/><line x1="248" y1="60" x2="306" y2="71" stroke="rgba(129,140,248,0.3)" stroke-width="1"/><text x="305" y="88" fill="rgba(129,140,248,0.06)" font-size="80" font-weight="900" font-family="sans-serif">A</text></svg>`,
+                'education': `<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block"><rect width="400" height="110" fill="rgba(251,191,36,0.04)"/><rect x="135" y="28" width="55" height="65" rx="3" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.3)" stroke-width="1.2"/><rect x="210" y="28" width="55" height="65" rx="3" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.3)" stroke-width="1.2"/><line x1="190" y1="28" x2="190" y2="93" stroke="rgba(251,191,36,0.45)" stroke-width="2"/><line x1="143" y1="46" x2="183" y2="46" stroke="rgba(251,191,36,0.22)" stroke-width="1"/><line x1="143" y1="57" x2="183" y2="57" stroke="rgba(251,191,36,0.22)" stroke-width="1"/><line x1="143" y1="68" x2="183" y2="68" stroke="rgba(251,191,36,0.22)" stroke-width="1"/><line x1="218" y1="46" x2="258" y2="46" stroke="rgba(251,191,36,0.22)" stroke-width="1"/><line x1="218" y1="57" x2="258" y2="57" stroke="rgba(251,191,36,0.22)" stroke-width="1"/><line x1="218" y1="68" x2="258" y2="68" stroke="rgba(251,191,36,0.22)" stroke-width="1"/><polygon points="190,8 222,20 190,32 158,20" fill="rgba(251,191,36,0.2)" stroke="rgba(251,191,36,0.5)" stroke-width="1"/><text x="295" y="88" fill="rgba(251,191,36,0.06)" font-size="80" font-weight="900" font-family="sans-serif">E</text></svg>`,
+                'ci-design': `<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:110px;display:block"><rect width="400" height="110" fill="rgba(167,139,250,0.04)"/><line x1="30" y1="55" x2="90" y2="55" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="90" y1="55" x2="90" y2="28" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="90" y1="28" x2="170" y2="28" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="90" y1="82" x2="170" y2="82" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="90" y1="55" x2="170" y2="55" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="90" y1="55" x2="90" y2="82" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="240" y1="28" x2="310" y2="28" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="310" y1="28" x2="310" y2="55" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="240" y1="55" x2="310" y2="55" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="240" y1="82" x2="310" y2="82" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><line x1="310" y1="55" x2="310" y2="82" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/><rect x="170" y="16" width="70" height="78" rx="4" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.4)" stroke-width="1.2"/><line x1="170" y1="33" x2="160" y2="33" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><line x1="170" y1="48" x2="160" y2="48" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><line x1="170" y1="63" x2="160" y2="63" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><line x1="170" y1="78" x2="160" y2="78" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><line x1="240" y1="33" x2="250" y2="33" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><line x1="240" y1="48" x2="250" y2="48" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><line x1="240" y1="63" x2="250" y2="63" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><line x1="240" y1="78" x2="250" y2="78" stroke="rgba(167,139,250,0.35)" stroke-width="1"/><circle cx="90" cy="55" r="4" fill="rgba(167,139,250,0.6)"/><circle cx="310" cy="55" r="4" fill="rgba(167,139,250,0.6)"/></svg>`
+            };
+            return thumbs[category] || thumbs['ai-workflows'];
+        }
+
         function renderGrid() {
             const grid = document.getElementById('posts-grid');
             const filtered = activeCategory ? POSTS.filter(p => p.category === activeCategory) : POSTS;
             grid.className = 'grid gap-6 md:grid-cols-2';
             grid.innerHTML = filtered.map(p => `
-                <article class="blog-card glass-card rounded-2xl p-8 flex flex-col gap-5 cursor-pointer"
+                <article class="blog-card glass-card rounded-2xl overflow-hidden flex flex-col cursor-pointer"
                     onclick="showPost('${p.slug}')" role="button" tabindex="0"
                     onkeydown="if(event.key==='Enter')showPost('${p.slug}')">
-                    <div class="flex items-center gap-3">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase">
+                    <div class="card-thumb">${getCategoryThumb(p.category)}</div>
+                    <div class="card-body">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase w-fit">
                             <i data-lucide="${p.icon}" class="w-3 h-3"></i> ${p.tag}
                         </span>
-                    </div>
-                    <h3 class="text-xl font-black tracking-tight leading-snug">${p.title}</h3>
-                    <p class="text-sm opacity-70 leading-relaxed flex-1">${p.description}</p>
-                    <div class="flex items-center justify-between mono text-[10px] tracking-widest text-slate-500 uppercase mt-auto pt-4 border-t border-white/5">
-                        <span class="flex items-center gap-2"><i data-lucide="user" class="w-3 h-3"></i> ${p.author}</span>
-                        <span class="flex items-center gap-2"><i data-lucide="calendar" class="w-3 h-3"></i> ${formatDate(p.date)}</span>
+                        <h3 class="text-xl font-black tracking-tight leading-snug">${p.title}</h3>
+                        <p class="text-sm opacity-70 leading-relaxed flex-1">${p.description}</p>
+                        <div class="flex items-center justify-between mono text-[10px] tracking-widest text-slate-500 uppercase mt-auto pt-4 border-t border-white/5">
+                            <span class="flex items-center gap-2"><i data-lucide="calendar" class="w-3 h-3"></i> ${formatDate(p.date)}</span>
+                            <span class="flex items-center gap-2"><i data-lucide="clock" class="w-3 h-3"></i> ${p.readTime} min read</span>
+                        </div>
                     </div>
                 </article>`).join('');
             lucide.createIcons();
@@ -672,6 +699,10 @@
         function showListing() {
             const url = activeCategory ? `blog.html?category=${activeCategory}` : 'blog.html';
             history.pushState({}, '', url);
+            document.title = 'Pegasus AI | Blog';
+            document.getElementById('meta-description')?.setAttribute('content', 'Research updates, insights, and announcements from the Pegasus AI team.');
+            document.getElementById('meta-og-title')?.setAttribute('content', 'Pegasus AI | Blog');
+            document.getElementById('meta-og-desc')?.setAttribute('content', 'Research updates, insights, and announcements from the Pegasus AI team.');
             document.getElementById('listing-view').classList.remove('hidden');
             document.getElementById('post-view').classList.add('hidden');
             renderListing();
@@ -723,15 +754,36 @@
             contentEl.classList.add('hidden');
             loadingEl.classList.remove('hidden');
             metaEl.innerHTML = '';
+            window.scrollTo(0, 0);
 
             try {
                 const res = await fetch(`blogs/${slug}.md`);
                 if (!res.ok) throw new Error('Post not found');
                 const { meta, content } = parseFrontmatter(await res.text());
 
-                document.title = `${meta.title} | Pegasus AI Blog`;
-
                 const postInfo = POSTS.find(p => p.slug === slug);
+                const readTime = postInfo?.readTime || Math.max(1, Math.round(content.split(/\s+/).length / 200));
+                const desc = postInfo?.description || meta.description || '';
+
+                // Update page title & meta
+                document.title = `${meta.title} | Pegasus AI`;
+                document.getElementById('meta-description')?.setAttribute('content', desc);
+                document.getElementById('meta-og-title')?.setAttribute('content', `${meta.title} | Pegasus AI`);
+                document.getElementById('meta-og-desc')?.setAttribute('content', desc);
+
+                // JSON-LD structured data
+                let ldScript = document.getElementById('ld-json');
+                if (!ldScript) { ldScript = document.createElement('script'); ldScript.id = 'ld-json'; ldScript.type = 'application/ld+json'; document.head.appendChild(ldScript); }
+                ldScript.textContent = JSON.stringify({
+                    "@context": "https://schema.org", "@type": "BlogPosting",
+                    "headline": meta.title, "description": desc,
+                    "author": { "@type": "Organization", "name": meta.author || "Pegasus AI Team", "url": "https://pegasus-isi.github.io/pegasus-ai/" },
+                    "datePublished": meta.date,
+                    "publisher": { "@type": "Organization", "name": "Pegasus AI", "logo": { "@type": "ImageObject", "url": "https://swarmourr.github.io/PegasusAI/assets/img/image1.png" } },
+                    "url": `https://swarmourr.github.io/PegasusAI/blog.html?post=${slug}`,
+                    "keywords": meta.tag || postInfo?.tag || ''
+                });
+
                 metaEl.innerHTML = `
                     <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
                         <i data-lucide="${postInfo ? postInfo.icon : 'file-text'}" class="w-3 h-3"></i> ${meta.tag || (postInfo ? postInfo.tag : 'Blog Post')}
@@ -740,10 +792,34 @@
                     <div class="flex flex-wrap items-center gap-6 mono text-[10px] tracking-widest text-slate-400 uppercase pb-8 border-b" style="border-color:var(--border-color)">
                         <span class="flex items-center gap-2"><i data-lucide="calendar" class="w-3 h-3"></i> ${formatDate(meta.date)}</span>
                         <span class="flex items-center gap-2"><i data-lucide="user" class="w-3 h-3"></i> ${meta.author}</span>
+                        <span class="flex items-center gap-2"><i data-lucide="clock" class="w-3 h-3"></i> ${readTime} min read</span>
                     </div>
                 `;
 
                 contentEl.innerHTML = marked.parse(content);
+
+                // Related posts
+                const related = POSTS.filter(p => p.slug !== slug && p.category === (postInfo?.category || '')).slice(0, 2);
+                if (related.length) {
+                    const relDiv = document.createElement('div');
+                    relDiv.className = 'mt-16 pt-10 border-t';
+                    relDiv.style.borderColor = 'var(--border-color)';
+                    relDiv.innerHTML = `
+                        <p class="mono text-[10px] tracking-[0.3em] text-slate-500 uppercase mb-6">Related Posts</p>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            ${related.map(r => `
+                                <div class="blog-card glass-card rounded-xl overflow-hidden cursor-pointer" onclick="showPost('${r.slug}')">
+                                    <div class="card-thumb">${getCategoryThumb(r.category)}</div>
+                                    <div class="p-5">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[9px] font-bold tracking-widest uppercase mb-3">${r.tag}</span>
+                                        <h4 class="text-sm font-bold leading-snug mb-2">${r.title}</h4>
+                                        <span class="mono text-[10px] text-slate-500">${formatDate(r.date)} · ${r.readTime} min read</span>
+                                    </div>
+                                </div>`).join('')}
+                        </div>`;
+                    contentEl.appendChild(relDiv);
+                }
+
                 lucide.createIcons();
             } catch (err) {
                 contentEl.innerHTML = `<p class="text-red-400">Could not load post: ${err.message}</p>`;
