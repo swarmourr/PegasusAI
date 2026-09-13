@@ -2009,7 +2009,7 @@
                 (async function loadPapers() {
                     const list = document.getElementById('papers-list');
                     try {
-                        const papers = await fetch('assets/data/papers.json').then(r => r.json());
+                        const papers = await fetch('assets/data/papers.json?v=2').then(r => r.json());
                         list.innerHTML = papers.map((p, i) => {
                             const year = new Date(p.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                             const authorsStr = p.authors.join(', ');
