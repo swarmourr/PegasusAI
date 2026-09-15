@@ -1244,27 +1244,57 @@
     </section>
 
     <section id="about" class="bg-slate-950 overflow-hidden py-24">
-        <div class="max-w-[1400px] mx-auto px-6 space-y-14">
+        <div class="max-w-[1400px] mx-auto px-6">
 
-            <!-- Top row: text left, image right -->
-            <div class="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+            <!-- Top: text + stats left, logo right -->
+            <div class="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center mb-16">
 
-                <!-- Text -->
-                <div class="space-y-8">
-                    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-sky-500/20 transition-colors">
-                        <img src="assets/img/nsf.png" alt="NSF" width="16" height="16"> Funded by the National Science Foundation · Award #2513101
-                    </a>
-                    <h2 class="text-5xl xl:text-6xl font-black tracking-tighter leading-[0.95] fade-in">
-                        What is <br><span class="text-sky-500 italic">Pegasus AI?</span>
-                    </h2>
-                    <p class="text-lg text-slate-300 leading-relaxed font-light max-w-lg">
-                        PegasusAI is the next-generation AI-driven scientific workflow management system developed
-                        by a multi-institutional team funded by the <strong>U.S. National Science Foundation</strong>.
-                    </p>
+                <!-- Left: heading, description, stats -->
+                <div class="space-y-10">
+                    <div class="space-y-6">
+                        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-sky-500/20 transition-colors">
+                            <img src="assets/img/nsf.png" alt="NSF" width="16" height="16"> Funded by the National Science Foundation · Award #2513101
+                        </a>
+                        <h2 class="text-5xl xl:text-6xl font-black tracking-tighter leading-[0.95] fade-in">
+                            What is <br><span class="text-sky-500 italic">Pegasus AI?</span>
+                        </h2>
+                        <p class="text-lg text-slate-300 leading-relaxed font-light max-w-lg">
+                            PegasusAI is the next-generation AI-driven scientific workflow management system developed
+                            by a multi-institutional team funded by the <strong>U.S. National Science Foundation</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Compact stats inline -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <a href="#workflows" class="group flex flex-col gap-1.5 p-4 rounded-xl border border-white/8 hover:border-sky-500/30 hover:bg-sky-500/[0.03] transition-all duration-300">
+                            <div class="flex items-center justify-between">
+                                <div class="text-2xl font-black tracking-tighter text-white group-hover:text-sky-400 transition-colors">20+</div>
+                                <i data-lucide="git-fork" class="w-3.5 h-3.5 text-sky-400/30 group-hover:text-sky-400/70 transition-colors"></i>
+                            </div>
+                            <div class="text-xs font-semibold text-slate-400 group-hover:text-slate-300 transition-colors">Open Workflows</div>
+                            <div class="mono text-[9px] tracking-widest text-sky-500/0 group-hover:text-sky-500/60 transition-colors flex items-center gap-1 uppercase">Explore <i data-lucide="arrow-right" class="w-2 h-2"></i></div>
+                        </a>
+                        <a href="#partners" class="group flex flex-col gap-1.5 p-4 rounded-xl border border-white/8 hover:border-violet-500/30 hover:bg-violet-500/[0.03] transition-all duration-300">
+                            <div class="flex items-center justify-between">
+                                <div class="text-2xl font-black tracking-tighter text-white group-hover:text-violet-400 transition-colors">5</div>
+                                <i data-lucide="building-2" class="w-3.5 h-3.5 text-violet-400/30 group-hover:text-violet-400/70 transition-colors"></i>
+                            </div>
+                            <div class="text-xs font-semibold text-slate-400 group-hover:text-slate-300 transition-colors">Institutions</div>
+                            <div class="mono text-[9px] tracking-widest text-violet-500/0 group-hover:text-violet-500/60 transition-colors flex items-center gap-1 uppercase">Partners <i data-lucide="arrow-right" class="w-2 h-2"></i></div>
+                        </a>
+                        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer" class="group flex flex-col gap-1.5 p-4 rounded-xl border border-white/8 hover:border-emerald-500/30 hover:bg-emerald-500/[0.03] transition-all duration-300">
+                            <div class="flex items-center justify-between">
+                                <div class="text-2xl font-black tracking-tighter text-white group-hover:text-emerald-400 transition-colors">NSF</div>
+                                <img src="assets/img/nsf.png" alt="NSF" class="w-3.5 h-3.5 opacity-25 group-hover:opacity-70 transition-opacity">
+                            </div>
+                            <div class="text-xs font-semibold text-slate-400 group-hover:text-slate-300 transition-colors">Funded Research</div>
+                            <div class="mono text-[9px] tracking-widest text-emerald-500/0 group-hover:text-emerald-500/60 transition-colors flex items-center gap-1 uppercase">View award <i data-lucide="arrow-up-right" class="w-2 h-2"></i></div>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Logo -->
+                <!-- Right: logo only -->
                 <div class="relative flex justify-center items-center">
                     <div class="hero-glow"></div>
                     <img src="assets/img/image1.png" alt="Pegasus AI — dark mode hero logo" class="logo-hero-xl relative z-10 dark-logo-img">
@@ -1272,74 +1302,43 @@
                 </div>
             </div>
 
-            <!-- Stats row -->
-            <div class="grid sm:grid-cols-3 gap-4">
-                <a href="#workflows" class="group relative flex flex-col gap-2 p-6 rounded-2xl border border-white/8 hover:border-sky-500/30 bg-white/[0.01] hover:bg-sky-500/[0.03] transition-all duration-300 overflow-hidden">
-                    <div class="absolute top-4 right-4 w-7 h-7 rounded-lg bg-sky-500/10 flex items-center justify-center">
-                        <i data-lucide="git-fork" class="w-3.5 h-3.5 text-sky-400/50 group-hover:text-sky-400 transition-colors"></i>
-                    </div>
-                    <div class="text-4xl font-black tracking-tighter text-white group-hover:text-sky-400 transition-colors">20+</div>
-                    <div class="font-semibold text-sm text-slate-300">Open Workflows</div>
-                    <div class="mono text-[10px] text-slate-500 group-hover:text-slate-400 transition-colors leading-relaxed">Scientific workflow templates across research domains</div>
-                    <div class="mono text-[9px] tracking-widest text-sky-500/0 group-hover:text-sky-500/70 transition-colors mt-1 flex items-center gap-1 uppercase">Explore <i data-lucide="arrow-right" class="w-2.5 h-2.5"></i></div>
-                </a>
-                <a href="#partners" class="group relative flex flex-col gap-2 p-6 rounded-2xl border border-white/8 hover:border-violet-500/30 bg-white/[0.01] hover:bg-violet-500/[0.03] transition-all duration-300 overflow-hidden">
-                    <div class="absolute top-4 right-4 w-7 h-7 rounded-lg bg-violet-500/10 flex items-center justify-center">
-                        <i data-lucide="building-2" class="w-3.5 h-3.5 text-violet-400/50 group-hover:text-violet-400 transition-colors"></i>
-                    </div>
-                    <div class="text-4xl font-black tracking-tighter text-white group-hover:text-violet-400 transition-colors">5</div>
-                    <div class="font-semibold text-sm text-slate-300">Partner Institutions</div>
-                    <div class="mono text-[10px] text-slate-500 group-hover:text-slate-400 transition-colors leading-relaxed">USC ISI · UTK · RENCI · UMass · FABRIC</div>
-                    <div class="mono text-[9px] tracking-widest text-violet-500/0 group-hover:text-violet-500/70 transition-colors mt-1 flex items-center gap-1 uppercase">Meet the team <i data-lucide="arrow-right" class="w-2.5 h-2.5"></i></div>
-                </a>
-                <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col gap-2 p-6 rounded-2xl border border-white/8 hover:border-emerald-500/30 bg-white/[0.01] hover:bg-emerald-500/[0.03] transition-all duration-300 overflow-hidden">
-                    <div class="absolute top-4 right-4 w-7 h-7 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                        <img src="assets/img/nsf.png" alt="NSF" class="w-4 h-4 opacity-40 group-hover:opacity-90 transition-opacity">
-                    </div>
-                    <div class="text-4xl font-black tracking-tighter text-white group-hover:text-emerald-400 transition-colors">NSF</div>
-                    <div class="font-semibold text-sm text-slate-300">Funded Research</div>
-                    <div class="mono text-[10px] text-slate-500 group-hover:text-slate-400 transition-colors leading-relaxed">Award #2513101 · National Science Foundation</div>
-                    <div class="mono text-[9px] tracking-widest text-emerald-500/0 group-hover:text-emerald-500/70 transition-colors mt-1 flex items-center gap-1 uppercase">View award <i data-lucide="arrow-up-right" class="w-2.5 h-2.5"></i></div>
-                </a>
-            </div>
-
-            <!-- Feature cards — 4 columns full width -->
+            <!-- Feature cards — full-width strip with distinct accent colors -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="brain" class="w-4 h-4 text-sky-400"></i>
-                        </div>
-                        <h4 class="font-semibold text-sm">Intelligent Planning</h4>
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-sky-500/[0.02] transition-all duration-300">
+                    <div class="w-9 h-9 rounded-xl bg-sky-500/10 flex items-center justify-center">
+                        <i data-lucide="brain" class="w-4 h-4 text-sky-400"></i>
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed">ML models predict resource needs and optimize execution.</p>
+                    <div>
+                        <h4 class="font-semibold text-sm mb-1">Intelligent Planning</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">ML models predict resource needs and optimize execution.</p>
+                    </div>
                 </div>
-                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="zap" class="w-4 h-4 text-sky-400"></i>
-                        </div>
-                        <h4 class="font-semibold text-sm">Adaptive Management</h4>
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-violet-500/30 hover:bg-violet-500/[0.02] transition-all duration-300">
+                    <div class="w-9 h-9 rounded-xl bg-violet-500/10 flex items-center justify-center">
+                        <i data-lucide="zap" class="w-4 h-4 text-violet-400"></i>
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed">Real-time anomaly detection and automatic plan adjustment.</p>
+                    <div>
+                        <h4 class="font-semibold text-sm mb-1">Adaptive Management</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Real-time anomaly detection and automatic plan adjustment.</p>
+                    </div>
                 </div>
-                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="users" class="w-4 h-4 text-sky-400"></i>
-                        </div>
-                        <h4 class="font-semibold text-sm">Human-in-the-Loop</h4>
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-emerald-500/30 hover:bg-emerald-500/[0.02] transition-all duration-300">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                        <i data-lucide="users" class="w-4 h-4 text-emerald-400"></i>
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed">AI-augmented tools for creation, monitoring, and debugging.</p>
+                    <div>
+                        <h4 class="font-semibold text-sm mb-1">Human-in-the-Loop</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">AI-augmented tools for creation, monitoring, and debugging.</p>
+                    </div>
                 </div>
-                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/30 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="database" class="w-4 h-4 text-sky-400"></i>
-                        </div>
-                        <h4 class="font-semibold text-sm">AI-Ready Data</h4>
+                <div class="flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-amber-500/30 hover:bg-amber-500/[0.02] transition-all duration-300">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                        <i data-lucide="database" class="w-4 h-4 text-amber-400"></i>
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed">Curated datasets to advance cyberinfrastructure research.</p>
+                    <div>
+                        <h4 class="font-semibold text-sm mb-1">AI-Ready Data</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Curated datasets to advance cyberinfrastructure research.</p>
+                    </div>
                 </div>
             </div>
 
