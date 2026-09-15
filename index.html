@@ -1274,21 +1274,24 @@
 
             <!-- Stats row -->
             <div class="grid grid-cols-3 divide-x divide-white/5 border border-white/5 rounded-2xl overflow-hidden">
-                <div class="flex flex-col gap-1 px-8 py-7">
+                <a href="#workflows" class="group flex flex-col gap-1 px-8 py-7 hover:bg-white/[0.03] transition-colors">
                     <div class="w-8 h-0.5 rounded-full bg-sky-400/60 mb-3"></div>
-                    <div class="stat-val">20+</div>
-                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2">Open Workflows</p>
-                </div>
-                <div class="flex flex-col gap-1 px-8 py-7">
+                    <div class="stat-val group-hover:text-sky-400 transition-colors">20+</div>
+                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2 group-hover:text-slate-400 transition-colors">Open Workflows</p>
+                    <span class="mono text-[9px] tracking-widest text-sky-500/0 group-hover:text-sky-500/60 transition-colors mt-1 flex items-center gap-1">View <i data-lucide="arrow-down" class="w-2.5 h-2.5 inline"></i></span>
+                </a>
+                <a href="#partners" class="group flex flex-col gap-1 px-8 py-7 hover:bg-white/[0.03] transition-colors">
                     <div class="w-8 h-0.5 rounded-full bg-violet-400/60 mb-3"></div>
-                    <div class="stat-val">5</div>
-                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2">Institutions</p>
-                </div>
-                <div class="flex flex-col gap-1 px-8 py-7">
+                    <div class="stat-val group-hover:text-violet-400 transition-colors">5</div>
+                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2 group-hover:text-slate-400 transition-colors">Institutions</p>
+                    <span class="mono text-[9px] tracking-widest text-violet-500/0 group-hover:text-violet-500/60 transition-colors mt-1 flex items-center gap-1">USC ISI · UTK · RENCI · UMass · FABRIC <i data-lucide="arrow-down" class="w-2.5 h-2.5 inline"></i></span>
+                </a>
+                <a href="#partners" class="group flex flex-col gap-1 px-8 py-7 hover:bg-white/[0.03] transition-colors">
                     <div class="w-8 h-0.5 rounded-full bg-emerald-400/60 mb-3"></div>
-                    <div class="stat-val">NSF</div>
-                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2">Funded Research</p>
-                </div>
+                    <div class="stat-val group-hover:text-emerald-400 transition-colors">NSF</div>
+                    <p class="text-xs text-slate-500 mono uppercase tracking-wider mt-2 group-hover:text-slate-400 transition-colors">Funded Research</p>
+                    <span class="mono text-[9px] tracking-widest text-emerald-500/0 group-hover:text-emerald-500/60 transition-colors mt-1 flex items-center gap-1">Award #2333609 <i data-lucide="arrow-down" class="w-2.5 h-2.5 inline"></i></span>
+                </a>
             </div>
 
             <!-- Feature cards — 4 columns full width -->
