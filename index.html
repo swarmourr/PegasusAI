@@ -2523,33 +2523,49 @@
                     ? `<span onclick="event.preventDefault();event.stopPropagation();window.location='blog.html?category=${post.category}'" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[9px] font-bold tracking-[0.2em] uppercase cursor-pointer hover:bg-sky-500/20 transition-colors">${post.tag}</span>`
                     : '<span></span>';
 
-                const cardHTML = (post, featured = false) => `
-                    <a href="blog.html?post=${post.slug}"
-                        class="group flex flex-col gap-${featured ? '6' : '4'} p-${featured ? '8' : '6'} rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300 blog-cat-${post.category || ''}">
+                const [first, ...rest] = posts;
+
+                const featuredHTML = `
+                    <a href="blog.html?post=${first.slug}"
+                        class="group flex flex-col gap-6 p-8 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300 blog-cat-${first.category || ''}">
                         <div class="flex items-center justify-between">
-                            ${tagHTML(post)}
-                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-sky-400 transition-colors"></i>
+                            ${tagHTML(first)}
+                            <span class="mono text-[8px] tracking-[0.3em] uppercase text-sky-400/50 border border-sky-500/20 px-2 py-0.5 rounded-full">Latest</span>
                         </div>
-                        <div class="flex-1 space-y-2">
-                            <h3 class="text-${featured ? 'xl' : 'base'} font-${featured ? 'bold' : 'semibold'} leading-snug group-hover:text-sky-400 transition-colors">${post.title}</h3>
-                            <p class="text-slate-${featured ? '400' : '500'} text-sm leading-relaxed">${post.description}</p>
+                        <div class="flex-1 space-y-3">
+                            <h3 class="text-2xl font-bold leading-snug group-hover:text-sky-400 transition-colors">${first.title}</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">${first.description}</p>
                         </div>
-                        <div class="flex items-center justify-between mono text-[9px] tracking-widest text-slate-600 uppercase pt-4 border-t border-white/5">
-                            <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3 h-3"></i> ${post.author}</span>
-                            <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3 h-3"></i> ${formatBlogDate(post.date)}</span>
+                        <div class="flex items-center justify-between mono text-[9px] tracking-widest text-slate-600 uppercase pt-5 border-t border-white/5">
+                            <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3 h-3"></i> ${first.author}</span>
+                            <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3 h-3"></i> ${formatBlogDate(first.date)}</span>
                         </div>
                     </a>
                 `;
 
-                const [first, second, ...rest] = posts;
+                const smallCardHTML = post => `
+                    <a href="blog.html?post=${post.slug}"
+                        class="group flex flex-col gap-3 p-5 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300 blog-cat-${post.category || ''}">
+                        <div class="flex items-start justify-between gap-2">
+                            ${tagHTML(post)}
+                            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-600 group-hover:text-sky-400 transition-colors shrink-0 mt-0.5"></i>
+                        </div>
+                        <div class="flex-1 space-y-1.5">
+                            <h3 class="text-sm font-semibold leading-snug group-hover:text-sky-400 transition-colors">${post.title}</h3>
+                            <p class="text-slate-500 text-xs leading-relaxed line-clamp-2">${post.description}</p>
+                        </div>
+                        <div class="mono text-[8px] tracking-widest text-slate-600 uppercase pt-3 border-t border-white/5 flex items-center gap-1">
+                            <i data-lucide="calendar" class="w-2.5 h-2.5"></i> ${formatBlogDate(post.date)}
+                        </div>
+                    </a>
+                `;
 
                 grid.innerHTML = `
-                    <div class="grid lg:grid-cols-[3fr_2fr] gap-6 mb-6">
-                        ${cardHTML(first, true)}
-                        ${cardHTML(second)}
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-6">
-                        ${rest.map(p => cardHTML(p)).join('')}
+                    <div class="grid lg:grid-cols-[5fr_4fr] gap-6 items-stretch">
+                        ${featuredHTML}
+                        <div class="grid grid-cols-2 gap-4">
+                            ${rest.map(smallCardHTML).join('')}
+                        </div>
                     </div>
                 `;
 
