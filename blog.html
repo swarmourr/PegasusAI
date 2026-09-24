@@ -610,6 +610,7 @@
             { id: 'task-performance', label: 'Task Performance',  icon: 'bar-chart-2' },
             { id: 'monitoring',       label: 'Monitoring',        icon: 'activity'    },
             { id: 'ai-workflows',     label: 'AI Workflows',      icon: 'bot'         },
+            { id: 'education',        label: 'Education',         icon: 'book-open'   },
             { id: 'ci-design',        label: 'CI Design',         icon: 'component'   }
         ];
 
@@ -651,6 +652,19 @@
         function renderGrid() {
             const grid = document.getElementById('posts-grid');
             const filtered = activeCategory ? POSTS.filter(p => p.category === activeCategory) : POSTS;
+            if (filtered.length === 0) {
+                grid.className = '';
+                grid.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-24 gap-4 text-center">
+                        <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-2">
+                            <i data-lucide="book-open" class="w-5 h-5 text-slate-600"></i>
+                        </div>
+                        <p class="font-semibold text-slate-400">No blog posts available yet</p>
+                        <p class="mono text-[10px] tracking-widest text-slate-600 uppercase">Check back soon</p>
+                    </div>`;
+                lucide.createIcons();
+                return;
+            }
             grid.className = 'grid gap-6 md:grid-cols-2';
             grid.innerHTML = filtered.map(p => `
                 <article class="blog-card glass-card rounded-2xl overflow-hidden flex flex-col cursor-pointer"

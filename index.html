@@ -2509,10 +2509,13 @@
             try {
                 const res = await fetch('assets/data/posts.json');
                 const slugs = await res.json();
-                // 5 most recent (reverse chronological)
-                const recent = [...slugs].reverse().slice(0, 5);
+                // Pinned featured post; remaining 4 from most recent
+                const FEATURED = 'build-a-pegasus-workflow-with-claude-skills';
+                const hasFeatured = slugs.includes(FEATURED);
+                const others = [...slugs].reverse().filter(s => s !== FEATURED).slice(0, hasFeatured ? 4 : 5);
+                const toLoad = hasFeatured ? [FEATURED, ...others] : others;
 
-                const posts = await Promise.all(recent.map(async slug => {
+                const posts = await Promise.all(toLoad.map(async slug => {
                     const r = await fetch(`blogs/${slug}.md`);
                     const meta = parseFrontmatter(await r.text());
                     return { slug, ...meta };
