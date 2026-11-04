@@ -13,9 +13,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        // Run before first paint to avoid flash of dark background
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved !== 'dark') document.documentElement.classList.add('pre-light');
+        })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
+        html.pre-light body { background: #f0f4f8 !important; color: #0f172a !important; }
         :root { --accent: #38bdf8; --bg-card: rgba(0,0,0,0.03); --border-color: rgba(255,255,255,0.08); --text-muted: #94a3b8; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
