@@ -973,8 +973,8 @@
         /* Fixed header scroll offset */
         section[id] { scroll-margin-top: 80px; }
 
-        /* Performance: defer rendering of off-screen sections */
-        #tech, #studio, #workflows {
+        /* Performance: only defer workflows (not observed by scroll spy) */
+        #workflows {
             content-visibility: auto;
             contain-intrinsic-size: 0 700px;
         }
@@ -1747,7 +1747,7 @@
                         if (active) active.classList.add('active');
                     }
                 });
-            }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+            }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
             sectionIds.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) observer.observe(el);
