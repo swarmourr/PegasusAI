@@ -603,7 +603,7 @@
     <script>
         // ── Theme ──
         const saved = localStorage.getItem('theme');
-        if (saved === 'light') document.body.classList.add('light-mode');
+        if (saved !== 'dark') document.body.classList.add('light-mode');
 
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
