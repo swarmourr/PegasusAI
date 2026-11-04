@@ -107,21 +107,12 @@
             transition: color 0.3s ease;
         }
         .nav-link:hover { color: #f8fafc; }
-        .nav-link.active { color: #fff !important; }
+        .nav-link.active { color:#38bdf8 !important; background:rgba(56,189,248,0.1); border-radius:8px; }
         body.light-mode .nav-link { color: #475569; }
         body.light-mode .nav-link:hover { color: #0f172a; }
-        body.light-mode .nav-link.active { color: var(--accent) !important; }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #38bdf8;
-        }
+        body.light-mode .nav-link.active { color:var(--accent) !important; background:rgba(14,165,233,0.08); }
+        .nav-link.active::after { display:none; }
+        body.light-mode nav a { font-weight: 700; }
 
         @media (max-width: 1024px) {
             header { height: 68px; }
@@ -358,6 +349,16 @@
             padding: 2rem 5%;
             text-align: center;
         }
+        .footer-link {
+            font-size: 13px;
+            color: #64748b;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: block;
+            padding: 1px 0;
+        }
+        .footer-link:hover { color: #f8fafc; padding-left: 4px; }
+        body.light-mode .footer-link { color: #94a3b8; }
+        body.light-mode .footer-link:hover { color: #0f172a; }
     </style>
 </head>
 
@@ -382,18 +383,12 @@
 
         <!-- Desktop nav -->
         <nav id="main-nav" class="ml-auto flex items-center gap-1">
-            <a href="index.html#about"     class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">About</a>
-            <a href="index.html#ecosystem" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Ecosystem</a>
-            <a href="index.html#tech"      class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Tech</a>
-            <a href="index.html#engine"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Engine</a>
-            <a href="index.html#workflows" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Workflows</a>
-            <a href="index.html#studio"       class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Studio</a>
-            <a href="index.html#publications" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Research</a>
-            <a href="index.html#team"         class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Team</a>
-            <div class="w-px h-4 bg-white/10 mx-2"></div>
-            <span class="inline-flex items-center px-4 py-2 rounded-full bg-sky-500 border border-sky-500 text-white text-[14px] font-bold">
-                Blog
-            </span>
+            <a href="index.html#about"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">About</a>
+            <a href="index.html#tech"     class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Tech</a>
+            <a href="studio.html"         class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Studio</a>
+            <a href="blog.html"           class="nav-link active px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Blog</a>
+            <a href="publications.html"   class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Research</a>
+            <a href="teamsepa.html"       class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Team</a>
         </nav>
 
         <!-- Hamburger (mobile only) -->
@@ -422,18 +417,12 @@
             <span class="text-base font-extrabold tracking-tight text-white">Pegasus <span class="text-sky-400">AI</span></span>
         </div>
         <nav class="flex flex-col items-center gap-1 w-full max-w-xs px-4">
-            <a href="index.html#about"     onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">About</a>
-            <a href="index.html#ecosystem" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Ecosystem</a>
-            <a href="index.html#tech"      onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Tech</a>
-            <a href="index.html#engine"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Engine</a>
-            <a href="index.html#workflows" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Workflows</a>
-            <a href="index.html#studio"       onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Studio</a>
-            <a href="index.html#publications" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Research</a>
-            <a href="index.html#team"         onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Team</a>
-            <div class="w-full h-px bg-white/5 my-2"></div>
-            <span class="inline-flex items-center px-6 py-2.5 rounded-full bg-sky-500 border border-sky-500 text-white text-sm font-bold">
-                Blog
-            </span>
+            <a href="index.html#about"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">About</a>
+            <a href="index.html#tech"     onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Tech</a>
+            <a href="studio.html"         onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Studio</a>
+            <a href="blog.html"           onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-sky-400 bg-sky-500/10 transition-all">Blog</a>
+            <a href="publications.html"   onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Research</a>
+            <a href="teamsepa.html"       onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Team</a>
         </nav>
     </div>
 
@@ -473,12 +462,147 @@
         </div>
     </main>
 
-    <footer>
-        <div class="flex items-center justify-center gap-8 font-mono text-[9px] tracking-widest uppercase opacity-40">
-            <span>© 2026 Pegasus AI</span>
-            <span class="h-3 w-px bg-slate-600"></span>
-            <span>Information Sciences Institute</span>
+    <footer id="contact" class="relative bg-slate-950 border-t border-white/5 overflow-hidden">
+
+        <!-- Background glow -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div style="position:absolute;bottom:-120px;left:10%;width:600px;height:400px;background:radial-gradient(ellipse,rgba(56,189,248,0.06) 0%,transparent 70%);border-radius:50%"></div>
+            <div style="position:absolute;bottom:-80px;right:5%;width:400px;height:300px;background:radial-gradient(ellipse,rgba(139,92,246,0.05) 0%,transparent 70%);border-radius:50%"></div>
         </div>
+
+        <!-- CTA band -->
+        <div class="relative max-w-7xl mx-auto px-6 pt-10 pb-8 border-b border-white/5">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="flex flex-col gap-3 max-w-xl">
+                    <span class="mono text-[10px] tracking-[0.25em] uppercase text-sky-400/70 font-bold">Get In Touch</span>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
+                        Ready to scale your<br class="hidden sm:block"> scientific workflows?
+                    </h2>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Connect with the team at USC ISI — we're building the next generation of AI-driven workflow automation.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+                    <a href="mailto:pegasus-support@isi.edu?subject=Pegasus%20AI%20Inquiry"
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-sky-500 text-white font-bold text-sm hover:bg-sky-400 transition-all hover:shadow-[0_0_24px_rgba(56,189,248,0.35)] group">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        Email Us
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/15 text-slate-300 font-semibold text-sm hover:border-white/30 hover:text-white transition-all group">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        GitHub
+                    </a>
+                    <a href="https://pegasus-users.slack.com/archives/C01KBPSM64S" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/15 text-slate-300 font-semibold text-sm hover:border-[#4a154b]/60 hover:text-[#e01e5a] transition-all group">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
+                        Slack
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Link grid -->
+        <div class="relative max-w-7xl mx-auto px-6 pt-8 pb-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-10">
+
+                <!-- Brand -->
+                <div class="col-span-2 md:col-span-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-3">
+                        <div class="shrink-0 overflow-hidden" style="width:34px;height:34px">
+                            <img src="assets/img/image1.png" alt="Pegasus AI" class="dark-logo-img" style="width:34px;height:46px;object-fit:cover;object-position:top center;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.3))">
+                            <img src="assets/img/image.png" alt="Pegasus AI" class="light-logo-img" style="width:34px;height:46px;object-fit:cover;object-position:top center">
+                        </div>
+                        <div class="flex flex-col leading-none">
+                            <span class="text-[15px] font-extrabold tracking-tight text-white">Pegasus <span class="text-sky-400">AI</span></span>
+                            <span class="mono text-[7px] tracking-[0.3em] text-sky-400/50 mt-0.5 uppercase">Next-Gen Workflows</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        NSF-funded AI-driven scientific workflow management for HPC and cloud infrastructure.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-white hover:border-white/20 transition-all">
+                            <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="mailto:pegasus-support@isi.edu" aria-label="Email"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-sky-400 hover:border-sky-500/30 transition-all">
+                            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer" aria-label="Website"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-white hover:border-white/20 transition-all">
+                            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="https://pegasus-users.slack.com/archives/C01KBPSM64S" target="_blank" rel="noopener noreferrer" aria-label="Slack"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-[#e01e5a] hover:border-[#e01e5a]/30 transition-all">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigate -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Navigate</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="index.html#about"   class="footer-link">About</a>
+                        <a href="studio.html"        class="footer-link">Studio</a>
+                        <a href="publications.html"  class="footer-link">Research</a>
+                        <a href="teamsepa.html"      class="footer-link">Team</a>
+                        <a href="blog.html"          class="footer-link text-sky-400/80 hover:text-sky-400">Blog ↗</a>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Resources</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer" class="footer-link">Pegasus WMS ↗</a>
+                        <a href="https://pegasus.isi.edu/documentation" target="_blank" rel="noopener noreferrer" class="footer-link">Documentation ↗</a>
+                        <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a>
+                        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer" class="footer-link">NSF Award ↗</a>
+                        <a href="https://access-ci.org" target="_blank" rel="noopener noreferrer" class="footer-link">ACCESS ↗</a>
+                        <a href="https://path-cc.io" target="_blank" rel="noopener noreferrer" class="footer-link">PATh & OSG ↗</a>
+                    </div>
+                </div>
+
+                <!-- Contact info -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Contact</p>
+                    <div class="flex flex-col gap-3">
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Email</p>
+                            <a href="mailto:pegasus-support@isi.edu" class="text-sm text-slate-300 hover:text-sky-400 transition-colors font-medium">pegasus-support@isi.edu</a>
+                        </div>
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Institution</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">USC Information Sciences<br>Institute, Marina del Rey CA</p>
+                        </div>
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Collaborators</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">UTK · RENCI<br>UMass Amherst</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="mono text-[9px] tracking-widest uppercase text-slate-700">
+                    © 2026 Pegasus AI · USC Information Sciences Institute · NSF Award #2513101
+                </p>
+                <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center gap-2.5 opacity-40 hover:opacity-80 transition-opacity">
+                    <img src="assets/img/nsf.png" alt="NSF" width="20" height="20" loading="lazy">
+                    <span class="mono text-[8px] tracking-widest uppercase text-slate-400">Funded by NSF · <span class="text-sky-400">#2513101</span></span>
+                </a>
+            </div>
+        </div>
+
     </footer>
 
     <button onclick="toggleTheme()" class="theme-toggle" aria-label="Switch Theme">

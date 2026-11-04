@@ -16,183 +16,362 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
-        :root { --accent: #38bdf8; }
-
-        * { box-sizing: border-box; }
+        :root { --accent: #38bdf8; --bg-card: rgba(0,0,0,0.03); --border-color: rgba(255,255,255,0.08); --text-muted: #94a3b8; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #0b162b;
+            background: #0b162b;
             color: #f8fafc;
             min-height: 100vh;
         }
-
-        body.light-mode {
-            background-color: #f8fafc;
-            color: #0f172a;
-        }
-
+        body.light-mode { background: #f0f4f8; color: #0f172a; --bg-card: rgba(15,23,42,0.03); --border-color: #e6eef8; --text-muted: #475569; }
         .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* ── Logo flash prevention ── */
+        .dark-logo-img { display: block; }
+        .light-logo-img { display: none; }
+        body.light-mode .dark-logo-img { display: none; }
+        body.light-mode .light-logo-img { display: block; }
 
         /* ── Header ── */
         header {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            height: 80px;
-            display: flex;
-            align-items: center;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            height: 80px; display: flex; align-items: center;
             padding: 0 clamp(1.5rem, 4%, 3rem);
-            background: rgba(11, 22, 43, 0.85);
+            background: rgba(11,22,43,0.88);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.06);
             transition: height 0.3s ease, box-shadow 0.3s ease;
         }
-        body.light-mode header {
-            background: rgba(248,250,252,0.92);
-            border-bottom-color: rgba(0,0,0,0.06);
-        }
+        body.light-mode header { background: rgba(248,250,252,0.94); border-bottom-color: rgba(0,0,0,0.07); }
         header.header-scrolled { height: 68px; }
-        body:not(.light-mode) header.header-scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
+        body:not(.light-mode) header.header-scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
 
-        .nav-link {
-            position: relative;
-            color: #94a3b8;
-            transition: color 0.3s ease;
-        }
+        .nav-link { color: #94a3b8; transition: color 0.25s ease; }
         .nav-link:hover { color: #f8fafc; }
-        body.light-mode .nav-link { color: #475569; }
+        body.light-mode .nav-link { color: #64748b; }
         body.light-mode .nav-link:hover { color: #0f172a; }
+        body.light-mode nav a { font-weight: 700; }
 
-        /* ── Member card ── */
-        .member-card {
-            display: flex;
-            flex-direction: column;
-            border-radius: 1rem;
-            border: 1px solid rgba(255,255,255,0.08);
-            overflow: hidden;
-            transition: all 0.3s ease;
+        .nav-active {
+            color: #38bdf8 !important;
+            background: rgba(56,189,248,0.1);
+            border-radius: 0.5rem;
         }
-        .member-card:hover { border-color: rgba(56,189,248,0.3); background: rgba(255,255,255,0.02); }
-        body.light-mode .member-card { border-color: rgba(0,0,0,0.08); background: #fff; }
-        body.light-mode .member-card:hover { border-color: rgba(14,165,233,0.4); box-shadow: 0 4px 24px rgba(14,165,233,0.08); }
+        body.light-mode .nav-active { color: #0ea5e9 !important; background: rgba(14,165,233,0.08); }
 
-        .image-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            background: #0f172a;
+/* ── Page Hero ── */
+        .page-hero {
+            position: relative; overflow: hidden;
+            padding: 7rem 0 3.5rem;
         }
-        body.light-mode .image-wrapper { background: #f1f5f9; border-bottom-color: rgba(0,0,0,0.05); }
 
-        .hover-logo {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%,-50%);
-            width: 36px; height: 36px;
-            object-fit: contain;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 2;
-            pointer-events: none;
+        .hero-orb {
+            position: absolute; border-radius: 50%;
+            pointer-events: none; filter: blur(90px);
         }
-        .member-card:hover .hover-logo { opacity: 0.7; }
-
-        /* ── Light mode toggle ── */
-        #theme-toggle {
-            width: 36px; height: 36px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: transparent;
-            color: #94a3b8;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
+        .hero-orb-1 {
+            width: 700px; height: 700px; top: -250px; left: -150px;
+            background: radial-gradient(circle, rgba(56,189,248,0.14) 0%, transparent 70%);
         }
-        #theme-toggle:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
-        body.light-mode #theme-toggle { border-color: rgba(0,0,0,0.12); color: #475569; }
-        body.light-mode #theme-toggle:hover { color: #0f172a; }
+        .hero-orb-2 {
+            width: 500px; height: 500px; top: -100px; right: -80px;
+            background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%);
+        }
+        .hero-orb-3 {
+            width: 400px; height: 300px; bottom: -80px; left: 35%;
+            background: radial-gradient(circle, rgba(52,211,153,0.07) 0%, transparent 70%);
+        }
 
-        /* ── Institution header ── */
-        .inst-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem 2rem;
-            border-radius: 1.25rem;
-            border: 1px solid rgba(255,255,255,0.07);
-            background: rgba(255,255,255,0.02);
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.375rem 0.875rem; border-radius: 999px;
+            background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2);
+            color: #38bdf8; font-size: 0.6875rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.75rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 10vw, 7.5rem);
+            font-weight: 900; font-style: italic;
+            text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.88;
             margin-bottom: 1.5rem;
         }
-        body.light-mode .inst-header {
-            background: #fff;
-            border-color: rgba(0,0,0,0.07);
+        .hero-title span { color: #38bdf8; }
+
+        .hero-sub {
+            color: #94a3b8; font-size: 1.125rem; max-width: 520px;
+            line-height: 1.65; margin-bottom: 1.5rem;
         }
-        .inst-logo-wrap {
-            width: 120px;
-            height: 56px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        body.light-mode .hero-sub { color: #64748b; }
+
+        /* ── Stats bar ── */
+        .hero-stats-row {
+            display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;
         }
-        .inst-logo-wrap img {
-            width: 100%; height: 100%;
-            object-fit: contain;
-            filter: brightness(0) invert(1);
-            opacity: 0.7;
+        .hero-stats {
+            display: inline-flex; align-items: stretch;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 1rem; overflow: hidden;
         }
-        body.light-mode .inst-logo-wrap img {
-            filter: none;
-            opacity: 0.85;
+        body.light-mode .hero-stats {
+            background: #fff; border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .hero-stat {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 0.2rem; padding: 0.875rem 1.75rem;
+            border-right: 1px solid rgba(255,255,255,0.07);
+        }
+        body.light-mode .hero-stat { border-right-color: rgba(0,0,0,0.07); }
+        .hero-stat:last-child { border-right: none; }
+        .hero-stat-num {
+            font-size: 2.25rem; font-weight: 900; color: #f1f5f9; line-height: 1; letter-spacing: -0.03em;
+        }
+        body.light-mode .hero-stat-num { color: #0f172a; }
+        .hero-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem; color: #475569;
+            text-transform: uppercase; letter-spacing: 0.2em; white-space: nowrap;
+        }
+        body.light-mode .hero-stat-label { color: #94a3b8; }
+        .hero-stat-divider { display: none; }
+
+        /* ── Institution section ── */
+        .inst-banner {
+            display: flex; align-items: center; gap: 1.5rem;
+            padding: 1.75rem 2rem 1.75rem 2.25rem;
+            border-radius: 1.25rem;
+            border: 1px solid rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.025);
+            margin-bottom: 1.25rem;
+            position: relative; overflow: hidden;
+        }
+        body.light-mode .inst-banner {
+            background: #fff; border-color: rgba(0,0,0,0.07);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.05);
         }
 
-        /* fade-in */
-        .fade-in { animation: fadeUp 0.6s ease both; }
-        @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+        /* Left accent bar via pseudo-element */
+        .inst-banner::before {
+            content: ''; position: absolute;
+            left: 0; top: 0; bottom: 0; width: 4px;
+            background: var(--ic, #38bdf8);
+            border-radius: 4px 0 0 4px;
+        }
+
+        /* Corner glow */
+        .inst-banner::after {
+            content: ''; position: absolute;
+            top: -80px; right: -80px;
+            width: 260px; height: 260px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(var(--ir, 56,189,248),0.16) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .inst-logo {
+            width: 108px; height: 48px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .inst-logo img {
+            max-width: 100%; max-height: 100%; object-fit: contain;
+            filter: brightness(0) invert(1); opacity: 0.72;
+            transition: opacity 0.25s ease;
+        }
+        body.light-mode .inst-logo img { filter: none; opacity: 0.88; }
+        .inst-logo:hover img { opacity: 1; }
+
+        .inst-sep {
+            width: 1px; height: 42px; flex-shrink: 0;
+            background: rgba(255,255,255,0.08);
+        }
+        body.light-mode .inst-sep { background: rgba(0,0,0,0.08); }
+
+        .inst-meta { flex: 1; min-width: 0; }
+
+        .inst-title-row {
+            display: flex; align-items: center;
+            gap: 0.625rem; flex-wrap: wrap; margin-bottom: 0.3rem;
+        }
+        .inst-name {
+            font-size: 1.125rem; font-weight: 900; letter-spacing: -0.02em;
+            color: #f8fafc;
+        }
+        body.light-mode .inst-name { color: #0f172a; }
+
+        .inst-badge {
+            display: inline-flex; align-items: center;
+            padding: 0.2rem 0.6rem; border-radius: 999px;
+            background: rgba(var(--ir,56,189,248),0.1);
+            border: 1px solid rgba(var(--ir,56,189,248),0.25);
+            color: var(--ic, #38bdf8);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+        }
+
+        .inst-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5625rem; color: #64748b;
+            text-transform: uppercase; letter-spacing: 0.18em;
+        }
+
+        .inst-arrow {
+            color: var(--ic, #38bdf8); opacity: 0.4; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .inst-arrow:hover { opacity: 1; transform: translate(2px,-2px); }
+
+        /* ── Member grid ── */
+        .member-grid {
+            display: grid;
+            gap: 0.625rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        /* ── Member card (horizontal row) ── */
+        .member-card {
+            display: flex; flex-direction: row; align-items: center;
+            gap: 1rem; padding: 0.875rem 1.125rem;
+            border-radius: 0.875rem;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-left: 3px solid var(--ic, #38bdf8);
+            background: rgba(255,255,255,0.025);
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            cursor: default;
+        }
+        body.light-mode .member-card {
+            background: #fff;
+            border-color: rgba(0,0,0,0.07);
+            border-left-color: var(--ic, #0ea5e9);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        }
+        .member-card:hover {
+            background: rgba(var(--ir,56,189,248),0.06);
+            border-color: rgba(var(--ir,56,189,248),0.25);
+            border-left-color: var(--ic, #38bdf8);
+            transform: translateX(3px);
+        }
+        body.light-mode .member-card:hover { background: rgba(var(--ir,56,189,248),0.04); }
+
+        /* Photo — circular */
+        .card-photo-wrap {
+            width: 54px; height: 54px; border-radius: 50%;
+            overflow: hidden; flex-shrink: 0;
+            background: #0c1828;
+            border: 2px solid rgba(var(--ir,56,189,248),0.25);
+        }
+        body.light-mode .card-photo-wrap { background: #dde4ee; }
+        .card-photo {
+            width: 100%; height: 100%; object-fit: cover;
+            object-position: top center; display: block;
+        }
+
+        /* Info */
+        .card-info { flex: 1; min-width: 0; }
+        .card-name {
+            font-size: 0.875rem; font-weight: 700; color: #f1f5f9;
+            line-height: 1.3; margin-bottom: 0.125rem;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        body.light-mode .card-name { color: #0f172a; }
+        .card-inst {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--ic, #38bdf8); margin-bottom: 0.3rem;
+        }
+        .card-email {
+            display: block; font-size: 0.625rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #475569; text-decoration: none;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            transition: color 0.2s ease;
+        }
+        .card-email:hover { color: var(--ic, #38bdf8); }
+        body.light-mode .card-email { color: #94a3b8; }
+
+        /* ── Animations ── */
+        .fade-up {
+            opacity: 0; transform: translateY(22px);
+            animation: fadeUp 0.65s ease forwards;
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Section label ── */
+        .section-sep {
+            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 3rem; margin-top: 1rem;
+        }
+        .section-sep-line {
+            flex: 1; height: 1px; background: rgba(255,255,255,0.05);
+        }
+        body.light-mode .section-sep-line { background: rgba(0,0,0,0.06); }
+        .section-sep-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5625rem; color: #334155;
+            text-transform: uppercase; letter-spacing: 0.25em; white-space: nowrap;
+        }
+        body.light-mode .section-sep-text { color: #94a3b8; }
+
+        /* ── Scroll progress ── */
+        #scroll-progress { position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(to right,#38bdf8,#818cf8,#38bdf8); background-size:200% 100%; animation:shimmer 2s linear infinite; z-index:10000; transition:width 0.1s linear; }
+        @keyframes shimmer { to { background-position:-200% 0; } }
+
+        /* ── Back to top ── */
+        #back-to-top { position:fixed; bottom:8.5rem; right:2.5rem; z-index:9998; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; background:var(--bg-card); backdrop-filter:blur(12px); border:1px solid var(--border-color); color:var(--text-muted); opacity:0; transform:translateY(16px); transition:all 0.3s ease; pointer-events:none; }
+        #back-to-top.visible { opacity:1; transform:translateY(0); pointer-events:auto; }
+        #back-to-top:hover { border-color:#38bdf8; box-shadow:0 0 20px rgba(56,189,248,0.25); color:#38bdf8; }
+
+        /* ── Floating theme toggle ── */
+        .theme-toggle { position:fixed; bottom:2.5rem; right:2.5rem; z-index:9999; width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; background:var(--bg-card); backdrop-filter:blur(12px); border:2px solid var(--border-color); box-shadow:0 12px 30px rgba(0,0,0,0.3); transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); overflow:hidden; }
+        .theme-toggle:hover { transform:scale(1.1) rotate(15deg); border-color:var(--accent); box-shadow:0 0 25px rgba(56,189,248,0.4); }
+        .theme-toggle .icon-wrapper { position:relative; width:32px; height:32px; }
+        .theme-toggle .sun-icon, .theme-toggle .moon-icon { position:absolute; top:0; left:0; width:100%; height:100%; transition:all 0.5s ease; }
+        body:not(.light-mode) .moon-icon { transform:translateY(40px) scale(0); opacity:0; }
+        body:not(.light-mode) .sun-icon { transform:translateY(0) scale(1); opacity:1; }
+        body.light-mode .sun-icon { transform:translateY(-40px) scale(0); opacity:0; }
+        body.light-mode .moon-icon { transform:translateY(0) scale(1); opacity:1; }
+
+        /* ── Footer ── */
+        .footer-link { font-size:13px; color:#64748b; transition:color 0.2s ease,padding-left 0.2s ease; display:block; padding:1px 0; }
+        .footer-link:hover { color:#f8fafc; padding-left:4px; }
+        body.light-mode .footer-link { color:#94a3b8; }
+        body.light-mode .footer-link:hover { color:#0f172a; }
     </style>
 </head>
 
 <body>
+    <div id="scroll-progress"></div>
 
-    <!-- Header -->
+    <!-- ── Header ── -->
     <header id="main-header">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-3 shrink-0">
-            <div class="shrink-0 overflow-hidden" style="width:46px;height:46px">
-                <img src="assets/img/image1.png" alt="Pegasus AI" class="dark-logo-img"
-                    style="width:46px;height:62px;object-fit:cover;object-position:top center;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.3))">
-                <img src="assets/img/image.png" alt="Pegasus AI" class="light-logo-img"
-                    style="width:46px;height:62px;object-fit:cover;object-position:top center">
+        <a href="index.html" class="flex items-center gap-3 shrink-0 no-underline" style="text-decoration:none">
+            <div class="dark-logo-img shrink-0 overflow-hidden" style="width:46px;height:46px">
+                <img src="assets/img/image1.png" alt="Pegasus AI" style="width:46px;height:62px;object-fit:cover;object-position:top center;display:block;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.35))">
+            </div>
+            <div class="light-logo-img shrink-0 overflow-hidden" style="width:46px;height:46px">
+                <img src="assets/img/image.png" alt="Pegasus AI" style="width:46px;height:62px;object-fit:cover;object-position:top center;display:block">
             </div>
             <div class="flex flex-col leading-none">
-                <span class="text-[17px] font-extrabold tracking-tight">Pegasus <span class="text-sky-400">AI</span></span>
-                <span class="mono text-[7px] tracking-[0.3em] text-sky-400/50 mt-0.5 uppercase">Next-Gen Workflows</span>
+                <span class="text-[22px] font-extrabold tracking-tight" style="color:var(--text-main)">Pegasus <span class="text-sky-400">AI</span></span>
+                <span class="mono text-[8px] tracking-[0.35em] text-sky-400/50 mt-0.5 uppercase">Next-Gen Workflows</span>
             </div>
         </a>
 
         <!-- Desktop nav -->
         <nav id="main-nav" class="ml-auto flex items-center gap-1">
-            <a href="index.html#about"        class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">About</a>
-            <a href="index.html#ecosystem"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Ecosystem</a>
-            <a href="index.html#tech"         class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Tech</a>
-            <a href="index.html#engine"       class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Engine</a>
-            <a href="index.html#workflows"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Workflows</a>
-            <a href="index.html#studio"       class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Studio</a>
-            <a href="index.html#publications" class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Research</a>
-            <span class="px-3 py-2 rounded-lg text-[15px] font-semibold text-white bg-white/8">Team</span>
-            <div class="w-px h-4 bg-white/10 mx-2"></div>
-            <a href="blog.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-[14px] font-bold hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-all">
-                Blog <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-            </a>
-            <div class="w-px h-4 bg-white/10 mx-2"></div>
-            <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                <i data-lucide="sun" class="w-4 h-4 hidden light-icon"></i>
-                <i data-lucide="moon" class="w-4 h-4 dark-icon"></i>
-            </button>
+            <a href="index.html#about"    class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">About</a>
+            <a href="index.html#tech"     class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Tech</a>
+            <a href="studio.html"         class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Studio</a>
+            <a href="blog.html"           class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Blog</a>
+            <a href="publications.html"   class="nav-link px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Research</a>
+            <a href="teamsepa.html"       class="nav-link active px-3 py-2 rounded-lg text-[15px] font-semibold hover:bg-white/5 transition-all">Team</a>
         </nav>
 
         <!-- Hamburger -->
@@ -204,9 +383,9 @@
         </button>
     </header>
 
-    <!-- Mobile menu -->
+    <!-- ── Mobile menu ── -->
     <div id="mobile-menu" class="fixed inset-0 z-[999] hidden flex-col items-center justify-center gap-6"
-        style="background: rgba(2,6,23,0.97); backdrop-filter: blur(20px);">
+        style="background:rgba(2,6,23,0.97);backdrop-filter:blur(20px)">
         <button onclick="toggleMobileMenu()" class="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
@@ -214,121 +393,266 @@
             <div class="dark-logo-img shrink-0 overflow-hidden" style="width:36px;height:36px">
                 <img src="assets/img/image1.png" alt="" style="width:36px;height:48px;object-fit:cover;object-position:top center;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.3))">
             </div>
+            <div class="light-logo-img shrink-0 overflow-hidden" style="width:36px;height:36px">
+                <img src="assets/img/image.png" alt="" style="width:36px;height:48px;object-fit:cover;object-position:top center">
+            </div>
             <span class="text-base font-extrabold tracking-tight text-white">Pegasus <span class="text-sky-400">AI</span></span>
         </div>
         <nav class="flex flex-col items-center gap-1 w-full max-w-xs px-4">
-            <a href="index.html#about"        onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">About</a>
-            <a href="index.html#ecosystem"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Ecosystem</a>
-            <a href="index.html#tech"         onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Tech</a>
-            <a href="index.html#engine"       onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Engine</a>
-            <a href="index.html#workflows"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Workflows</a>
-            <a href="index.html#studio"       onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Studio</a>
-            <a href="index.html#publications" onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Research</a>
-            <span class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-white bg-white/8">Team</span>
-            <div class="w-full h-px bg-white/5 my-2"></div>
-            <a href="blog.html" onclick="toggleMobileMenu()"
-                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-sm font-bold">
-                Blog <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-            </a>
+            <a href="index.html#about"    onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">About</a>
+            <a href="index.html#tech"     onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Tech</a>
+            <a href="studio.html"         onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Studio</a>
+            <a href="blog.html"           onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Blog</a>
+            <a href="publications.html"   onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-slate-400 hover:text-white hover:bg-white/5 transition-all">Research</a>
+            <a href="teamsepa.html"       onclick="toggleMobileMenu()" class="w-full text-center px-6 py-3 rounded-xl text-base font-semibold text-sky-400 bg-sky-500/10 transition-all">Team</a>
         </nav>
     </div>
 
-    <!-- Main -->
-    <main class="pt-32 pb-24 min-h-screen">
-        <div class="max-w-7xl mx-auto px-6">
+    <!-- ── Hero ── -->
+    <section class="page-hero">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
 
-            <!-- Page header -->
-            <div class="mb-20 fade-in">
-                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
-                    <i data-lucide="users" class="w-3 h-3"></i> Multi-Institutional Team
+        <div class="max-w-7xl mx-auto px-6 relative" style="z-index:1">
+            <div class="fade-up" style="animation-delay:0.05s">
+                <div class="hero-eyebrow">
+                    <i data-lucide="users" class="w-3 h-3"></i>
+                    Multi-Institutional Research Team
                 </div>
-                <h1 class="text-6xl font-black uppercase italic tracking-tighter leading-none mb-4">
-                    The <span class="text-sky-500">Team</span>
+                <h1 class="hero-title">
+                    The <span>Team</span>
                 </h1>
-                <p class="text-slate-400 mono text-xs tracking-[0.4em] uppercase">Researchers across the NSF ecosystem</p>
+                <p class="hero-sub">
+                    Researchers and engineers from four leading U.S. institutions, advancing AI-driven scientific workflow automation through NSF-funded collaboration.
+                </p>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-[0.18em] uppercase"
+                    style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);color:#38bdf8;font-family:'JetBrains Mono',monospace;margin-top:1rem">
+                    NSF Award #2513101
+                </span>
             </div>
+        </div>
+    </section>
 
-            <!-- Institution sections — filled by JS -->
-            <div id="team-by-institution" class="space-y-20"></div>
-
+    <!-- ── Team sections ── -->
+    <main style="padding-bottom:5rem">
+        <div class="max-w-7xl mx-auto px-6">
+<div id="team-container" style="display:flex;flex-direction:column;gap:2.5rem"></div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="relative bg-slate-950 border-t border-white/5 overflow-hidden">
+    <!-- ── Footer ── -->
+    <footer id="contact" class="relative bg-slate-950 border-t border-white/5 overflow-hidden">
+
+        <!-- Background glow -->
         <div class="absolute inset-0 pointer-events-none">
             <div style="position:absolute;bottom:-120px;left:10%;width:600px;height:400px;background:radial-gradient(ellipse,rgba(56,189,248,0.06) 0%,transparent 70%);border-radius:50%"></div>
+            <div style="position:absolute;bottom:-80px;right:5%;width:400px;height:300px;background:radial-gradient(ellipse,rgba(139,92,246,0.05) 0%,transparent 70%);border-radius:50%"></div>
         </div>
-        <div class="relative max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="shrink-0 overflow-hidden" style="width:28px;height:28px">
-                    <img src="assets/img/image1.png" alt="Pegasus AI" class="dark-logo-img" style="width:28px;height:38px;object-fit:cover;object-position:top center">
-                    <img src="assets/img/image.png" alt="Pegasus AI" class="light-logo-img" style="width:28px;height:38px;object-fit:cover;object-position:top center">
+
+        <!-- CTA band -->
+        <div class="relative max-w-7xl mx-auto px-6 pt-10 pb-8 border-b border-white/5">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="flex flex-col gap-3 max-w-xl">
+                    <span class="mono text-[10px] tracking-[0.25em] uppercase text-sky-400/70 font-bold">Get In Touch</span>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
+                        Ready to scale your<br class="hidden sm:block"> scientific workflows?
+                    </h2>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Connect with the team at USC ISI — we're building the next generation of AI-driven workflow automation.
+                    </p>
                 </div>
-                <span class="text-sm font-bold text-white">Pegasus <span class="text-sky-400">AI</span></span>
-            </a>
-            <p class="mono text-[10px] text-slate-600 tracking-widest uppercase">NSF-funded · USC ISI · UTK · RENCI · UMass</p>
-            <div class="flex items-center gap-2">
-                <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-white hover:border-white/20 transition-all">
-                    <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                </a>
-                <a href="mailto:pegasus-support@isi.edu" aria-label="Email"
-                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-sky-400 hover:border-sky-500/30 transition-all">
-                    <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+                    <a href="mailto:pegasus-support@isi.edu?subject=Pegasus%20AI%20Inquiry"
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-sky-500 text-white font-bold text-sm hover:bg-sky-400 transition-all hover:shadow-[0_0_24px_rgba(56,189,248,0.35)] group">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        Email Us
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/15 text-slate-300 font-semibold text-sm hover:border-white/30 hover:text-white transition-all group">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        GitHub
+                    </a>
+                    <a href="https://pegasus-users.slack.com/archives/C01KBPSM64S" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/15 text-slate-300 font-semibold text-sm hover:border-[#4a154b]/60 hover:text-[#e01e5a] transition-all group">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
+                        Slack
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Link grid -->
+        <div class="relative max-w-7xl mx-auto px-6 pt-8 pb-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-10">
+
+                <!-- Brand -->
+                <div class="col-span-2 md:col-span-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-3">
+                        <div class="shrink-0 overflow-hidden" style="width:34px;height:34px">
+                            <img src="assets/img/image1.png" alt="Pegasus AI" class="dark-logo-img" style="width:34px;height:46px;object-fit:cover;object-position:top center;filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.3))">
+                            <img src="assets/img/image.png" alt="Pegasus AI" class="light-logo-img" style="width:34px;height:46px;object-fit:cover;object-position:top center">
+                        </div>
+                        <div class="flex flex-col leading-none">
+                            <span class="text-[15px] font-extrabold tracking-tight text-white">Pegasus <span class="text-sky-400">AI</span></span>
+                            <span class="mono text-[7px] tracking-[0.3em] text-sky-400/50 mt-0.5 uppercase">Next-Gen Workflows</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        NSF-funded AI-driven scientific workflow management for HPC and cloud infrastructure.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-white hover:border-white/20 transition-all">
+                            <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="mailto:pegasus-support@isi.edu" aria-label="Email"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-sky-400 hover:border-sky-500/30 transition-all">
+                            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer" aria-label="Website"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-white hover:border-white/20 transition-all">
+                            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="https://pegasus-users.slack.com/archives/C01KBPSM64S" target="_blank" rel="noopener noreferrer" aria-label="Slack"
+                            class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 text-slate-600 hover:text-[#e01e5a] hover:border-[#e01e5a]/30 transition-all">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigate -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Navigate</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="index.html#about"   class="footer-link">About</a>
+                        <a href="studio.html"        class="footer-link">Studio</a>
+                        <a href="publications.html"  class="footer-link">Research</a>
+                        <a href="teamsepa.html"      class="footer-link">Team</a>
+                        <a href="blog.html"          class="footer-link text-sky-400/80 hover:text-sky-400">Blog ↗</a>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Resources</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer" class="footer-link">Pegasus WMS ↗</a>
+                        <a href="https://pegasus.isi.edu/documentation" target="_blank" rel="noopener noreferrer" class="footer-link">Documentation ↗</a>
+                        <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub ↗</a>
+                        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer" class="footer-link">NSF Award ↗</a>
+                        <a href="https://access-ci.org" target="_blank" rel="noopener noreferrer" class="footer-link">ACCESS ↗</a>
+                        <a href="https://path-cc.io" target="_blank" rel="noopener noreferrer" class="footer-link">PATh & OSG ↗</a>
+                    </div>
+                </div>
+
+                <!-- Contact info -->
+                <div class="flex flex-col gap-4">
+                    <p class="mono text-[9px] tracking-[0.2em] uppercase text-slate-500 font-bold">Contact</p>
+                    <div class="flex flex-col gap-3">
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Email</p>
+                            <a href="mailto:pegasus-support@isi.edu" class="text-sm text-slate-300 hover:text-sky-400 transition-colors font-medium">pegasus-support@isi.edu</a>
+                        </div>
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Institution</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">USC Information Sciences<br>Institute, Marina del Rey CA</p>
+                        </div>
+                        <div>
+                            <p class="mono text-[8px] tracking-widest text-slate-600 uppercase mb-1">Collaborators</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">UTK · RENCI<br>UMass Amherst</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="mono text-[9px] tracking-widest uppercase text-slate-700">
+                    © 2026 Pegasus AI · USC Information Sciences Institute · NSF Award #2513101
+                </p>
+                <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center gap-2.5 opacity-40 hover:opacity-80 transition-opacity">
+                    <img src="assets/img/nsf.png" alt="NSF" width="20" height="20" loading="lazy">
+                    <span class="mono text-[8px] tracking-widest uppercase text-slate-400">Funded by NSF · <span class="text-sky-400">#2513101</span></span>
                 </a>
             </div>
         </div>
+
     </footer>
 
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+        <i data-lucide="chevron-up" class="w-5 h-5"></i>
+    </button>
+    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Switch Theme">
+        <div class="icon-wrapper">
+            <svg class="sun-icon text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+            </svg>
+            <svg class="moon-icon text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+        </div>
+    </button>
+
     <script>
-        // ── Light/dark mode ──
+        // ── Theme ──
         const saved = localStorage.getItem('theme');
         if (saved === 'light') document.body.classList.add('light-mode');
+
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
             updateThemeIcons();
+            applyLogoMode();
         }
+
         function updateThemeIcons() {
             const light = document.body.classList.contains('light-mode');
             document.querySelectorAll('.light-icon').forEach(el => el.classList.toggle('hidden', !light));
             document.querySelectorAll('.dark-icon').forEach(el => el.classList.toggle('hidden', light));
         }
 
-        // ── Dark/light logo images ──
         function applyLogoMode() {
             const light = document.body.classList.contains('light-mode');
             document.querySelectorAll('.dark-logo-img').forEach(el => el.style.display = light ? 'none' : '');
             document.querySelectorAll('.light-logo-img').forEach(el => el.style.display = light ? '' : 'none');
         }
         applyLogoMode();
-        const _orig = toggleTheme;
-        function toggleTheme() { _orig(); applyLogoMode(); }
 
         // ── Mobile menu ──
         function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
+            const m = document.getElementById('mobile-menu');
+            m.classList.toggle('hidden');
+            m.classList.toggle('flex');
         }
 
-        // ── Header shrink ──
-        window.addEventListener('scroll', () => {
-            document.getElementById('main-header').classList.toggle('header-scrolled', window.scrollY > 60);
-        }, { passive: true });
+        // ── Scroll: header shrink + progress bar + back-to-top ──
+        (function () {
+            const bar = document.getElementById('scroll-progress');
+            const btn = document.getElementById('back-to-top');
+            const hdr = document.getElementById('main-header');
+            window.addEventListener('scroll', function () {
+                const s = document.documentElement.scrollTop;
+                const t = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (bar) bar.style.width = (s / t * 100) + '%';
+                if (btn) btn.classList.toggle('visible', s > 400);
+                if (hdr) hdr.classList.toggle('header-scrolled', s > 60);
+            }, { passive: true });
+        })();
 
         // ── Hamburger responsive ──
         function checkHamburger() {
             const ham = document.getElementById('hamburger');
             const nav = document.getElementById('main-nav');
-            if (window.innerWidth < 900) {
-                ham.style.display = 'flex';
-                nav.style.display = 'none';
-            } else {
-                ham.style.display = 'none';
-                nav.style.display = 'flex';
-            }
+            const small = window.innerWidth < 900;
+            ham.style.display = small ? 'flex' : 'none';
+            nav.style.display = small ? 'none' : 'flex';
         }
         checkHamburger();
         window.addEventListener('resize', checkHamburger);
@@ -336,121 +660,123 @@
         // ── Institution config ──
         const INSTITUTIONS = [
             {
-                id: 'ISI / USC',
-                name: 'USC Information Sciences Institute',
-                short: 'USC ISI',
-                url: 'https://www.isi.edu',
-                logo: 'https://swarm-workflows.org/images/isi.png',
-                badge: 'Lead Institution',
-                accentClass: 'text-sky-400',
-                borderClass: 'border-sky-500/30',
-                bgClass: 'bg-sky-500/5'
+                teamId: 'ISI / USC',
+                name:   'USC Information Sciences Institute',
+                short:  'USC ISI',
+                url:    'https://www.isi.edu',
+                logo:   'https://swarm-workflows.org/images/isi.png',
+                badge:  'Lead Institution',
+                color:  '#F5C42B',
+                rgb:    '245,196,43'
             },
             {
-                id: 'UTK',
-                name: 'University of Tennessee, Knoxville',
-                short: 'UT Knoxville',
-                url: 'https://www.utk.edu',
-                logo: 'https://logos-world.net/wp-content/uploads/2022/01/University-of-Tennessee-Logo.png',
-                badge: 'Partner',
-                accentClass: 'text-violet-400',
-                borderClass: 'border-violet-500/30',
-                bgClass: 'bg-violet-500/5'
+                teamId: 'UTK',
+                name:   'University of Tennessee, Knoxville',
+                short:  'UT Knoxville',
+                url:    'https://www.utk.edu',
+                logo:   'https://logos-world.net/wp-content/uploads/2022/01/University-of-Tennessee-Logo.png',
+                badge:  'Partner',
+                color:  '#FF8200',
+                rgb:    '255,130,0'
             },
             {
-                id: 'RENCI / UNC',
-                name: 'Renaissance Computing Institute / UNC',
-                short: 'RENCI',
-                url: 'https://renci.org',
-                logo: 'https://swarm-workflows.org/images/RENCI.png',
-                badge: 'Partner',
-                accentClass: 'text-emerald-400',
-                borderClass: 'border-emerald-500/30',
-                bgClass: 'bg-emerald-500/5'
+                teamId: 'RENCI / UNC',
+                name:   'Renaissance Computing Institute / UNC',
+                short:  'RENCI',
+                url:    'https://renci.org',
+                logo:   'https://swarm-workflows.org/images/RENCI.png',
+                badge:  'Partner',
+                color:  '#4B9CD3',
+                rgb:    '75,156,211'
             },
             {
-                id: 'UMass',
-                name: 'University of Massachusetts Amherst',
-                short: 'UMass Amherst',
-                url: 'https://www.umass.edu',
-                logo: 'https://www.umass.edu/brand/sites/default/files/styles/tile_max_250px/public/2026-02/UMassAmherst_longform-nowhitespace.png',
-                badge: 'Partner',
-                accentClass: 'text-amber-400',
-                borderClass: 'border-amber-500/30',
-                bgClass: 'bg-amber-500/5'
+                teamId: 'UMass',
+                name:   'University of Massachusetts Amherst',
+                short:  'UMass Amherst',
+                url:    'https://www.umass.edu',
+                logo:   'https://www.umass.edu/brand/sites/default/files/styles/tile_max_250px/public/2026-02/UMassAmherst_longform-nowhitespace.png',
+                badge:  'Partner',
+                color:  '#881C1C',
+                rgb:    '136,28,28'
             }
+        ];
+
+        // Inline SVGs — avoids lucide dependency in dynamic HTML
+        const SVG_MAIL  = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`;
+        const SVG_ARROW = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>`;
+
+        // ── Team data (inline fallback for file:// protocol) ──
+        const TEAM_DATA = [
+            {name:'Ewa Deelman',     role:'ISI / USC',   email:'deelman@isi.edu',     image:'https://swarm-workflows.org/images/people/deelman.jpg',                                                                             status:'Active'},
+            {name:'Karan Vahi',      role:'ISI / USC',   email:'vahi@isi.edu',         image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCnnpVa7rPmTUyHw3LNwsTlZQOFZN2vdp6A&s',                                  status:'Active'},
+            {name:'Mats Rynge',      role:'ISI / USC',   email:'rynge@isi.edu',        image:'https://www.isi.edu/wp-content/uploads/headshots/rynge-1.jpg',                                                                     status:'Active'},
+            {name:'Rajiv Mayani',    role:'ISI / USC',   email:'mayani@isi.edu',       image:'https://www.isi.edu/wp-content/uploads/2024/02/mayani-1.jpg',                                                                      status:'Active'},
+            {name:'Nicole Virdone',  role:'ISI / USC',   email:'virdone@isi.edu',      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCya3GecQdMZ0uhTIwWMN7dHKxYZDwTl95Lw&s',                                  status:'Active'},
+            {name:'Hamza Safri',     role:'ISI / USC',   email:'safri@isi.edu',        image:'https://swarm-workflows.org/images/people/safri-postdoc.png',                                                                      status:'Active'},
+            {name:'Michela Taufer',  role:'UTK',         email:'mtaufer@utk.edu',      image:'https://i1.rgstatic.net/ii/profile.image/272387660840968-1441953687301_Q512/Michela-Taufer.jpg',                                   status:'Active'},
+            {name:'Sai Swaminathan', role:'UTK',         email:'sswamin6@utk.edu',     image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLjQs1dxXwcDz9DoBHv9PN9pATKvY6SAZuQg&s',                                  status:'Active'},
+            {name:'Kin Wai NG',      role:'UTK',         email:'kng2@utk.edu',         image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWXbihJXZvJywgHDwNk0jGwgFnrmA3w_FDxA&s',                                   status:'Active'},
+            {name:'Kin Hong NG',     role:'UTK',         email:'kng3@utk.edu',         image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBU1Z22ht_F_VuuGAHPC_CAu2C5QGs6eQsQw&s',                                  status:'Active'},
+            {name:'Rajasi Gore',     role:'UTK',         email:'gore.rajas@gmail.com', image:'https://epic.eecs.utk.edu/assets/images/people/rajasi.jpg',                                                                        status:'Active'},
+            {name:'Angelina Ju',     role:'UTK',         email:'aju@vols.utk.edu',     image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRl41jZm6N-ifQSfQO3mHV357Unqfh8y3uMw&s',                                  status:'Active'},
+            {name:'Jack Marquez',    role:'UTK',         email:'jmarque4@utk.edu',     image:'https://jackdmarquez.github.io/images/profile.png',                                                                 status:'Active'},
+            {name:'Anirban Mandal',  role:'RENCI / UNC', email:'anirban@renci.org',    image:'https://swarm-workflows.org/images/people/mandal.jpg',                                                                             status:'Active'},
+            {name:'Komal Thareja',   role:'RENCI / UNC', email:'kthare10@renci.org',   image:'https://swarm-workflows.org/images/people/thareja.jpg',                                                                            status:'Active'},
+            {name:'Michael Stealey', role:'RENCI / UNC', email:'stealey@renci.org',    image:'https://cdn-icons-png.flaticon.com/512/4042/4042171.png',                                                                          status:'Active'},
+            {name:'Michael Zink',    role:'UMass',       email:'mzink@umass.edu',      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5uN_UkvtK6KTsI-SpLoMaRrovg-nMXrr5Pg&s',                                  status:'Active'},
+            {name:'Berent Aldikacti',role:'UMass',       email:'baldikacti@umass.edu', image:'https://cdn-icons-png.flaticon.com/512/4042/4042171.png',                                            status:'Active'}
         ];
 
         // ── Load & render ──
         async function loadTeam() {
-            const container = document.getElementById('team-by-institution');
+            const container = document.getElementById('team-container');
+            let members = TEAM_DATA;
             try {
                 const data = await fetch('assets/data/team.json').then(r => r.json());
-                const members = data.team || [];
+                if (data.team && data.team.length) members = data.team;
+            } catch (_) { /* file:// fallback active */ }
 
-                const html = INSTITUTIONS.map(inst => {
-                    const group = members.filter(m => m.role === inst.id);
+
+            const sections = INSTITUTIONS.map((inst, idx) => {
+                    const group = members.filter(m => m.role === inst.teamId);
                     if (!group.length) return '';
 
-                    const cards = group.map(person => `
-                        <div class="member-card group">
-                            <div class="image-wrapper">
-                                <img src="assets/img/image.png" class="hover-logo" alt="Pegasus Logo">
-                                <img src="${person.image}" alt="${person.name}" loading="lazy"
-                                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    const cards = group.map(p => `
+                        <div class="member-card" style="--ic:${inst.color};--ir:${inst.rgb}">
+                            <div class="card-photo-wrap">
+                                <img src="${p.image}" alt="${p.name}" loading="lazy" class="card-photo"
+                                    onerror="this.src='assets/img/image.png';this.style.objectFit='contain';this.style.padding='25%'">
                             </div>
-                            <div class="p-4 flex flex-col gap-3">
-                                <div>
-                                    <h4 class="text-sm font-bold text-white leading-tight">${person.name}</h4>
-                                    <p class="${inst.accentClass} mono text-[9px] font-bold tracking-widest uppercase mt-0.5">${inst.short}</p>
-                                </div>
-                                <div class="flex items-center justify-between pt-3 border-t border-white/5">
-                                    <a href="mailto:${person.email}" class="p-1.5 rounded-lg hover:bg-sky-500/10 text-slate-600 hover:text-sky-400 transition-colors" title="${person.email}">
-                                        <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-                                    </a>
-                                    <span class="text-[8px] text-slate-700 mono uppercase tracking-widest">${person.status}</span>
-                                </div>
+                            <div class="card-info">
+                                <div class="card-name">${p.name}</div>
+                                <div class="card-inst">${inst.short}</div>
+                                <a href="mailto:${p.email}" class="card-email" title="${p.email}">${p.email}</a>
                             </div>
                         </div>
                     `).join('');
 
                     return `
-                        <div class="fade-in">
-                            <!-- Institution header -->
-                            <div class="inst-header ${inst.borderClass} border" style="border-color: inherit">
-                                <a href="${inst.url}" target="_blank" rel="noopener noreferrer" class="inst-logo-wrap shrink-0">
-                                    <img src="${inst.logo}" alt="${inst.short}">
+                        <div class="inst-section fade-up" style="animation-delay:${(idx * 0.1).toFixed(2)}s">
+                            <div class="inst-banner" style="--ic:${inst.color};--ir:${inst.rgb}">
+                                <a href="${inst.url}" target="_blank" rel="noopener noreferrer" class="inst-logo">
+                                    <img src="${inst.logo}" alt="${inst.short}" onerror="this.style.opacity='0'">
                                 </a>
-                                <div class="h-10 w-px bg-white/8 shrink-0"></div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-3 flex-wrap">
-                                        <h2 class="text-lg font-black tracking-tight text-white">${inst.name}</h2>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full ${inst.bgClass} border ${inst.borderClass} ${inst.accentClass} mono text-[9px] font-bold tracking-widest uppercase">${inst.badge}</span>
+                                <div class="inst-sep"></div>
+                                <div class="inst-meta">
+                                    <div class="inst-title-row">
+                                        <span class="inst-name">${inst.name}</span>
+                                        <span class="inst-badge">${inst.badge}</span>
                                     </div>
-                                    <p class="mono text-[10px] text-slate-500 mt-1 tracking-widest uppercase">${group.length} member${group.length !== 1 ? 's' : ''}</p>
+                                    <p class="inst-count">${group.length} member${group.length !== 1 ? 's' : ''}</p>
                                 </div>
-                                <a href="${inst.url}" target="_blank" rel="noopener noreferrer"
-                                    class="shrink-0 ${inst.accentClass} opacity-40 hover:opacity-100 transition-opacity">
-                                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                                </a>
+                                <a href="${inst.url}" target="_blank" rel="noopener noreferrer" class="inst-arrow">${SVG_ARROW}</a>
                             </div>
-                            <!-- Members grid -->
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                                ${cards}
-                            </div>
+                            <div class="member-grid">${cards}</div>
                         </div>
                     `;
                 }).join('');
 
-                container.innerHTML = html;
-                lucide.createIcons();
-                updateThemeIcons();
-                applyLogoMode();
-            } catch (err) {
-                container.innerHTML = '<p class="text-slate-500 text-center py-16">Could not load team data.</p>';
-                console.error(err);
-            }
+            container.innerHTML = sections || '<p style="text-align:center;padding:4rem;color:#475569">No team data found.</p>';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
