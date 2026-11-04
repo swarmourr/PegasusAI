@@ -116,6 +116,7 @@
             background: radial-gradient(circle, rgba(56,189,248,0.11) 0%, transparent 65%);
             border-radius: 50%;
             animation: orb-drift 10s ease-in-out infinite;
+            will-change: transform;
         }
         .hero-orb-2 {
             display: block;
@@ -127,6 +128,7 @@
             background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 65%);
             border-radius: 50%;
             animation: orb-drift 13s ease-in-out infinite reverse;
+            will-change: transform;
         }
 
         /* Stat callout gradient text */
@@ -971,6 +973,12 @@
         /* Fixed header scroll offset */
         section[id] { scroll-margin-top: 80px; }
 
+        /* Performance: defer rendering of off-screen sections */
+        #tech, #studio, #workflows {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 700px;
+        }
+
         /* Footer links */
         .footer-link {
             font-size: 13px;
@@ -1729,21 +1737,18 @@
 
         // Scroll spy — highlight active nav section
         (function () {
-            const sections = ['hero', 'about', 'tech', 'team'];
             const navLinks = document.querySelectorAll('#main-nav .nav-link');
-
+            const sectionIds = ['about', 'tech', 'studio'];
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         navLinks.forEach(a => a.classList.remove('active'));
                         const active = document.querySelector(`#main-nav a[href="#${entry.target.id}"]`);
                         if (active) active.classList.add('active');
-                        // hero has no nav link → all items correctly un-highlighted
                     }
                 });
-            }, { rootMargin: '-40% 0px -55% 0px' });
-
-            sections.forEach(id => {
+            }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+            sectionIds.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) observer.observe(el);
             });
@@ -1786,22 +1791,6 @@
                 applyTheme('light');
             }
 
-            // Scroll spy — highlight nav link for the section in view
-            const navMap = { about:'#about', tech:'#tech', partners:'#partners' };
-            const navLinks = document.querySelectorAll('#main-nav .nav-link');
-            function setActive(id) {
-                navLinks.forEach(a => {
-                    const href = a.getAttribute('href');
-                    a.classList.toggle('active', href === '#' + id);
-                });
-            }
-            const spyObserver = new IntersectionObserver((entries) => {
-                entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-            }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-            Object.keys(navMap).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) spyObserver.observe(el);
-            });
         });
 
     </script>
