@@ -1352,7 +1352,7 @@
                     </p>
                     <!-- CTAs -->
                     <div class="flex flex-wrap gap-3">
-                        <a href="https://studio.pegasus-ai.org/hub/oauth_login?next=%2Fhub%2F" target="_blank" rel="noopener noreferrer"
+                        <a href="https://studio.pegasus-ai.org" target="_blank" rel="noopener noreferrer"
                             class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-sky-500 text-white font-bold text-sm hover:bg-sky-400 transition-all hover:shadow-[0_0_24px_rgba(56,189,248,0.4)] group">
                             Try Studio
                             <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
@@ -1425,95 +1425,6 @@
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <!-- ══ WORKFLOW EXAMPLES ══════════════════════════════════════════════ -->
-    <section id="workflows" class="py-14 bg-slate-950 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 w-full">
-            <div class="mb-10">
-                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
-                    <i data-lucide="git-branch" class="w-3 h-3"></i> Open Source
-                </div>
-                <h2 class="text-5xl font-black uppercase italic tracking-tighter fade-in">Workflow <span class="text-sky-500">Examples</span></h2>
-                <p class="text-slate-400 mono text-xs tracking-[0.4em] mt-2">Real-world Pegasus AI pipelines — open source, runnable today</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-                <a href="https://github.com/pegasus-isi/airquality-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="wind" class="w-4 h-4 text-cyan-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Air Quality Workflow</h3>
-                    </div>
-                    <p class="text-slate-500 text-sm leading-relaxed">Air quality sensor data ingestion and analysis at regional scale.</p>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/airquality-workflow <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
-                </a>
-
-                <a href="https://github.com/pegasus-isi/napkin-vibe-example" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="pencil-line" class="w-4 h-4 text-sky-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Napkin Vibe Example</h3>
-                    </div>
-                    <p class="text-slate-500 text-sm leading-relaxed">Sketch and prototype Pegasus AI workflows from a minimal starting point.</p>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/napkin-vibe-example <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
-                </a>
-
-                <a href="https://github.com/pegasus-isi/sra-search-pegasus-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="dna" class="w-4 h-4 text-indigo-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">SRA Search Workflow</h3>
-                    </div>
-                    <p class="text-slate-500 text-sm leading-relaxed">Large-scale NCBI Sequence Read Archive search using distributed execution.</p>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/sra-search <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
-                </a>
-
-                <a href="https://github.com/pegasus-isi/earthquake-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="activity" class="w-4 h-4 text-orange-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Earthquake Workflow</h3>
-                    </div>
-                    <p class="text-slate-500 text-sm leading-relaxed">Seismic data processing and ground motion analysis across HPC infrastructure.</p>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/earthquake-workflow <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
-                </a>
-
-                <a href="https://github.com/pegasus-isi/crophealth-workflow" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="leaf" class="w-4 h-4 text-emerald-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">Crop Health Workflow</h3>
-                    </div>
-                    <p class="text-slate-500 text-sm leading-relaxed">Satellite imagery ML pipeline for monitoring agricultural crop health.</p>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasus-isi/crophealth-workflow <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
-                </a>
-
-                <a href="https://pegasushub.io/" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col gap-3 p-6 rounded-2xl border border-white/8 hover:border-sky-500/40 hover:bg-white/[0.02] transition-all duration-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
-                            <i data-lucide="layout-dashboard" class="w-4 h-4 text-sky-400"></i>
-                        </div>
-                        <h3 class="font-semibold text-white text-sm group-hover:text-sky-400 transition-colors">PegasusHub</h3>
-                    </div>
-                    <p class="text-slate-500 text-sm leading-relaxed">Centralized hub for discovering and sharing Pegasus AI workflows.</p>
-                    <span class="mono text-[9px] tracking-widest text-slate-600 group-hover:text-slate-500 transition-colors uppercase flex items-center gap-1.5">pegasushub.io <i data-lucide="arrow-up-right" class="w-3 h-3"></i></span>
-                </a>
-
-            </div>
         </div>
     </section>
 
