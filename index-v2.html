@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/image.png">
+    <meta name="theme-color" content="#0b162b">
+    <title>Pegasus AI | Next-Gen Scientific Workflow Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@0.525.0/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            --bg: #0b162b;
+            --bg2: #0f1f3d;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --border: rgba(255,255,255,0.08);
+            --nav-h: 64px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { height:100%; overflow:hidden; }
+        body {
+            font-family:'Outfit',sans-serif;
+            background:var(--bg);
+            color:var(--text);
+        }
+        .mono { font-family:'JetBrains Mono',monospace; }
+
+        /* ── NAV ── */
+        header {
+            position:fixed; top:0; left:0; right:0;
+            height:var(--nav-h); z-index:100;
+            display:flex; align-items:center;
+            padding:0 clamp(1.5rem,4%,3rem);
+            background:rgba(11,22,43,0.9);
+            backdrop-filter:blur(20px);
+            border-bottom:1px solid var(--border);
+        }
+        .brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+        .brand-logo { width:38px; height:38px; overflow:hidden; }
+        .brand-logo img { width:38px; height:50px; object-fit:cover; object-position:top center; filter:brightness(1.1) drop-shadow(0 0 8px rgba(56,189,248,0.35)); }
+        .brand-text { font-size:18px; font-weight:900; color:#f8fafc; }
+        .brand-text span { color:var(--accent); }
+
+        nav { margin-left:auto; display:flex; align-items:center; gap:2px; }
+        .nav-btn {
+            padding:6px 14px; border-radius:8px;
+            font-size:13px; font-weight:600; color:var(--muted);
+            cursor:pointer; border:none; background:transparent;
+            transition:color 0.2s, background 0.2s;
+        }
+        .nav-btn:hover { color:#f8fafc; background:rgba(255,255,255,0.05); }
+        .nav-btn.active { color:var(--accent); background:rgba(56,189,248,0.1); }
+
+        /* ── PANELS ── */
+        .panel {
+            position:fixed;
+            top:var(--nav-h); left:0; right:0;
+            height:calc(100vh - var(--nav-h));
+            overflow-y:auto;
+            opacity:0;
+            pointer-events:none;
+            transition:opacity 0.35s ease, transform 0.35s ease;
+            transform:translateY(12px);
+        }
+        .panel.active {
+            opacity:1;
+            pointer-events:all;
+            transform:translateY(0);
+        }
+        .panel-inner {
+            max-width:1200px;
+            margin:0 auto;
+            padding:0 clamp(1.5rem,4%,3rem);
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+        }
+
+        /* ── HERO PANEL ── */
+        #panel-hero {
+            background:var(--bg);
+        }
+        .hero-orb-1 {
+            position:fixed; top:5%; left:5%;
+            width:600px; height:600px;
+            background:radial-gradient(circle,rgba(56,189,248,0.1) 0%,transparent 65%);
+            border-radius:50%; pointer-events:none;
+            animation:orb-drift 10s ease-in-out infinite;
+            will-change:transform;
+        }
+        .hero-orb-2 {
+            position:fixed; top:10%; right:5%;
+            width:450px; height:450px;
+            background:radial-gradient(circle,rgba(139,92,246,0.07) 0%,transparent 65%);
+            border-radius:50%; pointer-events:none;
+            animation:orb-drift 13s ease-in-out infinite reverse;
+            will-change:transform;
+        }
+        @keyframes orb-drift {
+            0%,100% { transform:translate(0,0) scale(1); }
+            33% { transform:translate(30px,-20px) scale(1.03); }
+            66% { transform:translate(-20px,25px) scale(0.97); }
+        }
+        .hero-grid {
+            position:fixed; inset:0; pointer-events:none;
+            background-image:linear-gradient(rgba(56,189,248,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.03) 1px,transparent 1px);
+            background-size:60px 60px;
+            mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
+        }
+
+        #panel-hero .panel-inner {
+            gap:28px;
+            text-align:center;
+            align-items:center;
+        }
+        .nsf-pill {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:5px 14px; border-radius:999px;
+            background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.2);
+            color:var(--accent); font-size:10px; font-weight:700;
+            letter-spacing:0.18em; text-transform:uppercase; text-decoration:none;
+            transition:background 0.2s;
+        }
+        .nsf-pill:hover { background:rgba(56,189,248,0.15); }
+        .hero-heading {
+            font-size:clamp(3rem,8vw,6.5rem);
+            font-weight:900; letter-spacing:-0.04em;
+            line-height:0.92; text-transform:uppercase;
+        }
+        .hero-heading span { color:var(--accent); font-style:italic; }
+        .hero-sub {
+            font-size:15px; color:var(--muted);
+            font-weight:300; max-width:460px; line-height:1.7;
+        }
+        .hero-trust {
+            font-size:11px; color:#475569;
+            letter-spacing:0.05em; font-family:'JetBrains Mono',monospace;
+        }
+        .hero-ctas { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+        .btn-primary {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:12px 28px; border-radius:999px;
+            background:var(--accent); color:#fff;
+            font-weight:700; font-size:14px; text-decoration:none;
+            transition:background 0.2s, box-shadow 0.2s;
+            border:none; cursor:pointer;
+        }
+        .btn-primary:hover { background:#7dd3fc; box-shadow:0 0 24px rgba(56,189,248,0.4); }
+        .btn-ghost {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:12px 28px; border-radius:999px;
+            border:1px solid rgba(255,255,255,0.15); color:var(--muted);
+            font-weight:600; font-size:14px; text-decoration:none;
+            transition:border-color 0.2s, color 0.2s;
+            background:transparent; cursor:pointer;
+        }
+        .btn-ghost:hover { border-color:rgba(255,255,255,0.3); color:#f8fafc; }
+
+        /* ── ABOUT PANEL ── */
+        #panel-about { background:var(--bg2); }
+        #panel-about .panel-inner { gap:0; justify-content:center; }
+        .about-grid {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:48px;
+            align-items:center;
+        }
+        @media(max-width:768px) { .about-grid { grid-template-columns:1fr; gap:24px; } }
+        .about-left { display:flex; flex-direction:column; gap:20px; }
+        .section-label {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:4px 12px; border-radius:999px;
+            background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.2);
+            color:var(--accent); font-size:10px; font-weight:700;
+            letter-spacing:0.18em; text-transform:uppercase; width:fit-content;
+        }
+        .section-heading {
+            font-size:clamp(1.8rem,3vw,2.8rem);
+            font-weight:900; letter-spacing:-0.03em; line-height:1;
+        }
+        .section-heading span { color:var(--accent); font-style:italic; }
+        .section-desc { font-size:14px; color:var(--muted); line-height:1.75; }
+        .stats-row { display:flex; flex-direction:column; gap:8px; }
+        .stat-card {
+            display:flex; align-items:center; gap:14px;
+            padding:12px 16px; border-radius:14px;
+            border:1px solid var(--border);
+            transition:border-color 0.25s, background 0.25s;
+            text-decoration:none; color:inherit;
+        }
+        .stat-card:hover { border-color:rgba(56,189,248,0.3); background:rgba(56,189,248,0.03); }
+        .stat-num { font-size:1.6rem; font-weight:900; letter-spacing:-0.04em; color:var(--accent); width:52px; shrink:0; }
+        .stat-label { font-weight:600; font-size:13px; color:#f8fafc; }
+        .stat-sub { font-size:11px; color:#475569; margin-top:1px; }
+        .about-logo {
+            display:flex; align-items:center; justify-content:center;
+        }
+        .about-logo img { max-width:260px; width:100%; filter:brightness(1.1) drop-shadow(0 0 40px rgba(56,189,248,0.2)); }
+        .caps-grid {
+            display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+            margin-top:28px;
+        }
+        @media(max-width:900px) { .caps-grid { grid-template-columns:repeat(2,1fr); } }
+        .cap-card {
+            padding:16px; border-radius:16px;
+            border:1px solid var(--border);
+            display:flex; flex-direction:column; gap:12px;
+            transition:border-color 0.25s;
+        }
+        .cap-card:hover { border-color:rgba(56,189,248,0.3); }
+        .cap-icon {
+            width:32px; height:32px; border-radius:10px;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .cap-title { font-weight:700; font-size:12px; color:#f8fafc; }
+        .cap-desc { font-size:11px; color:#475569; line-height:1.6; }
+        .cap-num { font-size:9px; font-weight:700; font-family:'JetBrains Mono',monospace; opacity:0.3; margin-left:auto; }
+
+        /* ── TECH PANEL ── */
+        #panel-tech { background:var(--bg); }
+        #panel-tech .panel-inner { gap:28px; justify-content:center; }
+        .tech-cards {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+        }
+        @media(max-width:900px) { .tech-cards { grid-template-columns:repeat(2,1fr); } }
+        .tech-card {
+            display:flex; align-items:flex-start; gap:14px;
+            padding:16px; border-radius:16px;
+            border:1px solid rgba(255,255,255,0.05);
+            text-decoration:none; color:inherit;
+            transition:border-color 0.25s, background 0.25s;
+        }
+        .tech-card:hover { border-color:rgba(56,189,248,0.3); background:rgba(56,189,248,0.02); }
+        .tech-num { font-size:1.4rem; font-weight:900; font-family:'JetBrains Mono',monospace; color:rgba(56,189,248,0.2); line-height:1; shrink:0; margin-top:2px; }
+        .tech-icon { width:22px; height:22px; border-radius:8px; display:flex; align-items:center; justify-content:center; shrink:0; margin-top:3px; }
+        .tech-title { font-weight:700; font-size:13px; color:#f8fafc; margin-bottom:4px; }
+        .tech-desc { font-size:11px; color:#475569; line-height:1.6; }
+        .blog-cta-row { display:flex; justify-content:flex-end; }
+
+        /* ── STUDIO PANEL ── */
+        #panel-studio { background:var(--bg2); }
+        #panel-studio .panel-inner { gap:24px; justify-content:center; }
+        .studio-top {
+            display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;
+        }
+        @media(max-width:768px) { .studio-top { grid-template-columns:1fr; } }
+        .studio-features { display:flex; flex-direction:column; gap:12px; }
+        .feat-row {
+            display:flex; align-items:flex-start; gap:12px;
+        }
+        .feat-icon { width:24px; height:24px; border-radius:8px; display:flex; align-items:center; justify-content:center; shrink:0; margin-top:2px; }
+        .feat-title { font-weight:600; font-size:13px; color:#f8fafc; }
+        .feat-desc { font-size:11px; color:#475569; line-height:1.5; margin-top:2px; }
+        .studio-ctas { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+        .studio-videos {
+            display:grid; grid-template-columns:1fr 1fr; gap:14px;
+        }
+        @media(max-width:768px) { .studio-videos { grid-template-columns:1fr; } }
+        .video-wrap {
+            border-radius:14px; overflow:hidden;
+            border:1px solid var(--border);
+            box-shadow:0 16px 40px rgba(0,0,0,0.4);
+        }
+        .video-wrap video { width:100%; display:block; background:#000; }
+        .video-label { text-align:center; font-size:9px; font-family:'JetBrains Mono',monospace; letter-spacing:0.25em; text-transform:uppercase; color:#475569; margin-top:8px; }
+
+        /* ── CONTACT PANEL ── */
+        #panel-contact { background:var(--bg); }
+        #panel-contact .panel-inner { gap:0; justify-content:center; align-items:center; text-align:center; }
+        .contact-inner { max-width:560px; display:flex; flex-direction:column; gap:24px; align-items:center; }
+        .contact-heading { font-size:clamp(2rem,4vw,3.2rem); font-weight:900; letter-spacing:-0.03em; line-height:1.05; }
+        .contact-desc { font-size:14px; color:var(--muted); line-height:1.7; }
+        .contact-ctas { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+        .footer-links {
+            display:flex; flex-wrap:wrap; gap:6px 24px; justify-content:center;
+            border-top:1px solid var(--border); padding-top:20px; margin-top:4px;
+        }
+        .footer-link { font-size:12px; color:#475569; text-decoration:none; transition:color 0.2s; }
+        .footer-link:hover { color:#f8fafc; }
+        .footer-copy { font-size:10px; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; color:#334155; text-transform:uppercase; }
+
+        /* ── PANEL INDICATORS ── */
+        .panel-dots {
+            position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+            display:flex; gap:6px; z-index:200;
+        }
+        .dot {
+            width:5px; height:5px; border-radius:50%;
+            background:rgba(255,255,255,0.15); cursor:pointer;
+            transition:background 0.25s, transform 0.25s;
+        }
+        .dot.active { background:var(--accent); transform:scale(1.4); }
+
+        /* ── KEYBOARD HINT ── */
+        .kbd-hint {
+            position:fixed; bottom:20px; right:24px;
+            font-size:10px; font-family:'JetBrains Mono',monospace;
+            color:#334155; letter-spacing:0.1em; pointer-events:none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorations (always visible) -->
+    <div class="hero-grid"></div>
+    <div class="hero-orb-1"></div>
+    <div class="hero-orb-2"></div>
+
+    <!-- NAV -->
+    <header>
+        <a href="#" class="brand" onclick="showPanel('hero')">
+            <div class="brand-logo">
+                <img src="assets/img/image1.png" alt="Pegasus AI">
+            </div>
+            <div class="flex flex-col leading-none">
+                <span class="brand-text">Pegasus <span>AI</span></span>
+                <span class="mono" style="font-size:7px;letter-spacing:0.3em;color:rgba(56,189,248,0.4);text-transform:uppercase">Next-Gen Workflows</span>
+            </div>
+        </a>
+
+        <nav>
+            <button class="nav-btn active" onclick="showPanel('hero')"    data-panel="hero">Home</button>
+            <button class="nav-btn"        onclick="showPanel('about')"   data-panel="about">About</button>
+            <button class="nav-btn"        onclick="showPanel('tech')"    data-panel="tech">Tech</button>
+            <button class="nav-btn"        onclick="showPanel('studio')"  data-panel="studio">Studio</button>
+            <a href="blog.html"        class="nav-btn" style="text-decoration:none">Blog</a>
+            <a href="publications.html" class="nav-btn" style="text-decoration:none">Research</a>
+            <a href="teamsepa.html"    class="nav-btn" style="text-decoration:none">Team</a>
+        </nav>
+    </header>
+
+    <!-- ── HERO PANEL ── -->
+    <div class="panel active" id="panel-hero">
+        <div class="panel-inner">
+            <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer" class="nsf-pill">
+                <img src="assets/img/nsf.png" alt="NSF" width="13" height="13"> NSF Award #2513101
+            </a>
+            <h1 class="hero-heading">
+                AI&#8209;Powered<br><span>Scientific</span><br>Workflows
+            </h1>
+            <p class="hero-sub">Next-generation workflow management — intelligent automation, real-time monitoring, and LLM-powered tools for large-scale scientific computing.</p>
+            <p class="hero-trust mono">Used by researchers at USC ISI · UTK · RENCI · UMass Amherst</p>
+            <div class="hero-ctas">
+                <button class="btn-primary" onclick="showPanel('about')">
+                    Explore <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+                </button>
+                <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+                    <i data-lucide="github" style="width:15px;height:15px"></i> GitHub
+                </a>
+                <a href="blog.html" class="btn-ghost">
+                    <i data-lucide="book-open" style="width:15px;height:15px"></i> Blog
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── ABOUT PANEL ── -->
+    <div class="panel" id="panel-about">
+        <div class="panel-inner" style="padding-top:24px;padding-bottom:24px">
+            <div class="about-grid">
+                <div class="about-left">
+                    <div class="section-label"><i data-lucide="info" style="width:11px;height:11px"></i> About</div>
+                    <h2 class="section-heading">What is <span>Pegasus AI?</span></h2>
+                    <p class="section-desc">PegasusAI is the next-generation AI-driven scientific workflow management system developed by a multi-institutional team funded by the <strong style="color:#f8fafc">U.S. National Science Foundation</strong>.</p>
+                    <div class="stats-row">
+                        <a href="#" class="stat-card" onclick="showPanel('studio')">
+                            <div class="stat-num">20+</div>
+                            <div><div class="stat-label">Open Workflows</div><div class="stat-sub">Real-world scientific pipelines on GitHub</div></div>
+                            <i data-lucide="arrow-up-right" style="width:14px;height:14px;color:#334155;margin-left:auto"></i>
+                        </a>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                            <a href="teamsepa.html" class="stat-card">
+                                <div class="stat-num" style="color:#a78bfa">5</div>
+                                <div><div class="stat-label">Institutions</div><div class="stat-sub">USC · UTK · RENCI · UMass</div></div>
+                            </a>
+                            <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513101" target="_blank" rel="noopener noreferrer" class="stat-card">
+                                <div class="stat-num" style="color:#34d399;font-size:1.2rem">NSF</div>
+                                <div><div class="stat-label">Funded Research</div><div class="stat-sub">Award #2513101</div></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-logo">
+                    <img src="assets/img/image1.png" alt="Pegasus AI">
+                </div>
+            </div>
+            <div class="caps-grid">
+                <div class="cap-card">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                        <div class="cap-icon" style="background:rgba(56,189,248,0.1)"><i data-lucide="brain" style="width:14px;height:14px;color:#38bdf8"></i></div>
+                        <span class="cap-num mono">01</span>
+                    </div>
+                    <div><div class="cap-title">Intelligent Planning</div><div class="cap-desc">ML models predict resource needs and optimize scheduling before execution.</div></div>
+                </div>
+                <div class="cap-card">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                        <div class="cap-icon" style="background:rgba(139,92,246,0.1)"><i data-lucide="zap" style="width:14px;height:14px;color:#a78bfa"></i></div>
+                        <span class="cap-num mono">02</span>
+                    </div>
+                    <div><div class="cap-title">Adaptive Management</div><div class="cap-desc">Real-time anomaly detection and automatic plan adjustment mid-run.</div></div>
+                </div>
+                <div class="cap-card">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                        <div class="cap-icon" style="background:rgba(52,211,153,0.1)"><i data-lucide="users" style="width:14px;height:14px;color:#34d399"></i></div>
+                        <span class="cap-num mono">03</span>
+                    </div>
+                    <div><div class="cap-title">Human-in-the-Loop</div><div class="cap-desc">AI-augmented tools keep researchers in control at every step.</div></div>
+                </div>
+                <div class="cap-card">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                        <div class="cap-icon" style="background:rgba(251,191,36,0.1)"><i data-lucide="database" style="width:14px;height:14px;color:#fbbf24"></i></div>
+                        <span class="cap-num mono">04</span>
+                    </div>
+                    <div><div class="cap-title">AI-Ready Data</div><div class="cap-desc">Curated datasets to continuously improve AI models and decisions.</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── TECH PANEL ── -->
+    <div class="panel" id="panel-tech">
+        <div class="panel-inner" style="padding-top:24px;padding-bottom:24px">
+            <div>
+                <div class="section-label" style="margin-bottom:12px"><i data-lucide="flask-conical" style="width:11px;height:11px"></i> Research Areas</div>
+                <h2 class="section-heading">Technical <span>Approach</span></h2>
+            </div>
+            <div class="tech-cards">
+                <a href="blog.html?category=task-performance" class="tech-card">
+                    <span class="tech-num">01</span>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                            <div class="tech-icon" style="background:rgba(56,189,248,0.1)"><i data-lucide="bar-chart-2" style="width:11px;height:11px;color:#38bdf8"></i></div>
+                            <div class="tech-title">Task Performance Prediction</div>
+                        </div>
+                        <div class="tech-desc">ML models that predict task runtime, memory, and resource needs to enable smarter scheduling.</div>
+                    </div>
+                </a>
+                <a href="blog.html?category=monitoring" class="tech-card">
+                    <span class="tech-num" style="color:rgba(167,139,250,0.3)">02</span>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                            <div class="tech-icon" style="background:rgba(167,139,250,0.1)"><i data-lucide="activity" style="width:11px;height:11px;color:#a78bfa"></i></div>
+                            <div class="tech-title">Comprehensive Online Monitoring</div>
+                        </div>
+                        <div class="tech-desc">Real-time tracking that detects anomalies, surfaces bottlenecks, and supports live workflow introspection.</div>
+                    </div>
+                </a>
+                <a href="blog.html?category=ai-workflows" class="tech-card">
+                    <span class="tech-num" style="color:rgba(52,211,153,0.3)">03</span>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                            <div class="tech-icon" style="background:rgba(52,211,153,0.1)"><i data-lucide="bot" style="width:11px;height:11px;color:#34d399"></i></div>
+                            <div class="tech-title">AI-Assisted Workflow Creation</div>
+                        </div>
+                        <div class="tech-desc">LLM-powered tools that help scientists compose, validate, and refine workflows through natural language.</div>
+                    </div>
+                </a>
+                <a href="blog.html?category=education" class="tech-card">
+                    <span class="tech-num" style="color:rgba(251,191,36,0.3)">04</span>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                            <div class="tech-icon" style="background:rgba(251,191,36,0.1)"><i data-lucide="book-open" style="width:11px;height:11px;color:#fbbf24"></i></div>
+                            <div class="tech-title">PegasusAI in the Classroom</div>
+                        </div>
+                        <div class="tech-desc">Educational integration enabling students to engage with real-world scientific computing.</div>
+                    </div>
+                </a>
+                <a href="blog.html?category=ci-design" class="tech-card">
+                    <span class="tech-num" style="color:rgba(251,113,133,0.3)">05</span>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                            <div class="tech-icon" style="background:rgba(251,113,133,0.1)"><i data-lucide="component" style="width:11px;height:11px;color:#fb7185"></i></div>
+                            <div class="tech-title">CI-Ready Design</div>
+                        </div>
+                        <div class="tech-desc">Modular architecture ensuring compatibility with the NSF cyberinfrastructure ecosystem.</div>
+                    </div>
+                </a>
+                <div class="blog-cta-row" style="display:flex;align-items:flex-end;justify-content:flex-end">
+                    <a href="blog.html" class="btn-ghost" style="font-size:12px;padding:8px 18px">
+                        <i data-lucide="book-open" style="width:13px;height:13px"></i> Research Blog
+                        <i data-lucide="arrow-right" style="width:12px;height:12px"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── STUDIO PANEL ── -->
+    <div class="panel" id="panel-studio">
+        <div class="panel-inner" style="padding-top:24px;padding-bottom:24px">
+            <div>
+                <div class="section-label" style="margin-bottom:12px"><i data-lucide="play-circle" style="width:11px;height:11px"></i> Available Now</div>
+                <h2 class="section-heading">Science at scale,<br><span>in your browser</span></h2>
+            </div>
+            <div class="studio-top">
+                <div class="studio-features">
+                    <p style="font-size:14px;color:var(--muted);line-height:1.7">Studio is the browser-based interface to Pegasus AI — describe your pipeline in plain language, let the AI build it, then execute it across thousands of cores with a single click.</p>
+                    <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+                        <div class="feat-row">
+                            <div class="feat-icon" style="background:rgba(56,189,248,0.1)"><i data-lucide="bot" style="width:12px;height:12px;color:#38bdf8"></i></div>
+                            <div><div class="feat-title">AI workflow authoring</div><div class="feat-desc">Describe your goal — the AI generates a fully configured Pegasus workflow.</div></div>
+                        </div>
+                        <div class="feat-row">
+                            <div class="feat-icon" style="background:rgba(167,139,250,0.1)"><i data-lucide="git-fork" style="width:12px;height:12px;color:#a78bfa"></i></div>
+                            <div><div class="feat-title">Real-time DAG visualization</div><div class="feat-desc">Inspect and monitor your workflow graph as jobs run across distributed infrastructure.</div></div>
+                        </div>
+                        <div class="feat-row">
+                            <div class="feat-icon" style="background:rgba(52,211,153,0.1)"><i data-lucide="zap" style="width:12px;height:12px;color:#34d399"></i></div>
+                            <div><div class="feat-title">One-click execution</div><div class="feat-desc">Submit to OSPool, ACCESS, or your institution's cluster without touching a terminal.</div></div>
+                        </div>
+                        <div class="feat-row">
+                            <div class="feat-icon" style="background:rgba(251,191,36,0.1)"><i data-lucide="notebook-pen" style="width:12px;height:12px;color:#fbbf24"></i></div>
+                            <div><div class="feat-title">Integrated Jupyter notebooks</div><div class="feat-desc">Analyze results and iterate — all within the same AI-assisted environment.</div></div>
+                        </div>
+                    </div>
+                    <div class="studio-ctas">
+                        <a href="https://studio.pegasus-ai.org/hub/oauth_login?next=%2Fhub%2F" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                            Try Studio <i data-lucide="arrow-right" style="width:15px;height:15px"></i>
+                        </a>
+                        <a href="studio.html" class="btn-ghost">Learn more</a>
+                    </div>
+                </div>
+                <div class="studio-videos">
+                    <div>
+                        <div class="video-wrap">
+                            <video controls preload="metadata">
+                                <source src="assets/videos/pegasusai-studio-orientation-v3-savvy-1080p30.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <p class="video-label">Studio Orientation</p>
+                    </div>
+                    <div>
+                        <div class="video-wrap">
+                            <video controls preload="metadata">
+                                <source src="assets/videos/streamflow-workflow-tutorial-v2-savvy-1080p30.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <p class="video-label">Workflow Tutorial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── CONTACT PANEL ── -->
+    <div class="panel" id="panel-contact">
+        <div class="panel-inner">
+            <div class="contact-inner">
+                <span class="mono" style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(56,189,248,0.6)">Get In Touch</span>
+                <h2 class="contact-heading">Ready to scale your<br>scientific workflows?</h2>
+                <p class="contact-desc">Connect with the team at USC ISI — we're building the next generation of AI-driven workflow automation.</p>
+                <div class="contact-ctas">
+                    <a href="mailto:pegasus-support@isi.edu" class="btn-primary">
+                        <i data-lucide="mail" style="width:15px;height:15px"></i> Email Us
+                    </a>
+                    <a href="https://github.com/pegasus-isi" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+                        <i data-lucide="github" style="width:15px;height:15px"></i> GitHub
+                    </a>
+                    <a href="https://pegasus-users.slack.com/archives/C01KBPSM64S" target="_blank" rel="noopener noreferrer" class="btn-ghost">Slack</a>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link" onclick="showPanel('about')">About</a>
+                    <a href="#" class="footer-link" onclick="showPanel('tech')">Tech</a>
+                    <a href="#" class="footer-link" onclick="showPanel('studio')">Studio</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="publications.html" class="footer-link">Research</a>
+                    <a href="teamsepa.html" class="footer-link">Team</a>
+                    <a href="https://pegasus.isi.edu" target="_blank" rel="noopener noreferrer" class="footer-link">Pegasus WMS ↗</a>
+                </div>
+                <p class="footer-copy">© 2026 Pegasus AI · USC Information Sciences Institute · NSF #2513101</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel dots -->
+    <div class="panel-dots">
+        <div class="dot active" onclick="showPanel('hero')"    data-panel="hero"></div>
+        <div class="dot"        onclick="showPanel('about')"   data-panel="about"></div>
+        <div class="dot"        onclick="showPanel('tech')"    data-panel="tech"></div>
+        <div class="dot"        onclick="showPanel('studio')"  data-panel="studio"></div>
+        <div class="dot"        onclick="showPanel('contact')" data-panel="contact"></div>
+    </div>
+
+    <div class="kbd-hint mono">← → arrow keys to navigate</div>
+
+    <script>
+        // ── Theme init (dark default) ──
+        const saved = localStorage.getItem('theme');
+        // This page is dark-only for now
+
+        // ── Panel switching ──
+        const PANELS = ['hero', 'about', 'tech', 'studio', 'contact'];
+        let current = 0;
+
+        function showPanel(id) {
+            const idx = PANELS.indexOf(id);
+            if (idx === -1) return;
+            current = idx;
+
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn[data-panel]').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+
+            const panel = document.getElementById('panel-' + id);
+            if (panel) panel.classList.add('active');
+
+            const btn = document.querySelector('.nav-btn[data-panel="' + id + '"]');
+            if (btn) btn.classList.add('active');
+
+            const dot = document.querySelector('.dot[data-panel="' + id + '"]');
+            if (dot) dot.classList.add('active');
+        }
+
+        // ── Keyboard navigation ──
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                if (current < PANELS.length - 1) showPanel(PANELS[current + 1]);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                if (current > 0) showPanel(PANELS[current - 1]);
+            }
+        });
+
+        // ── Init icons ──
+        document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+    </script>
+</body>
+</html>
