@@ -178,6 +178,16 @@
             <script>
                 const _PAPERS_FB = [
                   {
+                    "id": "pegasusai-studio-2611.13309",
+                    "title": "PegasusAI Studio: Legible Cyberinfrastructure and Accountable AI Agents for Scientific Workflows",
+                    "authors": ["Komal Thareja", "Mats Rynge", "Berent Aldikacti", "Angelina Ju", "Ian Lumsden", "Anirban Mandal", "Rajiv Mayani", "Kin Wai Ng", "Hamza Safri", "Michael Stealey", "Sai Swaminathan", "Michela Taufer", "Karan Vahi", "Michael Zink", "Ewa Deelman"],
+                    "venue": "arXiv", "arxivId": "2611.13309", "date": "2026-11-09",
+                    "url": "https://arxiv.org/abs/2611.13309",
+                    "abstract": "The system addresses challenges in deploying AI coding agents on shared research infrastructure. AI agents need current knowledge of the workflow system and its execution sites and access to the runtime state of distributed executions. The platform combines federated authentication, per-user execution environments, and approval controls. Evaluation includes case studies involving weather workflow modernization, gravitational-wave reanalysis, EEG analysis, and Event Horizon Telescope image reconstruction.",
+                    "tags": ["AI Agents", "Scientific Workflows", "Cyberinfrastructure", "Studio"],
+                    "status": "published"
+                  },
+                  {
                     "id": "complexity-scale-ai-workflow-2606.18425",
                     "title": "Complexity and Scale in AI-Assisted Workflow Management: A Federated Learning Case Study",
                     "authors": ["Komal Thareja", "Hamza Safri", "Rajiv Mayani", "Anirban Mandal", "Ewa Deelman"],
@@ -192,7 +202,7 @@
                     const list = document.getElementById('papers-list');
                     try {
                         let papers = _PAPERS_FB;
-                        try { const _r = await fetch('assets/data/papers.json?v=2'); const _d = await _r.json(); if (Array.isArray(_d) && _d.length) papers = _d; } catch(_) {};
+                        try { const _r = await fetch('assets/data/papers.json', { cache: 'no-cache' }); const _d = await _r.json(); if (Array.isArray(_d) && _d.length) papers = _d; } catch(_) {};
                         list.innerHTML = papers.map((p, i) => {
                             const year = new Date(p.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                             const authorsStr = p.authors.join(', ');
