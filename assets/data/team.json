@@ -5,6 +5,7 @@
       "role": "ISI / USC",
       "email": "deelman@isi.edu",
       "image": "https://swarm-workflows.org/images/people/deelman.jpg",
+      "profile": "https://deelman.isi.edu/",
       "status": "Active"
     },
     {
@@ -12,6 +13,7 @@
       "role": "ISI / USC",
       "email": "vahi@isi.edu",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCnnpVa7rPmTUyHw3LNwsTlZQOFZN2vdp6A&s",
+      "profile": "https://www.isi.edu/people-vahi/",
       "status": "Active"
     },
     {
@@ -19,6 +21,7 @@
       "role": "ISI / USC",
       "email": "rynge@isi.edu",
       "image": "https://www.isi.edu/wp-content/uploads/headshots/rynge-1.jpg",
+      "profile": "https://www.isi.edu/directory/mats-rynge/",
       "status": "Active"
     },
     {
@@ -26,6 +29,7 @@
       "role": "ISI / USC",
       "email": "mayani@isi.edu",
       "image": "https://www.isi.edu/wp-content/uploads/2024/02/mayani-1.jpg",
+      "profile": "https://www.isi.edu/directory/rajiv-mayani/",
       "status": "Active"
     },
     {
@@ -33,6 +37,7 @@
       "role": "ISI / USC",
       "email": "virdone@isi.edu",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCya3GecQdMZ0uhTIwWMN7dHKxYZDwTl95Lw&s",
+      "profile": "https://www.isi.edu/directory/nicole-virdone/",
       "status": "Active"
     },
     {
@@ -40,6 +45,7 @@
       "role": "ISI / USC",
       "email": "safri@isi.edu",
       "image": "https://swarm-workflows.org/images/people/safri-postdoc.png",
+      "profile": "https://scitech.group/blog/postdoctoral-hamza/",
       "status": "Active"
     },
     {
@@ -47,6 +53,7 @@
       "role": "UTK",
       "email": "mtaufer@utk.edu",
       "image": "https://i1.rgstatic.net/ii/profile.image/272387660840968-1441953687301_Q512/Michela-Taufer.jpg",
+      "profile": "https://eecs.utk.edu/people/michela-taufer/",
       "status": "Active"
     },
     {
@@ -54,6 +61,7 @@
       "role": "UTK",
       "email": "sswamin6@utk.edu",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLjQs1dxXwcDz9DoBHv9PN9pATKvY6SAZuQg&s",
+      "profile": "https://eecs.utk.edu/people/sai-swaminathan/",
       "status": "Active"
     },
     {
@@ -61,6 +69,7 @@
       "role": "UTK",
       "email": "kng2@utk.edu",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWXbihJXZvJywgHDwNk0jGwgFnrmA3w_FDxA&s",
+      "profile": "https://eecs.utk.edu/people/kin-ng/",
       "status": "Active"
     },
     {
@@ -68,6 +77,7 @@
       "role": "UTK",
       "email": "kng3@utk.edu",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBU1Z22ht_F_VuuGAHPC_CAu2C5QGs6eQsQw&s",
+      "profile": "https://www.linkedin.com/in/kin-hong-ng/",
       "status": "Active"
     },
     {
@@ -75,6 +85,7 @@
       "role": "UTK",
       "email": "gore.rajas@gmail.com",
       "image": "https://epic.eecs.utk.edu/assets/images/people/rajasi.jpg",
+      "profile": "https://epic.eecs.utk.edu/team.html",
       "status": "Active"
     },
     {
@@ -82,6 +93,7 @@
       "role": "UTK",
       "email": "aju@vols.utk.edu",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRl41jZm6N-ifQSfQO3mHV357Unqfh8y3uMw&s",
+      "profile": "https://globalcomputing.group/people.html",
       "status": "Active"
     },
     {
@@ -89,6 +101,7 @@
       "role": "UTK",
       "email": "jmarque4@utk.edu",
       "image": "https://jackdmarquez.github.io/images/profile.png",
+      "profile": "https://eecs.utk.edu/people/jack-marquez/",
       "status": "Active"
     },
     {
@@ -97,6 +110,7 @@
       "email": "relgedaw@vols.utk.edu",
       "linkedin": "https://www.linkedin.com/in/ran-el-gedawy-8a7b75142/",
       "image": "https://userlab.utk.edu/files/img/people/ran-elgedawy.jpeg",
+      "profile": "https://userlab.utk.edu/ran-elgedawy",
       "status": "Active"
     },
     {
@@ -104,6 +118,7 @@
       "role": "RENCI / UNC",
       "email": "anirban@renci.org",
       "image": "https://swarm-workflows.org/images/people/mandal.jpg",
+      "profile": "https://renci.org/staff/anirban-mandal/",
       "status": "Active"
     },
     {
@@ -111,6 +126,7 @@
       "role": "RENCI / UNC",
       "email": "kthare10@renci.org",
       "image": "https://swarm-workflows.org/images/people/thareja.jpg",
+      "profile": "https://renci.org/staff/komal-thareja/",
       "status": "Active"
     },
     {
@@ -118,6 +134,7 @@
       "role": "RENCI / UNC",
       "email": "stealey@renci.org",
       "image": "https://cdn-icons-png.flaticon.com/512/4042/4042171.png",
+      "profile": "https://renci.org/staff/michael-stealey/",
       "status": "Active"
     },
     {
@@ -125,6 +142,7 @@
       "role": "UMass",
       "email": "mzink@umass.edu",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5uN_UkvtK6KTsI-SpLoMaRrovg-nMXrr5Pg&s",
+      "profile": "https://www.umass.edu/engineering/about/directory/michael-zink",
       "status": "Active"
     },
     {
@@ -132,6 +150,7 @@
       "role": "UMass",
       "email": "baldikacti@umass.edu",
       "image": "https://cdn-icons-png.flaticon.com/512/4042/4042171.png",
+      "profile": "https://www.umass.edu/research-computing/about/directory/berent-aldikacti",
       "status": "Active"
     }
   ],
